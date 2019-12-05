@@ -1,5 +1,7 @@
 
 
+![](system.png)
+
 ## Expression Trees
 
 If the parser is able to understand what a student has typed, then it produces an *expression tree* of what they have typed.
@@ -97,3 +99,29 @@ The `supernode` attribute is a reference to the node's supernode. This must be s
 The `depth` attribute represents the number of steps that must be taken to get back to the root node. Thus for the root node itself, this is 0; for subnodes of the root node, this is 1; for subnodes of subnodes of the root node, it's 2; et c.
 
 The `type` and `subtype` attributes are strings representing what type the node is, and may be 'number', 'identifier', 'binaryOperation', 'unaryOperation', 'namedFunction', et c.
+
+The subnodes of a node are not contained within a single `subnodes` attribute. Instead, they are accessed by a `subnodes` property; how the subnodes are stored is implemented differently by the different node classes, and the `subnodes` property can be overridden. On the base class `RPNode`, the `subnodes` property returns an empty list.
+
+We can see how this works with one of the classes that inherits from `RPNode`.
+
+```python
+
+class RPFractionNode(RPNode):
+    def __init__(self):
+        super(RPNode, self).__init__("fraction")
+
+        self.numerator = None
+        self.denominator = None
+
+    @RPNode.subnodes.getter
+    def subnodes(self):
+        return [self.numerator, self.denominator]
+
+    @subnodes.getter
+    def subnodes(self, value):
+        self.numerator = value[0]
+        self.denominator = value[1]
+
+```
+
+The `RPFractionNode` has attributes `numerator` and `denominator`, which are given as its subnodes.
