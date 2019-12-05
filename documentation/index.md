@@ -91,3 +91,9 @@ class RPNode(object):
         pass
 
 ```
+
+The `supernode` attribute is a reference to the node's supernode. This must be set for all nodes apart from the topmost node in the tree, for which it will remain as `None`.
+
+The `depth` attribute represents the number of steps that must be taken to get back to the root node. Thus for the root node itself, this is 0; for subnodes of the root node, this is 1; for subnodes of subnodes of the root node, it's 2; et c.
+
+The `type` and `subtype` attributes are strings representing what type the node is, and may be 'number', 'identifier', 'binaryOperation', 'unaryOperation', 'namedFunction', et c.
