@@ -1,9 +1,13 @@
+# Response Parsing Python
 
+- [Response Parsing Python](#response-parsing-python)
+  - [An overview of the system](#an-overview-of-the-system)
+  - [Expression Trees](#expression-trees)
+    - [Terminology](#terminology)
+    - [In the code](#in-the-code)
+  - [How does the parser work?](#how-does-the-parser-work)
 
-- [Expression Trees](#expression-trees)
-  - [Terminology](#terminology)
-  - [In the code](#in-the-code)
-- [How does the parser work?](#how-does-the-parser-work)
+## An overview of the system
 
 ![](system.png)
 
@@ -186,3 +190,10 @@ def parseWhiteSpace(inputText, marker):
 
     return node
 ```
+
+So this function looks for any white space characters at the position `marker.position`. If it finds any, it will create an `RPWhiteSpaceNode`, put the white space into it, and return it. It will also move the marker position along so that whatever function is called *after* this one will try to parse whatever is *after* the white space.
+
+If it doesn't find any white space, it will return nothing, and the marker position will not change (the parser will not move on to a different part of the string).
+
+
+
