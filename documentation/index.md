@@ -55,3 +55,39 @@ In conclusion ...
 - The only node which doesn't have a supernode is the topmost node in the expression tree.
 
 ![](node-terminology.png)
+
+### In the code
+
+Each node in the expression tree corresponds to an object.
+
+The different types of node are represented by different classes.
+
+Each node class ultimately inherits from a base class, called `RPNode`. Here is an example of the `RPNode` class:
+
+```python
+
+class RPNode(object):
+    def __init__(self, nodeType):
+
+        self.supernode = None
+        self.depth = 0
+
+        self.type = nodeType
+        self.subtype = ""
+
+        self.start = 0
+        self.end = 0
+        self._text = ""
+
+        self._latex = ""
+        self._asciiMath = ""
+
+    @property
+    def subnodes(self):
+        return []
+
+    @subnodes.setter
+    def subnodes(self, value):
+        pass
+
+```
