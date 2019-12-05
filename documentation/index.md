@@ -38,6 +38,14 @@ Radicals can also be considered to be a type of operation.
 
 ![](example-6.png)
 
+In conclusion ...
+
+- An expression tree is a collection of linked nodes.
+- A node can represent an **operand** (like an identifier or a number).
+- A node can represent an **operation** (like addition, subtraction, or a function or a radical, et c.).
+- Or a node can simply represent a **group of operands** (no example has been shown above, but this will become important as we attempt to parse more unusual types of mathematical expressions.
+- **Operation nodes can themselves be operands of other nodes.**
+
 ### Terminology
 
 - For any given **node**, the nodes below it (which are usually its operands) are called its **subnodes**.
