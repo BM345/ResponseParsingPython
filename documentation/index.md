@@ -8,7 +8,7 @@ An expression tree is a *collection of linked nodes*. Each node represents an **
 
 For example, the image below shows an expression tree for 'a+b'.
 
-![](addition-expression-tree-2.png)
+![](example-1.png)
 
 The green nodes represent the identifiers *a* and *b*. 
 
@@ -16,10 +16,10 @@ The green nodes represent the identifiers *a* and *b*.
 
 Addition is a binary operation (*binary* meaning that it has two operands). Any other binary operation can be represented in the same way. The image below shows an expression tree for '2*p'.
 
-![](multiplication-expression-tree.png)
+![](example-2.png)
 
 An operation can in itself be an operand of *another* operation, as shown in the following expression tree.
 
-![](expression-tree-3.png)
+![](example-3.png)
 
 This expression tree shows the number 2 and the identifier *p* as operands of a *multiplication* operation, which is then the first operand of an *addition* operation. This expression tree is represented in plain text as '2*p+c'.
