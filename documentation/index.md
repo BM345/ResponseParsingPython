@@ -30,3 +30,10 @@ Expression trees can be used to represent very complex expressions. The image be
 
 ![](example-4.png)
 
+Lots of different things can be considered to be operations. Functions can be considered to be operations, where the parameters of the function are the operands.
+
+![](example-5.png)
+
+Radicals can also be considered to be a type of operation.
+
+![](example-6.png)
