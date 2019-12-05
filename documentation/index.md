@@ -1,5 +1,10 @@
 
 
+- [Expression Trees](#expression-trees)
+  - [Terminology](#terminology)
+  - [In the code](#in-the-code)
+- [How does the parser work?](#how-does-the-parser-work)
+
 ![](system.png)
 
 ## Expression Trees
@@ -67,7 +72,6 @@ The different types of node are represented by different classes.
 Each node class ultimately inherits from a base class, called `RPNode`. Here is an example of the `RPNode` class:
 
 ```python
-
 class RPNode(object):
     def __init__(self, nodeType):
 
@@ -91,7 +95,6 @@ class RPNode(object):
     @subnodes.setter
     def subnodes(self, value):
         pass
-
 ```
 
 The `supernode` attribute is a reference to the node's supernode. This must be set for all nodes apart from the topmost node in the tree, for which it will remain as `None`.
@@ -105,7 +108,6 @@ The subnodes of a node are not contained within a single `subnodes` attribute. I
 We can see how this works with one of the classes that inherits from `RPNode`.
 
 ```python
-
 class RPFractionNode(RPNode):
     def __init__(self):
         super(RPNode, self).__init__("fraction")
@@ -121,7 +123,66 @@ class RPFractionNode(RPNode):
     def subnodes(self, value):
         self.numerator = value[0]
         self.denominator = value[1]
-
 ```
 
 The `RPFractionNode` has attributes `numerator` and `denominator`, which are given as its subnodes.
+
+More node type classes can be added to the package as needed.
+
+## How does the parser work?
+
+The parser is an object which, when given a string, returns an expression tree showing what mathematical expression the string represents.
+
+If the parser cannot build the expression tree, then it should give information describing as best as possible what is wrong with the given string.
+
+There are several qualities that a parser should ideally have:
+
+- The parser will have to look at each character in the string at least once - ideally it will look at each character **only** once.
+  - As we will see, there are times when it is convenient to break this rule (for the sake of making the code more readable), but for the most part following this rule makes the parser faster.
+- The parser should be easy to extend.
+- The design of the parser should be relatively easy to understand, so that someone who's not seen it before can quickly learn how to add new features to it.
+
+The parser for this project uses a very simple design pattern that allows the parser to have these qualities.
+
+The parser contains a set of functions that all have the same form:
+
+```python
+def parseX(inputText, marker):
+```
+
+Here 'X' is the type of thing we want to parse. This can be all sorts of things, at different scales - it may be a number, an identifier, a binary operation, a vector, a polynomial, et c..
+
+The `inputText` argument is the input string that's given to the parser. Importantly, the entire input string is passed to any function that has this form.
+
+The `marker` argument is an object that has a attribute `marker.position`, which is the position within the string at which to look for whatever 'X' is.
+
+The most basic `parseX` function is the `parseWhiteSpace` function.
+
+```python
+def parseWhiteSpace(inputText, marker):
+    t = "" # A temporary string to store any white space that's found
+
+    # Start iterating over the input string from the given position.
+    while (marker.position < len(inputText)):
+        c = inputText[marker.position, marker.position + 1] # Get the character at the current position.
+        
+        if c in " \t\n":
+            # If the character at the current position is a white space character (a space, a tab, or a new line character), then add it to the temporary string, and move the marker along by 1.
+            t += c
+            marker.position += 1
+        else:
+            # If the character at the current position is not a white space character, then exit the loop, as the current block of white space has ended.
+            break
+
+    if len(t) == 0:
+        # If no white space was found, return nothing.
+        return None
+
+    # Otherwise, create a white space node, and return it.
+    # Most likely this node will be discarded (as white space has no mathematical meaning), but it should be returned so that whichever function called parseWhiteSpace can decide what to do with it.
+    node = RPWhiteSpaceNode()
+
+    node.value = t
+
+    return node
+```
