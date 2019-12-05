@@ -37,3 +37,13 @@ Lots of different things can be considered to be operations. Functions can be co
 Radicals can also be considered to be a type of operation.
 
 ![](example-6.png)
+
+### Terminology
+
+- For any given **node**, the nodes below it (which are usually its operands) are called its **subnodes**.
+- For any given **node**, the node above it is called its **supernode**.
+- A node can have any number of subnodes (including zero, as is the case for numbers and identifiers).
+- A node can only have **one** supernode.
+- The only node which doesn't have a supernode is the topmost node in the expression tree.
+
+![](node-terminology.png)
