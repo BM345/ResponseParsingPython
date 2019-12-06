@@ -13,8 +13,8 @@ class RPNode(object):
         self._text = ""
 
         self._latex = ""
-        self._asciiMath =""
-        self._mathML =""
+        self._asciiMath = ""
+        self._mathML = ""
 
     @property
     def length(self):
@@ -44,11 +44,16 @@ class RPNode(object):
     def subnodes(self, value):
         pass
 
-    def setDepth(self, depth = 0):
+    def setDepth(self, depth=0):
         self.depth = depth
 
         for node in self.subnodes:
             node.supernode = self
             node.setDepth(depth + 1)
 
-            
+
+class RPWhiteSpaceNode(RPNode):
+    def __init__(self):
+        super(RPNode, self).__init__("whiteSpace")
+
+        self.value = ""
