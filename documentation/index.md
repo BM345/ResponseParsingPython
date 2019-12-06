@@ -52,7 +52,7 @@ This outgoing packet of data includes:
 
 ### In the code
 
-Below is an example of how the incoming data packet might look. (Here I've used JSON, but this is just so that I can easily represent the object structure.)
+Below is an example of how the incoming data packet might look. (Here I've used JSON, but a different format could be used.)
 
 ```json
 {
@@ -415,5 +415,6 @@ One of the advantages of having a single entry / exit point for data in the syst
   - Non-negative integers (all positive integers, as well as zero)
   - Decimals
   - Currency Values
+- Follow design principles that make the system extensible to more answer types later
 - Have a comprehensive set of unit tests for the above four answer types
 
