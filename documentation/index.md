@@ -12,21 +12,24 @@ This document describes how the response parsing and validation system would wor
     - [Terminology](#terminology)
     - [In the code](#in-the-code-1)
   - [How does the parser work?](#how-does-the-parser-work)
+  - [Unit Tests](#unit-tests)
+  - [Features Roadmap](#features-roadmap)
+    - [Version 1.0](#version-10)
 
 ## An overview of the system
 
 The image below gives an overview of how the response parsing and validation system would work.
 
-(`Right click + Open image in new tab` to see a bigger version of the image.)
+(Right Click + Open Image in New Tab to see a bigger version of the image.)
 
 ![](system.png)
 
 Each time a student answers a question, a packet of data is sent to the system.
 
-This packet of data includes:
+This incoming packet of data includes:
 
 - **The student's response** (as a `string`)
-- **The expected response** type (as a `string`; one of `"integer"`, `"decimal"`, `"currencyValue"`, et c.)
+- **The expected response** type (as a `string`; one of `"integer"`, `"decimal"`, `"currencyValue"`, `"fraction"`, `"mixedNumber"`, `"complexNumber`", `"vector"`, et c.)
 - **Constraints on the response**
   - This might be things like 'it must have 2 decimal places' or 'it must have an explicit plus sign'
   - Given as a set of key-value pairs
@@ -260,5 +263,22 @@ So this function looks for any white space characters at the position `marker.po
 
 If it doesn't find any white space, it will return nothing, and the marker position will not change (the parser will not move on to a different part of the string).
 
+## Unit Tests
 
+I cannot emphasise enough the extent to which the success of this system will depend on having a large and comprehensive set of unit tests.
+
+A student can type a huge variety of different things into the answer box, and each one must have a very specific message / action. The only way to be sure that the system is working as intended, particularly as more features are added to it, is to have a large number of unit tests.
+
+One of the advantages of having a single entry / exit point for data in the system (the incoming and outgoing data packets) is that it makes it very easy to create unit tests for.
+
+## Features Roadmap
+
+### Version 1.0
+
+- Be able to parse and validate the following answer types
+  - Integers (which includes all integers, both positive and negative)
+  - Non-negative integers (all positive integers, as well as zero)
+  - Decimals
+  - Currency Values
+- Have a comprehensive set of unit tests for the above four answer types
 
