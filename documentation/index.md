@@ -1,10 +1,10 @@
-# Response Parsing Python
+# Response Parsing (Python)
 
 This document describes how the response parsing and validation system would work. It also describes some of the underlying concepts of the system, such as what expression trees are and how the parser works.
 
 ## Table of Contents
 
-- [Response Parsing Python](#response-parsing-python)
+- [Response Parsing (Python)](#response-parsing-python)
   - [Table of Contents](#table-of-contents)
   - [An overview of the system](#an-overview-of-the-system)
     - [In the code](#in-the-code)
