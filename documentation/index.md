@@ -294,6 +294,104 @@ So this function looks for any white space characters at the position `marker.po
 
 If it doesn't find any white space, it will return nothing, and the marker position will not change (the parser will not move on to a different part of the string).
 
+On its own, this function probably looks like overkill - it's just white space, after all. But the usefulness of this function form becomes more apparent when we try to parse longer and more complex expressions, as these functions can easily be chained together recursively.
+
+For example, the following function can be used for parsing integers.
+
+```python
+def parseInteger(inputText, marker):
+    t = "" # A temporary string to store any digits that are found
+
+    # Start by grabbing any white space at the current position.
+    whiteSpaceNode1 = parseWhiteSpace(inputText, marker)
+
+    # Start iterating over the input string from the given position.
+    while (marker.position < len(inputText)):
+        c = inputText[marker.position, marker.position + 1] # Get the character at the current position.
+        
+        if c in "0123456789":
+            # If the character at the current position is a numeric digit, then add it to the temporary string, and move the marker along by 1.
+            t += c
+            marker.position += 1
+        else:
+            # If the character at the current position is not a numeric digit, then exit the loop, as the current integer has ended.
+            break
+
+    # There may be white space after the number too.
+    whiteSpaceNode2 = parseWhiteSpace(inputText, marker)
+
+    if len(t) == 0:
+        # If no digits were found, return nothing.
+        return None
+
+    # Otherwise, create an integer node, and return it.
+    node = RPIntegerNode()
+
+    node.value = t
+
+    return node
+```
+
+The `parseInteger` function works in the same way as `parseWhiteSpace`, but because they have the same arguments, `parseWhiteSpace` can be called from within `parseInteger`. This means that the `parseInteger` function can account for any white space before or after the integer, and discard it.
+
+This function can parse each of the following, and return just the integer:
+
+- '123'
+- ' 123'
+- '&nbsp;&nbsp;&nbsp;123'
+- '123 '
+- '123&nbsp;&nbsp;&nbsp;'
+- '&nbsp;&nbsp;&nbsp;123&nbsp;&nbsp;&nbsp;'
+
+The usefulness becomes even more apparent when we try to parse fractions.
+
+```python
+def parseFraction(inputText, marker):
+
+    numerator = parseInteger(inputText, marker)
+
+    if numerator == None:
+        # If there's no numerator, then there's no fraction
+        return None
+    
+    c = inputText[marker.position, marker.position + 1] # Get the character at the current position.
+
+    if c == "/":
+        # There must be a solidus at the current position, otherwise it's not a fraction
+        marker.position += 1
+    else:
+        return None
+
+    denominator = parseInteger(inputText, marker)
+
+    if denominator == None:
+        # If there's no denominator, then there's no fraction.
+        return None
+
+    # Otherwise, create a fraction node, and return it.
+    node = RPFractionNode()
+
+    node.numerator = numerator
+    node.denominator = denominator
+
+    return node
+```
+
+This `parseFraction` can parse all of the following, and return a fraction object, where the integer numerator and denominator have been captured:
+
+- '1/2'
+- ' 1 / 2 '
+- '&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;'
+- '&nbsp;&nbsp;&nbsp;345&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;678&nbsp;&nbsp;&nbsp;'
+
+But all of the following will not be considered to be fractions:
+
+- '1'
+- '1/'
+- '/2'
+- '1//2'
+
+
 ## Unit Tests
 
 I cannot emphasise enough the extent to which the success of this system will depend on having a large and comprehensive set of unit tests.
