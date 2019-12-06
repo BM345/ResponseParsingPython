@@ -57,3 +57,27 @@ class RPWhiteSpaceNode(RPNode):
         super(RPNode, self).__init__("whiteSpace")
 
         self.value = ""
+
+
+class RPNumberNode(RPNode):
+    def __init__(self):
+        super(RPNode, self).__init__("number")
+
+        self.value = ""
+        self.integralPart = ""
+        self.decimalPart = ""
+        self.sign = ""
+        self.signIsExplicit = False
+        self.numberOfLeadingZeros = 0
+        self.numberOfTrailingZeros = 0
+        self.minimumNumberOfSignificantFigures = 0
+        self.maximumNumberOfSignificantFigures = 0
+        self.numberOfDecimalPlaces = 0
+
+    @RPNode.latex.getter
+    def latex(self):
+        return self.value
+
+    @RPNode.asciiMath.getter
+    def asciiMath(self):
+        return self.value
