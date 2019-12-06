@@ -79,6 +79,37 @@ Below is an example of how the outgoing data packet might look if the system wer
 }
 ```
 
+Here is another example of the incoming and outgoing data packets, but with a more complicated answer type.
+
+(Note that complex numbers will not be supported in version 1.0 - they will be included in a later version - I'm just using them here as an example.)
+
+```json
+{
+    "studentsResponse": " 2 + 3i - 1 ",
+    "expectedResponseType": "complexNumber",
+    "responseConstraints": {
+        "allowedForms": {
+            "form": "cartesian",
+            "mustHaveSingleRealTerm": true, // The student's answer will fail on this constraint.
+            "mustHaveSingleImaginaryTerm": true,
+            "termsMustBeOrdered": true
+        }
+     },
+    "localizationSettings": {
+        "locale": "en-GB"
+    }
+}
+```
+
+```json
+{
+    "isAccepted": false,
+    "message": "Give your answer in its simplest form.",
+    "studentsResponse": " 2 + 3i - 1 ",
+    "normalizedResponse": "2+3*i-1"
+}
+```
+
 ## Expression Trees
 
 If the parser is able to understand what a student has typed, then it produces an *expression tree* of what they have typed.
