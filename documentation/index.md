@@ -348,6 +348,8 @@ The usefulness becomes even more apparent when we try to parse fractions.
 ```python
 def parseFraction(inputText, marker):
 
+    # First, get the numerator.
+    # Because we built white-space parsing into the parseInteger function, any white space that's around the integer will automatically be found and discarded.
     numerator = parseInteger(inputText, marker)
 
     if numerator == None:
@@ -362,6 +364,7 @@ def parseFraction(inputText, marker):
     else:
         return None
 
+    # Now get the denominator. Again, white space has already been dealt with.
     denominator = parseInteger(inputText, marker)
 
     if denominator == None:
@@ -391,6 +394,9 @@ But all of the following will not be considered to be fractions:
 - '/2'
 - '1//2'
 
+We are able to parse the entire fraction by parsing smaller elements of the fraction - the numerator and the denominator. This allows us to reuse code. When parsing larger and more complex expressions, we can reuse the parsing functions that we used for smaller and simpler expressions.
+
+It should be easy to see from here how this code can be extended to mixed numbers, ratios, percentages, decimals, currency values - all can have parsing functions built in the same way.
 
 ## Unit Tests
 
