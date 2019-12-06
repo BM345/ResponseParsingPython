@@ -90,7 +90,7 @@ Here is another example of the incoming and outgoing data packets, but with a mo
     "responseConstraints": {
         "allowedForms": {
             "form": "cartesian",
-            "mustHaveSingleRealTerm": true, // The student's answer will fail on this constraint.
+            "mustHaveSingleRealTerm": true,
             "mustHaveSingleImaginaryTerm": true,
             "termsMustBeOrdered": true
         }
