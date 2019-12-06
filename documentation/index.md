@@ -1,15 +1,80 @@
 # Response Parsing Python
 
+This document describes how the response parsing and validation system would work. It also describes some of the underlying concepts of the system, such as what expression trees are and how the parser works.
+
+## Table of Contents
+
 - [Response Parsing Python](#response-parsing-python)
+  - [Table of Contents](#table-of-contents)
   - [An overview of the system](#an-overview-of-the-system)
+    - [In the code](#in-the-code)
   - [Expression Trees](#expression-trees)
     - [Terminology](#terminology)
-    - [In the code](#in-the-code)
+    - [In the code](#in-the-code-1)
   - [How does the parser work?](#how-does-the-parser-work)
 
 ## An overview of the system
 
+The image below gives an overview of how the response parsing and validation system would work.
+
+(`Right click + Open image in new tab` to see a bigger version of the image.)
+
 ![](system.png)
+
+Each time a student answers a question, a packet of data is sent to the system.
+
+This packet of data includes:
+
+- **The student's response** (as a `string`)
+- **The expected response** type (as a `string`; one of `"integer"`, `"decimal"`, `"currencyValue"`, et c.)
+- **Constraints on the response**
+  - This might be things like 'it must have 2 decimal places' or 'it must have an explicit plus sign'
+  - Given as a set of key-value pairs
+- **Localisation settings**
+  - This will affect how the parser will interpret the response
+    - For example, if the locale is set to `France`, then '3,21' would be considered a decimal, but '3.21' would not; if the locale is set to `UK` then '3.21' would be considered a decimal, but '3,21' would not
+    - It will also affect what language the message back to the student is given in
+
+The system will take this packet of data, and parse the student's response (building an *expression tree* in the process (see below)). It will then compare the expression tree against the given constraints, and return a new packet of data.
+
+This outgoing packet of data includes:
+
+- Whether or not the response is **accepted** or **rejected**.
+- The **message** to the student
+  - If there are multiple messages that could be sent to the student, the validator will decide, based on the student's response, which ones should be sent.
+  - If the response is **accepted**, this system will not provide a message
+- The **student's original response**
+- The **normalised version of the student's response** (it may be useful to keep a record of this)
+- (Optionally) the expression tree
+
+### In the code
+
+Below is an example of how the incoming data packet might look. (Here I've used JSON, but this is just so that I can easily represent the object structure.)
+
+```json
+{
+    "studentsResponse": " 2.3 ",
+    "expectedResponseType": "decimal",
+    "responseConstraints": {
+        "mustHaveNDecimalPlaces": 2,
+        "mustHaveExplicitPlus": false,
+    },
+    "localizationSettings": {
+        "locale": "en-GB"
+    }
+}
+```
+
+Below is an example of how the outgoing data packet might look if the system were given the data packet above.
+
+```json
+{
+    "isAccepted": false,
+    "message": "Give your answer to two decimal places.",
+    "studentsResponse": " 2.3 ",
+    "normalizedResponse": "2.3"
+}
+```
 
 ## Expression Trees
 
