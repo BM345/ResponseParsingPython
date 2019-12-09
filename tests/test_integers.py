@@ -31,25 +31,27 @@ class TestIntegerValidation(unittest.TestCase):
 
         request.studentsResponse = studentsResponse
         request.expectedResponseType = "integer"
+        request.normalisedStudentsResponse = asciiMath
 
         response = validator.validate(request)
 
-        self.assertTrue(response.isAccepted)
+        self.assertEqual(response.isAccepted, isAccepted)
 
         integer = response.expressionTree
 
-        self.assertEqual(integer.type, "number")
-        self.assertEqual(integer.subtype, "integer")
-        self.assertEqual(integer.integralPart, integralPart)
-        self.assertEqual(integer.decimalPart, decimalPart)
-        self.assertEqual(integer.sign, sign)
-        self.assertEqual(integer.signIsExplicit, signIsExplicit)
-        self.assertEqual(integer.numberOfLeadingZeros, nlz)
-        self.assertEqual(integer.numberOfTrailingZeros, ntz)
-        self.assertEqual(integer.minimumNumberOfSignificantFigures, nsf1)
-        self.assertEqual(integer.maximumNumberOfSignificantFigures, nsf2)
-        self.assertEqual(integer.numberOfDecimalPlaces, ndp)
-        self.assertEqual(integer.asciiMath, asciiMath)
+        if integer != None:
+            self.assertEqual(integer.type, "number")
+            self.assertEqual(integer.subtype, "integer")
+            self.assertEqual(integer.integralPart, integralPart)
+            self.assertEqual(integer.decimalPart, decimalPart)
+            self.assertEqual(integer.sign, sign)
+            self.assertEqual(integer.signIsExplicit, signIsExplicit)
+            self.assertEqual(integer.numberOfLeadingZeros, nlz)
+            self.assertEqual(integer.numberOfTrailingZeros, ntz)
+            self.assertEqual(integer.minimumNumberOfSignificantFigures, nsf1)
+            self.assertEqual(integer.maximumNumberOfSignificantFigures, nsf2)
+            self.assertEqual(integer.numberOfDecimalPlaces, ndp)
+            self.assertEqual(integer.asciiMath, asciiMath)
 
 
 if __name__ == "__main__":
