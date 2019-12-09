@@ -16,7 +16,7 @@ In order to pass validation, the student's response must have a **minimum** of *
 }
 ```
 
-<br />
+<br /><br />
 
 ### `"mustHaveNoMoreThanNSF"`
 
@@ -30,7 +30,7 @@ In order to pass validation, the student's response must have a **maximum** of *
 }
 ```
 
-<br />
+<br /><br />
 
 ### `"mustHaveExactlyNSF"`
 
