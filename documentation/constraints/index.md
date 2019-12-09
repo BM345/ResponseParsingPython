@@ -2,6 +2,11 @@
 
 This document describes what constraints can be applied to which response types.
 
+## Table of Contents
+
+- [Integers](#integers)
+- [Non-negative Integers](#non-negative-integers)
+
 ## Integers
 
 ### `"allowLeadingZeros"`
@@ -83,4 +88,10 @@ The default is `not set`.
     "mustHaveExactlyNSF": 3
 }
 ```
+
+<br /><br />
+
+## Non-negative Integers
+
+This response type has the same constraints as the `integer` type, but of course it doesn't allow negative-integer answers. (This means that the `"mustHaveExplicitSign"` constraint now only applies to the plus sign.)
 
