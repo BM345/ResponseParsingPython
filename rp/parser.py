@@ -60,3 +60,140 @@ class Parser(object):
         node._asciiMath = t
 
         return node
+
+    def parseNumber(self, inputText, marker):
+        t = ""
+        start = marker.position
+
+        integralPart = ""
+        decimalPart = ""
+
+        ts = ""
+        sign = "positive"
+        signIsExplicit = False
+
+        d = cut(inputText, marker.position)
+
+        if d == "+":
+            ts = "+"
+            signIsExplicit = True
+            marker.position += 1
+        elif d == "-":
+            ts = "-"
+            sign = "negative"
+            signIsExplicit = True
+            marker.position += 1
+
+        nlz = 0
+        ntz = 0
+        nsf = 0
+        ndp = 0
+
+        p = 0
+        q = 0
+
+        while marker.position < len(inputText):
+            c = cut(inputText, marker.position)
+
+            if c in "0123456789":
+                t += c
+                marker.position += 1
+
+                if q == 0:
+                    integralPart += c
+                else:
+                    decimalPart += c
+                    ndp += 1
+
+                if c == "0" and nsf == 0 and q == 0:
+                    nlz += 1
+                elif c != "0":
+                    nsf += p
+                    p=0
+                    nsf+=1
+                elif c == "0" and nsf > 0:
+                    p+=1
+
+            elif c == ".":
+                if q == 0:
+                    t+= c
+                    marker.position +=1
+
+                    decimalPart +=c
+
+                    q+=1
+                else:
+                    break
+            else:
+                break
+
+        allZero = True if nsf == 0 and len(t) > 0 else False
+        sign = "zero" if allZero == True else sign
+
+        minimumNSF =0
+        maximumNSF = 0
+
+        if allZero:
+            minimumNSF = 1
+            maximumNSF = 1
+            if q>0:
+                ntz = ndp
+        else:
+            if q>0:
+                minimumNSF = nsf + p
+                maximumNSF = nsf + p
+
+                ntz = p
+            else:
+                minimumNSF = nsf
+                maximumNSF = nsf+p
+
+        end = marker.position
+
+        subtype = "integer" if q==0 else "decimalNumber"
+
+        t1 = ""
+
+        if integralPart == "" and (decimalPart == "" or decimalPart == "."):
+            t1 = ""
+        elif integralPart == "":
+            if self.settings.addLeadingZeroToDecimalsForSimplifiedForms:
+                t1 = "0"
+            else:
+                t1 = ""
+        else:
+            if self.settings.removeLeadingZerosFromSimplifiedForms:
+                t1 = integralPart[nlz:]
+                if self.settings.addLeadingZeroToDecimalsForSimplifiedForms:
+                    t1 = "0" if t1 == "" else t1
+            else:
+                t1 = integralPart
+
+        t2 = "" if decimalPart == "." else decimalPart
+
+        if ts + t == "":
+            return None
+        else:
+
+            node = nodes.RPNumberNode()
+
+            node.subtype = subtype
+
+            node.start = start
+            node.end = end
+            node._text = ts + t
+            node.value = t1 + t2 if allZero else ts + t1 + t2
+
+            node.integralPart = integralPart
+            node.decimalPart = decimalPart
+
+            node.sign = sign
+            node.signIsExplicit = signIsExplicit
+            node.numberOfLeadingZeros = nlz
+            node.numberOfTrailingZeros =ntz
+            node.minimumNumberOfSignificantFigures =minimumNSF
+            node.maximumNumberOfSignificantFigures = maximumNSF
+            node.numberOfDecimalPlaces = ndp
+
+            return node
+
