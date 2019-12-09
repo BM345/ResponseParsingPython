@@ -15,7 +15,12 @@ This document describes what constraints can be applied to which response types.
 
 | Name | String | Description |
 |---|---|---|
-| Integer | `"integer"` | All whole numbers from $-\infty$ to $+\infty$
+| Integer | `"integer"` | All whole numbers from $-\infty$ to $+\infty$ |
+| Non-negative Integers | `"nonNegativeIntegers"` |  All whole numbers from $0$ to $+\infty$, **including** $0$ |
+| Decimal | `"decimal"` | All rational numbers from $-\infty$ to $+\infty$ |
+| Currency Value | `"currencyValue"` | All rational numbers from $-\infty$ to $+\infty$, optionally with a currency symbol |
+
+<br /><br />
 
 ## Integers
 
