@@ -22,7 +22,9 @@ class ParserSettings(object):
 
 
 def cut(text, startIndex, length=1):
-    return text[startIndex, startIndex + length]
+    a = startIndex
+    b = startIndex + length
+    return text[a:b]
 
 
 class Parser(object):

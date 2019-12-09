@@ -54,14 +54,14 @@ class RPNode(object):
 
 class RPWhiteSpaceNode(RPNode):
     def __init__(self):
-        super(RPNode, self).__init__("whiteSpace")
+        super(RPWhiteSpaceNode, self).__init__("whiteSpace")
 
         self.value = ""
 
 
 class RPNumberNode(RPNode):
     def __init__(self):
-        super(RPNode, self).__init__("number")
+        super(RPNumberNode, self).__init__("number")
 
         self.value = ""
         self.integralPart = ""
