@@ -2,7 +2,7 @@
 
 This document describes what constraints can be applied to which response types.
 
-## `"integer"`
+## Integers
 
 ### `"mustHaveAtLeastNSF"`
 
@@ -16,6 +16,8 @@ In order to pass validation, the student's response must have a **minimum** of *
 }
 ```
 
+<br />
+
 ### `"mustHaveNoMoreThanNSF"`
 
 In order to pass validation, the student's response must have a **maximum** of *n* significant figures.
@@ -27,6 +29,8 @@ In order to pass validation, the student's response must have a **maximum** of *
     "mustHaveNoMoreThanNSF": 5
 }
 ```
+
+<br />
 
 ### `"mustHaveExactlyNSF"`
 
