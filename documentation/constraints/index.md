@@ -15,10 +15,10 @@ This document describes what constraints can be applied to which response types.
 
 | Name | String | Description |
 |---|---|---|
-| Integer | `"integer"` | All whole numbers from $-\infty$ to $+\infty$ |
-| Non-negative Integers | `"nonNegativeIntegers"` |  All whole numbers from $0$ to $+\infty$, **including** $0$ |
-| Decimal | `"decimal"` | All rational numbers from $-\infty$ to $+\infty$ |
-| Currency Value | `"currencyValue"` | All rational numbers from $-\infty$ to $+\infty$, optionally with a currency symbol |
+| Integer | `"integer"` | All whole numbers from -∞ to +∞ |
+| Non-negative Integers | `"nonNegativeIntegers"` |  All whole numbers from 0 to +∞, **including** 0 |
+| Decimal | `"decimal"` | All rational numbers from -∞ to +∞ |
+| Currency Value | `"currencyValue"` | All rational numbers from -∞ to +∞, optionally with a currency symbol |
 
 <br /><br />
 
@@ -109,4 +109,60 @@ The default is `not set`.
 ## Non-negative Integers
 
 This response type has the same constraints as the `integer` type, but of course it doesn't allow negative-integer answers. (This means that the `"mustHaveExplicitSign"` constraint now only applies to the plus sign.)
+
+<br /><br />
+
+## Decimals
+
+The `"mustHaveExplicitSign"`, `"mustHaveAtLeastNSF"`, `"mustHaveNoMoreThanNSF"` and `"mustHaveExactlyNSF"` constraints from the `integer` type can also be applied to the `decimal` type, as well as the following.
+
+<br /><br />
+
+### `"mustHaveAtLeastNDP"`
+
+In order to pass validation, the student's response must have a **minimum** of *n* decimal places.
+
+The default is `not set`.
+
+#### Example
+
+```json
+{
+    "mustHaveAtLeastNDP": 2
+}
+```
+
+<br /><br />
+
+### `"mustHaveNoMoreThanNDP"`
+
+In order to pass validation, the student's response must have a **maximum** of *n* decimal places.
+
+The default is `not set`.
+
+#### Example
+
+```json
+{
+    "mustHaveNoMoreThanNDP": 4
+}
+```
+
+<br /><br />
+
+### `"mustHaveExactlyNDP"`
+
+In order to pass validation, the student's response must have **exactly** *n* decimal places.
+
+The default is `not set`.
+
+#### Example
+
+```json
+{
+    "mustHaveExactlyNDP": 3
+}
+```
+
+<br /><br />
 
