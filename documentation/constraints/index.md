@@ -2,10 +2,20 @@
 
 This document describes what constraints can be applied to which response types.
 
+<br /><br />
+
 ## Table of Contents
 
 - [Integers](#integers)
 - [Non-negative Integers](#non-negative-integers)
+
+<br /><br />
+
+## Response Types
+
+| Name | String | Description |
+|---|---|---|
+| Integer | `"integer"` | All whole numbers from $-\infty$ to $+\infty$
 
 ## Integers
 
