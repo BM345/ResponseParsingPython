@@ -30,6 +30,20 @@ class Parser(object):
 
         self.settings = ParserSettings()
 
+    def getParseResult(self, inputText):
+        marker = Marker()
+
+        self.parseWhiteSpace(inputText, marker)
+
+        number = self.parseNumber(inputText, marker)
+
+        self.parseWhiteSpace(inputText, marker)
+
+        if number != None and marker.position == len(inputText):
+            return number
+
+        return None
+
     def parseWhiteSpace(self, inputText, marker):
         t = ""
         start = marker.position
@@ -109,19 +123,19 @@ class Parser(object):
                     nlz += 1
                 elif c != "0":
                     nsf += p
-                    p=0
-                    nsf+=1
+                    p = 0
+                    nsf += 1
                 elif c == "0" and nsf > 0:
-                    p+=1
+                    p += 1
 
             elif c == ".":
                 if q == 0:
-                    t+= c
-                    marker.position +=1
+                    t += c
+                    marker.position += 1
 
-                    decimalPart +=c
+                    decimalPart += c
 
-                    q+=1
+                    q += 1
                 else:
                     break
             else:
@@ -130,16 +144,16 @@ class Parser(object):
         allZero = True if nsf == 0 and len(t) > 0 else False
         sign = "zero" if allZero == True else sign
 
-        minimumNSF =0
+        minimumNSF = 0
         maximumNSF = 0
 
         if allZero:
             minimumNSF = 1
             maximumNSF = 1
-            if q>0:
+            if q > 0:
                 ntz = ndp
         else:
-            if q>0:
+            if q > 0:
                 minimumNSF = nsf + p
                 maximumNSF = nsf + p
 
@@ -150,7 +164,7 @@ class Parser(object):
 
         end = marker.position
 
-        subtype = "integer" if q==0 else "decimalNumber"
+        subtype = "integer" if q == 0 else "decimalNumber"
 
         t1 = ""
 
@@ -190,10 +204,9 @@ class Parser(object):
             node.sign = sign
             node.signIsExplicit = signIsExplicit
             node.numberOfLeadingZeros = nlz
-            node.numberOfTrailingZeros =ntz
-            node.minimumNumberOfSignificantFigures =minimumNSF
+            node.numberOfTrailingZeros = ntz
+            node.minimumNumberOfSignificantFigures = minimumNSF
             node.maximumNumberOfSignificantFigures = maximumNSF
             node.numberOfDecimalPlaces = ndp
 
             return node
-
