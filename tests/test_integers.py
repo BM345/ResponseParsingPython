@@ -42,17 +42,13 @@ class TestIntegerValidation(unittest.TestCase):
 
     @parameterized.expand([
         ["123", {}, True, "123"],
-        ["+123", {}, True, "+123"],
-        ["-123", {}, True, "-123"],
-        ["-00123", constraints.allowLeadingZeros, True, "-00123"],
-        ["-0012300", constraints.allowLeadingZeros, True, "-0012300"],
-        ["-0012300456", constraints.allowLeadingZeros, True, "-0012300456"],
-        ["0", {}, True, "0"],
-        ["000", constraints.allowLeadingZeros, True, "000"],
-        ["+0", {}, True, "0"],
-        ["-0", {}, True, "0"]
+        ["123", constraints.allowLeadingZeros, True, "123"],
+        ["123", constraints.mustNotHavePlus, True, "123"],
+        ["123",  constraints.mustHavePlus, False, "123"],
+          ["00123", {}, False, "00123"],
+        ["00123", constraints.allowLeadingZeros, True, "00123"],
     ])
-    def test_accept(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
+    def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 
         validator = Validator()
         request = ValidationRequest()
@@ -65,22 +61,6 @@ class TestIntegerValidation(unittest.TestCase):
 
         self.assertEqual(response.isAccepted, isAccepted)
         self.assertEqual(response.normalisedStudentsResponse, normalisedStudentsResponse)
-
-    @parameterized.expand([
-        ["00123", {}, False],
-    ])
-    def test_reject(self, studentsResponse, constraints, isAccepted):
-
-        validator = Validator()
-        request = ValidationRequest()
-
-        request.studentsResponse = studentsResponse
-        request.expectedResponseType = "integer"
-        request.constraints = constraints
-
-        response = validator.validate(request)
-
-        self.assertEqual(response.isAccepted, isAccepted)
 
 
 if __name__ == "__main__":

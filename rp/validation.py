@@ -39,17 +39,22 @@ class Validator(object):
         if r != None and r.type == "number" and r.subtype == "integer":
             response.isAccepted = True
 
-            if ( "allowLeadingZeros" not in request.constraints or request.constraints["allowLeadingZeros"] == False) and r.numberOfLeadingZeros > 0 and r.value != "0":
+            if "allowLeadingZeros" not in request.constraints:
+                request.constraints["allowLeadingZeros"] = False
+
+            if request.constraints["allowLeadingZeros"] == False and r.numberOfLeadingZeros > 0 and r.value != "0":
                 response.isAccepted = False
                 response.messageText = self.messages.getMessageById("noLeadingZeros")
 
-            if "mustHaveExplicitSign" in request.constraints:
-                if request.constraints["mustHaveExplicitSign"] == True and r.sign == "positive" and r.signIsExplicit == False:
-                    response.isAccepted = False
-                    response.messageText = self.messages.getMessageById("mustHaveSign")
-                elif request.constraints["mustHaveExplicitSign"] == False and r.sign == "positive" and r.signIsExplicit == True:
-                    response.isAccepted = False
-                    response.messageText = self.messages.getMessageById("dontHaveSign")
+            if "mustHaveExplicitSign" not in request.constraints:
+                request.constraints["mustHaveExplicitSign"] = False
+
+            if request.constraints["mustHaveExplicitSign"] == True and r.sign == "positive" and r.signIsExplicit == False:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("mustHaveSign")
+            elif request.constraints["mustHaveExplicitSign"] == False and r.sign == "positive" and r.signIsExplicit == True:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("dontHaveSign")
 
         else:
             response.isAccepted = False
