@@ -39,7 +39,7 @@ class Validator(object):
         if r != None and r.type == "number" and r.subtype == "integer":
             response.isAccepted = True
 
-            if ( "allowLeadingZeros" not in request.constraints or request.constraints["allowLeadingZeros"] == False) and r.numberOfLeadingZeros > 0:
+            if ( "allowLeadingZeros" not in request.constraints or request.constraints["allowLeadingZeros"] == False) and r.numberOfLeadingZeros > 0 and r.value != "0":
                 response.isAccepted = False
                 response.messageText = self.messages.getMessageById("noLeadingZeros")
 
