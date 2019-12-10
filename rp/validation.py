@@ -58,6 +58,20 @@ class Validator(object):
                 response.isAccepted = False
                 response.messageText = self.messages.getMessageById("dontHaveSign")
 
+            if "mustHaveAtLeastNSF" in request.constraints:
+                n = request.constraints["mustHaveAtLeastNSF"]
+
+                if r.maximumNumberOfSignificantFigures < n:
+                    response.isAccepted = False
+                    response.messageText = self.messages.getMessageById("mustHaveAtLeastNSF", [n])
+
+            if "mustHaveNoMoreThanNSF" in request.constraints:
+                n = request.constraints["mustHaveNoMoreThanNSF"]
+
+                if r.minimumNumberOfSignificantFigures > n:
+                    response.isAccepted = False
+                    response.messageText = self.messages.getMessageById("mustHaveNoMoreThanNSF", [n])
+
         else:
             response.isAccepted = False
             response.messageText = "Your answer should be a whole number."

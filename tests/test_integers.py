@@ -86,6 +86,23 @@ class TestIntegerValidation(unittest.TestCase):
         ["   +   0   ", {}, False, "0"],
         ["+0", constraints.mustNotHavePlus, False, "0"],
         ["+0", constraints.mustHavePlus, True, "0"],
+        ["123", constraints.mustHaveAtLeast3SF, True, "123"],
+        ["12300", constraints.mustHaveAtLeast3SF, True, "12300"],
+        ["12345", constraints.mustHaveAtLeast3SF, True, "12345"],
+        ["120", constraints.mustHaveAtLeast3SF, True, "120"],
+        ["100", constraints.mustHaveAtLeast3SF, True, "100"],
+        ["123", constraints.mustHaveAtLeast5SF, False, "123"],
+        ["12345", constraints.mustHaveAtLeast5SF, True, "12345"],
+        ["12", constraints.mustHaveAtLeast3SF, False, "12"],
+        ["012", merge(constraints.mustHaveAtLeast3SF, constraints.allowLeadingZeros), False, "012"],
+        ["123", constraints.mustHaveNoMoreThan3SF, True, "123"],
+        ["120", constraints.mustHaveNoMoreThan3SF, True, "120"],
+        ["100", constraints.mustHaveNoMoreThan3SF, True, "100"],
+        ["12345", constraints.mustHaveNoMoreThan6SF, True, "12345"],
+        ["1000", constraints.mustHaveNoMoreThan3SF, True, "1000"],
+        ["123000", constraints.mustHaveNoMoreThan3SF, True, "123000"],
+        ["1234", constraints.mustHaveNoMoreThan3SF, False, "1234"],
+        ["1234567", constraints.mustHaveNoMoreThan6SF, False, "1234567"],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 
@@ -100,6 +117,8 @@ class TestIntegerValidation(unittest.TestCase):
 
         self.assertEqual(response.isAccepted, isAccepted)
         self.assertEqual(response.normalisedStudentsResponse, normalisedStudentsResponse)
+
+        print(response.messageText)
 
         integer = response.expression
 
