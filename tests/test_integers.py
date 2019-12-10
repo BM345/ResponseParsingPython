@@ -6,6 +6,12 @@ from rp.validation import *
 import constraints
 
 
+def merge(d1, d2):
+    a = d1.copy()
+    a.update(d2)
+    return a
+
+
 class TestIntegerValidation(unittest.TestCase):
 
     @parameterized.expand([
@@ -50,6 +56,17 @@ class TestIntegerValidation(unittest.TestCase):
         ["+123", {}, False, "+123"],
         ["+123", constraints.mustNotHavePlus, False, "+123"],
         ["+123", constraints.mustHavePlus, True, "+123"],
+        ["-123", {}, True, "-123"],
+        ["-123", constraints.mustNotHavePlus, True, "-123"],
+        ["-123", constraints.mustHavePlus, True, "-123"],
+        ["+00123", {}, False, "+00123"],
+        ["+00123", constraints.allowLeadingZeros, False, "+00123"],
+        ["+00123", constraints.mustHavePlus, False, "+00123"],
+        ["+00123", merge(constraints.allowLeadingZeros, constraints.mustHavePlus), True, "+00123"],
+        ["-00123", {}, False, "-00123"],
+        ["-00123", constraints.allowLeadingZeros, True, "-00123"],
+        ["-00123", constraints.mustHavePlus, False, "-00123"],
+        ["-00123", merge(constraints.allowLeadingZeros, constraints.mustHavePlus), True, "-00123"],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 
