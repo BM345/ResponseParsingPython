@@ -44,9 +44,12 @@ class TestIntegerValidation(unittest.TestCase):
         ["123", {}, True, "123"],
         ["123", constraints.allowLeadingZeros, True, "123"],
         ["123", constraints.mustNotHavePlus, True, "123"],
-        ["123",  constraints.mustHavePlus, False, "123"],
-          ["00123", {}, False, "00123"],
+        ["123", constraints.mustHavePlus, False, "123"],
+        ["00123", {}, False, "00123"],
         ["00123", constraints.allowLeadingZeros, True, "00123"],
+        ["+123", {}, False, "+123"],
+        ["+123", constraints.mustNotHavePlus, False, "+123"],
+        ["+123", constraints.mustHavePlus, True, "+123"],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 

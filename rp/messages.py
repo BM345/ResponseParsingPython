@@ -6,7 +6,7 @@ class Messages(object):
 
         self.messages = []
 
-        tree = ET.parse("./rp/messages.en_GB.xml")
+        tree = ET.parse("./rp/messages.en-gb.xml")
         root = tree.getroot()
 
         for message in root:
