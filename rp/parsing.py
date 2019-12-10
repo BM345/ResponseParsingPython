@@ -144,7 +144,6 @@ class Parser(object):
                 break
 
         allZero = True if nsf == 0 and len(t) > 0 else False
-        sign = "zero" if allZero == True else sign
 
         minimumNSF = 0
         maximumNSF = 0
@@ -205,6 +204,7 @@ class Parser(object):
 
             node.sign = sign
             node.signIsExplicit = signIsExplicit
+            node.isZero = allZero
             node.numberOfLeadingZeros = nlz
             node.numberOfTrailingZeros = ntz
             node.minimumNumberOfSignificantFigures = minimumNSF

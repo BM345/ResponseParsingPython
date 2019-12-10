@@ -31,6 +31,8 @@ class Validator(object):
         if request.expectedResponseType == "integer":
             return self.validateInteger(request)
 
+        raise ValueError("Unsupported response type '{0}'.".format(request.expectedResponseType))
+
     def validateInteger(self, request):
         r = self.parser.getParseResult(request.studentsResponse)
 
@@ -42,7 +44,7 @@ class Validator(object):
             if "allowLeadingZeros" not in request.constraints:
                 request.constraints["allowLeadingZeros"] = False
 
-            if request.constraints["allowLeadingZeros"] == False and r.numberOfLeadingZeros > 0 and r.value != "0":
+            if request.constraints["allowLeadingZeros"] == False and r.numberOfLeadingZeros > 0 and not r.isZero:
                 response.isAccepted = False
                 response.messageText = self.messages.getMessageById("noLeadingZeros")
 

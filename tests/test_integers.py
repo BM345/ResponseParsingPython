@@ -22,10 +22,10 @@ class TestIntegerValidation(unittest.TestCase):
         ["-00123", "00123", "", "negative", True, 2, 0, 3, 3, 0],
         ["-0012300", "0012300", "", "negative", True, 2, 0, 3, 5, 0],
         ["-0012300456", "0012300456", "", "negative", True, 2, 0, 8, 8, 0],
-        ["0", "0", "", "zero", False, 1, 0, 1, 1, 0],
-        ["000", "000", "", "zero", False, 3, 0, 1, 1, 0],
-        ["+0", "0", "", "zero", True, 1, 0, 1, 1, 0],
-        ["-0", "0", "", "zero", True, 1, 0, 1, 1, 0]
+        ["0", "0", "", "positive", False, 1, 0, 1, 1, 0],
+        ["000", "000", "", "positive", False, 3, 0, 1, 1, 0],
+        ["+0", "0", "", "positive", True, 1, 0, 1, 1, 0],
+        ["-0", "0", "", "negative", True, 1, 0, 1, 1, 0]
     ])
     def test_parse(self, studentsResponse, integralPart, decimalPart, sign, signIsExplicit, nlz, ntz, nsf1, nsf2, ndp):
 
@@ -67,6 +67,13 @@ class TestIntegerValidation(unittest.TestCase):
         ["-00123", constraints.allowLeadingZeros, True, "-00123"],
         ["-00123", constraints.mustHavePlus, False, "-00123"],
         ["-00123", merge(constraints.allowLeadingZeros, constraints.mustHavePlus), True, "-00123"],
+        ["0", {}, True, "0"],
+        ["0", constraints.allowLeadingZeros, True, "0"],
+        ["0", constraints.mustNotHavePlus, True, "0"],
+        ["0", constraints.mustHavePlus, False, "0"],
+        ["+0", {}, False, "0"],
+        ["+0", constraints.mustNotHavePlus, False, "0"],
+        ["+0", constraints.mustHavePlus, True, "0"],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 
@@ -81,6 +88,11 @@ class TestIntegerValidation(unittest.TestCase):
 
         self.assertEqual(response.isAccepted, isAccepted)
         self.assertEqual(response.normalisedStudentsResponse, normalisedStudentsResponse)
+
+        integer = response.expression
+
+        self.assertEqual(integer.type, "number")
+        self.assertEqual(integer.subtype, "integer")
 
 
 if __name__ == "__main__":
