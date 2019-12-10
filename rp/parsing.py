@@ -100,6 +100,8 @@ class Parser(object):
             signIsExplicit = True
             marker.position += 1
 
+        self.parseWhiteSpace(inputText, marker)
+
         nlz = 0
         ntz = 0
         nsf = 0
