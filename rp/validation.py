@@ -1,4 +1,5 @@
 import parsing
+import messages
 
 
 class ValidationRequest(object):
@@ -24,6 +25,7 @@ class Validator(object):
     def __init__(self):
 
         self.parser = parsing.Parser()
+        self.messages = messages.Messages()
 
     def validate(self, request):
         if request.expectedResponseType == "integer":
@@ -36,6 +38,11 @@ class Validator(object):
 
         if r != None and r.type == "number" and r.subtype == "integer":
             response.isAccepted = True
+
+            if "allowLeadingZeros" in request.constraints:
+                if request.constraints["allowLeadingZeros"] == False and r.numberOfLeadingZeros > 0:
+                    response.isAccepted = False
+                    response.messageText = self.messages.getMessageById("noLeadingZeros")
         else:
             response.isAccepted = False
             response.messageText = "Your answer should be a whole number."

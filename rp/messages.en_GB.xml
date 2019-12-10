@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messages locale="en_GB">
+    <message id="noLeadingZeros">You don't need to write the zeros at the start of the number.</message>
+</messages>
