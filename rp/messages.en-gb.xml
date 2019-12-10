@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<messages locale="en_GB">
+<messages>
     <message id="noLeadingZeros">You don't need to write the zeros at the start of the number.</message>
     <message id="mustHaveSign">Include a plus sign or a minus sign in your answer.</message>
      <message id="dontHaveSign">You don't need to write a plus sign before the number.</message>

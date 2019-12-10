@@ -22,10 +22,10 @@ class ValidationResponse(object):
 
 
 class Validator(object):
-    def __init__(self):
+    def __init__(self, messagesFile="./rp/messages.en-gb.xml"):
 
         self.parser = parsing.Parser()
-        self.messages = messages.Messages()
+        self.messages = messages.Messages(messagesFile)
 
     def validate(self, request):
         if request.expectedResponseType == "integer":
