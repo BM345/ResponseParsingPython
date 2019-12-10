@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 class Messages(object):
     def __init__(self):
 
-        messages = []
+        self.messages = []
 
         tree = ET.parse("./rp/messages.en_GB.xml")
         root = tree.getroot()
@@ -13,7 +13,7 @@ class Messages(object):
             i = message.attrib["id"]
             text = message.text
 
-            messages.append({"id": i, "text": text})
+            self.messages.append({"id": i, "text": text})
 
     def getMessageById(self, i):
-        return [message["text"] for message in messages if message["id"] == i][0]
+        return [message["text"] for message in self.messages if message["id"] == i][0]

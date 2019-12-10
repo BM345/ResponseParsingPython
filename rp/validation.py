@@ -18,7 +18,7 @@ class ValidationResponse(object):
         self.messageText = ""
         self.request = None
         self.normalisedStudentsResponse = ""
-        self.expressionTree = None
+        self.expression = None
 
 
 class Validator(object):
@@ -31,7 +31,7 @@ class Validator(object):
         if request.expectedResponseType == "integer":
             return self.validateInteger(request)
 
-    def validateInteger(self,  request):
+    def validateInteger(self, request):
         r = self.parser.getParseResult(request.studentsResponse)
 
         response = ValidationResponse()
@@ -39,10 +39,18 @@ class Validator(object):
         if r != None and r.type == "number" and r.subtype == "integer":
             response.isAccepted = True
 
-            if "allowLeadingZeros" in request.constraints:
-                if request.constraints["allowLeadingZeros"] == False and r.numberOfLeadingZeros > 0:
+            if ( "allowLeadingZeros" not in request.constraints or request.constraints["allowLeadingZeros"] == False) and r.numberOfLeadingZeros > 0:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("noLeadingZeros")
+
+            if "mustHaveExplicitSign" in request.constraints:
+                if request.constraints["mustHaveExplicitSign"] == True and r.sign == "positive" and r.signIsExplicit == False:
                     response.isAccepted = False
-                    response.messageText = self.messages.getMessageById("noLeadingZeros")
+                    response.messageText = self.messages.getMessageById("mustHaveSign")
+                elif request.constraints["mustHaveExplicitSign"] == False and r.sign == "positive" and r.signIsExplicit == True:
+                    response.isAccepted = False
+                    response.messageText = self.messages.getMessageById("dontHaveSign")
+
         else:
             response.isAccepted = False
             response.messageText = "Your answer should be a whole number."
@@ -51,6 +59,6 @@ class Validator(object):
 
         if r != None:
             response.normalisedStudentsResponse = r.asciiMath
-            response.expressionTree = r
+            response.expression = r
 
         return response

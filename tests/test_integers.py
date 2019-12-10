@@ -1,39 +1,41 @@
 import unittest
 from parameterized import parameterized
+from pyunitreport import HTMLTestRunner
 
 from rp.validation import *
+import constraints
 
 
 class TestIntegerValidation(unittest.TestCase):
 
     @parameterized.expand([
-        ["123", True, "123", "", "positive", False, 0, 0, 3, 3, 0, "123"],
-        ["+123", True, "123", "", "positive", True, 0, 0, 3, 3, 0, "+123"],
-        ["-123", True, "123", "", "negative", True, 0, 0, 3, 3, 0, "-123"],
-        ["-00123", True, "00123", "", "negative", True, 2, 0, 3, 3, 0, "-00123"],
-        ["-0012300", True, "0012300", "", "negative",
+        ["123", {}, True, "123", "", "positive", False, 0, 0, 3, 3, 0, "123"],
+        ["+123", {}, True, "123", "", "positive", True, 0, 0, 3, 3, 0, "+123"],
+        ["-123", {}, True, "123", "", "negative", True, 0, 0, 3, 3, 0, "-123"],
+        ["-00123", constraints.allowLeadingZeros, True, "00123", "", "negative", True, 2, 0, 3, 3, 0, "-00123"],
+        ["-0012300", constraints.allowLeadingZeros, True, "0012300", "", "negative",
             True, 2, 0, 3, 5, 0, "-0012300"],
-        ["-0012300456", True, "0012300456", "", "negative",
+        ["-0012300456", constraints.allowLeadingZeros, True, "0012300456", "", "negative",
             True, 2, 0, 8, 8, 0, "-0012300456"],
-        ["0", True, "0", "", "zero", False, 1, 0, 1, 1, 0, "0"],
-        ["000", True, "000", "", "zero", False, 3, 0, 1, 1, 0, "000"],
-        ["+0", True, "0", "", "zero", True, 1, 0, 1, 1, 0, "0"],
-        ["-0", True, "0", "", "zero", True, 1, 0, 1, 1, 0, "0"]
+        ["0", {}, True, "0", "", "zero", False, 1, 0, 1, 1, 0, "0"],
+        ["000", constraints.allowLeadingZeros, True, "000", "", "zero", False, 3, 0, 1, 1, 0, "000"],
+        ["+0", {}, True, "0", "", "zero", True, 1, 0, 1, 1, 0, "0"],
+        ["-0", {}, True, "0", "", "zero", True, 1, 0, 1, 1, 0, "0"]
     ])
-    def test_accept(self, studentsResponse, isAccepted, integralPart, decimalPart, sign, signIsExplicit, nlz, ntz, nsf1, nsf2, ndp, asciiMath):
+    def test_accept(self, studentsResponse, constraints, isAccepted, integralPart, decimalPart, sign, signIsExplicit, nlz, ntz, nsf1, nsf2, ndp, asciiMath):
 
         validator = Validator() 
         request = ValidationRequest()
 
         request.studentsResponse = studentsResponse
         request.expectedResponseType = "integer"
-        request.normalisedStudentsResponse = asciiMath
+        request.constraints = constraints
 
         response = validator.validate(request)
 
         self.assertEqual(response.isAccepted, isAccepted)
 
-        integer = response.expressionTree
+        integer = response.expression
 
         if integer != None:
             self.assertEqual(integer.type, "number")
@@ -50,5 +52,22 @@ class TestIntegerValidation(unittest.TestCase):
             self.assertEqual(integer.asciiMath, asciiMath)
 
 
+    @parameterized.expand([
+        ["00123", {}, False],
+    ])
+    def test_reject(self, studentsResponse, constraints, isAccepted):
+
+        validator = Validator() 
+        request = ValidationRequest()
+
+        request.studentsResponse = studentsResponse
+        request.expectedResponseType = "integer"
+        request.constraints = constraints
+
+        response = validator.validate(request)
+
+        self.assertEqual(response.isAccepted, isAccepted)
+
+
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(testRunner=HTMLTestRunner(output="example_dir"))
