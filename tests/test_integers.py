@@ -1,11 +1,7 @@
 import unittest
 from parameterized import parameterized
 
-import sys
-
-sys.path.append("../rp")
-
-from validation import *
+from rp.validation import *
 
 
 class TestIntegerValidation(unittest.TestCase):
