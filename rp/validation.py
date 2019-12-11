@@ -30,6 +30,8 @@ class Validator(object):
     def validate(self, request):
         if request.expectedResponseType == "integer":
             return self.validateInteger(request)
+        if request.expectedResponseType == "nonNegativeInteger":
+            return self.validateNonNegativeInteger(request)
 
         raise ValueError("Unsupported response type '{0}'.".format(request.expectedResponseType))
 
@@ -41,12 +43,7 @@ class Validator(object):
         if r != None and r.type == "number" and r.subtype == "integer":
             response.isAccepted = True
 
-            if "allowLeadingZeros" not in request.constraints:
-                request.constraints["allowLeadingZeros"] = False
-
-            if request.constraints["allowLeadingZeros"] == False and r.numberOfLeadingZeros > 0 and not r.isZero:
-                response.isAccepted = False
-                response.messageText = self.messages.getMessageById("noLeadingZeros")
+            self._applyLeadingZerosConstraints(request, r, response)
 
             if "mustHaveExplicitSign" not in request.constraints:
                 request.constraints["mustHaveExplicitSign"] = False
@@ -58,26 +55,7 @@ class Validator(object):
                 response.isAccepted = False
                 response.messageText = self.messages.getMessageById("dontHaveSign")
 
-            if "mustHaveAtLeastNSF" in request.constraints:
-                n = request.constraints["mustHaveAtLeastNSF"]
-
-                if r.maximumNumberOfSignificantFigures < n:
-                    response.isAccepted = False
-                    response.messageText = self.messages.getMessageById("mustHaveAtLeastNSF", [n])
-
-            if "mustHaveNoMoreThanNSF" in request.constraints:
-                n = request.constraints["mustHaveNoMoreThanNSF"]
-
-                if r.minimumNumberOfSignificantFigures > n:
-                    response.isAccepted = False
-                    response.messageText = self.messages.getMessageById("mustHaveNoMoreThanNSF", [n])
-
-            if "mustHaveExactlyNSF" in request.constraints:
-                n = request.constraints["mustHaveExactlyNSF"]
-
-                if r.maximumNumberOfSignificantFigures < n or r.minimumNumberOfSignificantFigures > n:
-                    response.isAccepted = False
-                    response.messageText = self.messages.getMessageById("mustHaveExactlyNSF", [n])
+            self._applySignificantFigureConstraints(request, r, response)
 
         else:
             response.isAccepted = False
@@ -90,3 +68,74 @@ class Validator(object):
             response.expression = r
 
         return response
+
+    def validateNonNegativeInteger(self, request):
+        r = self.parser.getParseResult(request.studentsResponse)
+
+        response = ValidationResponse()
+
+        if r != None and r.type == "number" and r.subtype == "integer" and r.sign == "positive":
+            response.isAccepted = True
+
+            self._applyLeadingZerosConstraints(request, r, response)
+
+            if "mustHaveExplicitSign" not in request.constraints:
+                request.constraints["mustHaveExplicitSign"] = False
+
+            if request.constraints["mustHaveExplicitSign"] == True and r.signIsExplicit == False:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("mustHavePlusSign")
+            elif request.constraints["mustHaveExplicitSign"] == False and r.signIsExplicit == True:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("dontHavePlusSign")
+
+            self._applySignificantFigureConstraints(request, r, response)
+
+        elif r != None and r.type == "number" and r.subtype == "integer" and r.sign == "negative":
+            response.isAccepted = False
+            response.messageText = "Your answer must be a positive number."
+
+        else:
+            response.isAccepted = False
+            response.messageText = "Your answer should be a whole number."
+
+        response.request = request
+
+        if r != None:
+            response.normalisedStudentsResponse = r.asciiMath
+            response.expression = r
+
+        return response
+
+    def _applyLeadingZerosConstraints(self, request, result, response):
+
+        if "allowLeadingZeros" not in request.constraints:
+            request.constraints["allowLeadingZeros"] = False
+
+        if request.constraints["allowLeadingZeros"] == False and result.numberOfLeadingZeros > 0 and not result.isZero:
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("noLeadingZeros")
+
+
+    def _applySignificantFigureConstraints(self, request, result, response):
+
+        if "mustHaveAtLeastNSF" in request.constraints:
+            n = request.constraints["mustHaveAtLeastNSF"]
+
+            if result.maximumNumberOfSignificantFigures < n:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("mustHaveAtLeastNSF", [n])
+
+        if "mustHaveNoMoreThanNSF" in request.constraints:
+            n = request.constraints["mustHaveNoMoreThanNSF"]
+
+            if result.minimumNumberOfSignificantFigures > n:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("mustHaveNoMoreThanNSF", [n])
+
+        if "mustHaveExactlyNSF" in request.constraints:
+            n = request.constraints["mustHaveExactlyNSF"]
+
+            if result.maximumNumberOfSignificantFigures < n or result.minimumNumberOfSignificantFigures > n:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("mustHaveExactlyNSF", [n])
