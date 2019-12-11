@@ -4,12 +4,7 @@ from pyunitreport import HTMLTestRunner
 
 from rp.validation import *
 import constraints
-
-
-def merge(d1, d2):
-    a = d1.copy()
-    a.update(d2)
-    return a
+from general import *
 
 
 class TestNonNegativeIntegerValidation(unittest.TestCase):
