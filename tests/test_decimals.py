@@ -67,22 +67,65 @@ class TestDecimalValidation(unittest.TestCase):
         ["1.23", constraints.allowLeadingZeros, True, "1.23"],
         ["1.23", constraints.mustNotHavePlus, True, "1.23"],
         ["1.23", constraints.mustHavePlus, False, "1.23"],
+        ["+1.23", constraints.mustNotHavePlus, False, "+1.23"],
+        ["+1.23", constraints.mustHavePlus, True, "+1.23"],
+        ["-1.23", constraints.mustNotHavePlus, True, "-1.23"],
+        ["-1.23", constraints.mustHavePlus, True, "-1.23"],
         [" 1.23 ", {}, True, "1.23"],
         ["   1.23   ", constraints.allowLeadingZeros, True, "1.23"],
         [" 1.23 ", constraints.mustNotHavePlus, True, "1.23"],
         ["   1.23   ", constraints.mustHavePlus, False, "1.23"],
         ["001.23", {}, False, "001.23"],
         ["001.23", constraints.allowLeadingZeros, True, "001.23"],
+        ["+001.23", {}, False, "+001.23"],
+        ["+001.23", constraints.allowLeadingZeros, False, "+001.23"],
+        ["+001.23", merge(constraints.allowLeadingZeros, constraints.mustHavePlus), True, "+001.23"],
+        ["-001.23", constraints.allowLeadingZeros, True, "-001.23"],
+        ["-001.23", merge(constraints.allowLeadingZeros, constraints.mustHavePlus), True, "-001.23"],
         ["0.12", {}, True, "0.12"],
         ["0.12", constraints.allowLeadingZeros, True, "0.12"],
         [".12", {}, True, "0.12"],
         [".12", constraints.allowLeadingZeros, True, "0.12"],
         ["00.12", {}, False, "00.12"],
         ["00.12", constraints.allowLeadingZeros, True, "00.12"],
+        ["0", {}, True, "0"],
+        ["0.", {}, True, "0"],
+        [".0", {}, True, "0.0"],
+        ["0.0", {}, True, "0.0"],
+        ["000.0", {}, False, "000.0"],
+        ["0.000", {}, True, "0.000"],
+        ["000.000", {}, False, "000.000"],
+        ["0", constraints.allowLeadingZeros, True, "0"],
+        ["0.", constraints.allowLeadingZeros, True, "0"],
+        [".0", constraints.allowLeadingZeros, True, "0.0"],
+        ["0.0", constraints.allowLeadingZeros, True, "0.0"],
+        ["000.0", constraints.allowLeadingZeros, True, "000.0"],
+        ["0.000", constraints.allowLeadingZeros, True, "0.000"],
+        ["000.000", constraints.allowLeadingZeros, True, "000.000"],
+        ["0", constraints.mustHavePlus, False, "0"],
+        ["0.", constraints.mustHavePlus, False, "0"],
+        [".0", constraints.mustHavePlus, False, "0.0"],
+        ["0.0", constraints.mustHavePlus, False, "0.0"],
+        ["000.0", constraints.mustHavePlus, False, "000.0"],
+        ["0.000", constraints.mustHavePlus, False, "0.000"],
+        ["000.000", constraints.mustHavePlus, False, "000.000"],
+        ["+0", {}, False, "0"],
+        ["+0.", {}, False, "0"],
+        ["+.0", {}, False, "0.0"],
+        ["+0.0", {}, False, "0.0"],
+        ["+000.0", {}, False, "000.0"],
+        ["+0.000", {}, False, "0.000"],
+        ["+000.000", {}, False, "000.000"],
+        ["+0", constraints.mustHavePlus, True, "0"],
+        ["+0.", constraints.mustHavePlus, True, "0"],
+        ["+.0", constraints.mustHavePlus, True, "0.0"],
+        ["+0.0", constraints.mustHavePlus, True, "0.0"],
+        ["+000.0", constraints.mustHavePlus, False, "000.0"],
+        ["+0.000", constraints.mustHavePlus, True, "0.000"],
+        ["+000.000", constraints.mustHavePlus, False, "000.000"],
+
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
-
-        print "\"{0}\"".format( studentsResponse)
 
         validator = Validator()
         request = ValidationRequest()
@@ -95,8 +138,6 @@ class TestDecimalValidation(unittest.TestCase):
 
         self.assertEqual(response.isAccepted, isAccepted)
         self.assertEqual(response.normalisedStudentsResponse, normalisedStudentsResponse)
-
-        print(response.messageText)
 
 
 if __name__ == "__main__":

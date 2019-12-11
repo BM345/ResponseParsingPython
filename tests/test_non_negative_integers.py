@@ -89,8 +89,6 @@ class TestNonNegativeIntegerValidation(unittest.TestCase):
         self.assertEqual(response.isAccepted, isAccepted)
         self.assertEqual(response.normalisedStudentsResponse, normalisedStudentsResponse)
 
-        print(response.messageText)
-
         integer = response.expression
 
         self.assertEqual(integer.type, "number")
