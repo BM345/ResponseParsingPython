@@ -11,10 +11,10 @@
      <message id="mustBeSingleInteger">Your answer must be a single, whole number.</message>
      <message id="mustBeInteger">Your answer must be a whole number.</message>
      <message id="mustBePositive">Your answer must be a positive number.</message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
+     <message id="mustBeSingleNumber">Your answer must be a single integer or decimal.</message>
+     <message id="mustHaveAtLeastNDP">Give your answer to at least #p1# decimal places.</message>
+     <message id="mustHaveNoMoreThanNDP">Give your answer to no more than #p1# decimal places.</message>
+     <message id="mustHaveExactlyNDP">Give your answer to #p1# decimal places.</message>
      <message id=""></message>
      <message id=""></message>
      <message id=""></message>

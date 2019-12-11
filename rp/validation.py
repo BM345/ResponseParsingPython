@@ -36,6 +36,8 @@ class Validator(object):
             self.validateInteger(request, result, response)
         elif request.expectedResponseType == "nonNegativeInteger":
             self.validateNonNegativeInteger(request, result, response)
+        elif request.expectedResponseType == "decimal":
+            self.validateDecimal(request, result, response)
         else:
             raise ValueError("Unsupported response type '{0}'.".format(request.expectedResponseType))
 
@@ -128,6 +130,29 @@ class Validator(object):
 
         self._applySignificantFigureConstraints(request, result, response)
 
+    def validateDecimal(self, request, result, response):
+        response.isAccepted = True
+
+        if result == None or result.type != "number":
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustBeSingleNumber")
+            return
+
+        self._applyLeadingZerosConstraints(request, result, response)
+
+        if response.isAccepted == False:
+            return
+
+        self._applySignificantFigureConstraints(request, result, response)
+
+        if response.isAccepted == False:
+            return
+
+        self._applyDecimalPlaceConstraints(request, result, response)
+
+        if response.isAccepted == False:
+            return
+
     def _applyLeadingZerosConstraints(self, request, result, response):
 
         if "allowLeadingZeros" not in request.constraints:
@@ -162,4 +187,30 @@ class Validator(object):
             if result.maximumNumberOfSignificantFigures < n or result.minimumNumberOfSignificantFigures > n:
                 response.isAccepted = False
                 response.messageText = self.messages.getMessageById("mustHaveExactlyNSF", [n])
+                return
+
+    def _applyDecimalPlaceConstraints(self, request, result, response):
+
+        if "mustHaveAtLeastNDP" in request.constraints:
+            n = request.constraints["mustHaveAtLeastNDP"]
+
+            if result.numberOfDecimalPlaces < n:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("mustHaveAtLeastNDP", [n])
+                return
+
+        if "mustHaveNoMoreThanNDP" in request.constraints:
+            n = request.constraints["mustHaveNoMoreThanNDP"]
+
+            if result.numberOfDecimalPlaces > n:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("mustHaveNoMoreThanNDP", [n])
+                return
+
+        if "mustHaveExactlyNDP" in request.constraints:
+            n = request.constraints["mustHaveExactlyNDP"]
+
+            if result.numberOfDecimalPlaces != n:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("mustHaveExactlyNDP", [n])
                 return

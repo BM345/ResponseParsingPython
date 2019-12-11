@@ -24,7 +24,7 @@ class TestDecimalValidation(unittest.TestCase):
         [".123", "", ".123", "positive", False, 0, 0, 3, 3, 3],
         ["123.", "123", ".", "positive", False, 0, 0, 3, 3, 0],
         ["123.000", "123", ".000", "positive", False, 0, 3, 6, 6, 3],
-           ["-0.123", "0", ".123", "negative", True, 1, 0, 3, 3, 3],
+        ["-0.123", "0", ".123", "negative", True, 1, 0, 3, 3, 3],
         ["-000.123", "000", ".123", "negative", True, 3, 0, 3, 3, 3],
         ["-.123", "", ".123", "negative", True, 0, 0, 3, 3, 3],
         ["-123.", "123", ".", "negative", True, 0, 0, 3, 3, 0],
@@ -61,7 +61,21 @@ class TestDecimalValidation(unittest.TestCase):
         self.assertEqual(number.numberOfDecimalPlaces, ndp)
 
     @parameterized.expand([
-       
+        ["1.23", {}, True, "1.23"],
+        ["1.23", constraints.allowLeadingZeros, True, "1.23"],
+        ["1.23", constraints.mustNotHavePlus, True, "1.23"],
+        ["1.23", constraints.mustHavePlus, False, "1.23"],
+        [" 1.23 ", {}, True, "1.23"],
+        ["   1.23   ", constraints.allowLeadingZeros, True, "1.23"],
+        [" 1.23 ", constraints.mustNotHavePlus, True, "1.23"],
+        ["   1.23   ", constraints.mustHavePlus, False, "1.23"],
+        ["001.23", constraints.allowLeadingZeros, True, "001.23"],
+        ["0.12", {}, True, "0.12"],
+        ["0.12", constraints.allowLeadingZeros, True, "0.12"],
+        [".12", {}, True, "0.12"],
+        [".12", constraints.allowLeadingZeros, True, "0.12"],
+        ["00.12", {}, False, "00.12"],
+        ["00.12", constraints.allowLeadingZeros, True, "00.12"],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 
@@ -78,11 +92,6 @@ class TestDecimalValidation(unittest.TestCase):
         self.assertEqual(response.normalisedStudentsResponse, normalisedStudentsResponse)
 
         print(response.messageText)
-
-        integer = response.expression
-
-        self.assertEqual(integer.type, "number")
-        self.assertEqual(integer.subtype, "integer")
 
 
 if __name__ == "__main__":
