@@ -69,6 +69,7 @@ class RPNumberNode(RPNode):
         self.sign = ""
         self.signIsExplicit = False
         self.isZero = False
+        self.integralPartIsZero = False
         self.numberOfLeadingZeros = 0
         self.numberOfTrailingZeros = 0
         self.minimumNumberOfSignificantFigures = 0

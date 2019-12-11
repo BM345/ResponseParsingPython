@@ -143,6 +143,19 @@ class Validator(object):
         if response.isAccepted == False:
             return
 
+        if "mustHaveExplicitSign" not in request.constraints:
+            request.constraints["mustHaveExplicitSign"] = False
+
+        if request.constraints["mustHaveExplicitSign"] == True and result.sign == "positive" and result.signIsExplicit == False:
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustHaveSign")
+            return
+
+        if request.constraints["mustHaveExplicitSign"] == False and result.sign == "positive" and result.signIsExplicit == True:
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("dontHaveSign")
+            return
+            
         self._applySignificantFigureConstraints(request, result, response)
 
         if response.isAccepted == False:
@@ -158,7 +171,9 @@ class Validator(object):
         if "allowLeadingZeros" not in request.constraints:
             request.constraints["allowLeadingZeros"] = False
 
-        if request.constraints["allowLeadingZeros"] == False and result.numberOfLeadingZeros > 0 and not result.isZero:
+        n = 1 if result.integralPartIsZero else 0
+
+        if request.constraints["allowLeadingZeros"] == False and result.numberOfLeadingZeros > n:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("noLeadingZeros")
             return

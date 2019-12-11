@@ -10,28 +10,28 @@ from general import *
 class TestIntegerValidation(unittest.TestCase):
 
     @parameterized.expand([
-        ["123", "123", "", "positive", False, 0, 0, 3, 3, 0],
-        [" 123 ", "123", "", "positive", False, 0, 0, 3, 3, 0],
-        ["   123   ", "123", "", "positive", False, 0, 0, 3, 3, 0],
-        ["00123", "00123", "", "positive", False, 2, 0, 3, 3, 0],
-        ["   00123   ", "00123", "", "positive", False, 2, 0, 3, 3, 0],
-        ["+123", "123", "", "positive", True, 0, 0, 3, 3, 0],
-        ["   +   123   ", "123", "", "positive", True, 0, 0, 3, 3, 0],
-        ["-123", "123", "", "negative", True, 0, 0, 3, 3, 0],
-        ["   -   123   ", "123", "", "negative", True, 0, 0, 3, 3, 0],
-        ["-00123", "00123", "", "negative", True, 2, 0, 3, 3, 0],
-        ["-0012300", "0012300", "", "negative", True, 2, 0, 3, 5, 0],
-        ["-0012300456", "0012300456", "", "negative", True, 2, 0, 8, 8, 0],
-        ["0", "0", "", "positive", False, 1, 0, 1, 1, 0],
-        ["   0   ", "0", "", "positive", False, 1, 0, 1, 1, 0],
-        ["000", "000", "", "positive", False, 3, 0, 1, 1, 0],
-        ["   000   ", "000", "", "positive", False, 3, 0, 1, 1, 0],
-        ["+0", "0", "", "positive", True, 1, 0, 1, 1, 0],
-        ["   +   0   ", "0", "", "positive", True, 1, 0, 1, 1, 0],
-        ["-0", "0", "", "negative", True, 1, 0, 1, 1, 0],
-        ["   -   0   ", "0", "", "negative", True, 1, 0, 1, 1, 0]
+        ["123", "123", "", "positive", False, 0, 0, 3, 3, 0, False, False],
+        [" 123 ", "123", "", "positive", False, 0, 0, 3, 3, 0, False, False],
+        ["   123   ", "123", "", "positive", False, 0, 0, 3, 3, 0, False, False],
+        ["00123", "00123", "", "positive", False, 2, 0, 3, 3, 0, False, False],
+        ["   00123   ", "00123", "", "positive", False, 2, 0, 3, 3, 0, False, False],
+        ["+123", "123", "", "positive", True, 0, 0, 3, 3, 0, False, False],
+        ["   +   123   ", "123", "", "positive", True, 0, 0, 3, 3, 0, False, False],
+        ["-123", "123", "", "negative", True, 0, 0, 3, 3, 0, False, False],
+        ["   -   123   ", "123", "", "negative", True, 0, 0, 3, 3, 0, False, False],
+        ["-00123", "00123", "", "negative", True, 2, 0, 3, 3, 0, False, False],
+        ["-0012300", "0012300", "", "negative", True, 2, 0, 3, 5, 0, False, False],
+        ["-0012300456", "0012300456", "", "negative", True, 2, 0, 8, 8, 0, False, False],
+        ["0", "0", "", "positive", False, 1, 0, 1, 1, 0, True, True],
+        ["   0   ", "0", "", "positive", False, 1, 0, 1, 1, 0, True, True],
+        ["000", "000", "", "positive", False, 3, 0, 1, 1, 0, True, True],
+        ["   000   ", "000", "", "positive", False, 3, 0, 1, 1, 0, True, True],
+        ["+0", "0", "", "positive", True, 1, 0, 1, 1, 0, True, True],
+        ["   +   0   ", "0", "", "positive", True, 1, 0, 1, 1, 0, True, True],
+        ["-0", "0", "", "negative", True, 1, 0, 1, 1, 0, True, True],
+        ["   -   0   ", "0", "", "negative", True, 1, 0, 1, 1, 0, True, True]
     ])
-    def test_parse(self, studentsResponse, integralPart, decimalPart, sign, signIsExplicit, nlz, ntz, nsf1, nsf2, ndp):
+    def test_parse(self, studentsResponse, integralPart, decimalPart, sign, signIsExplicit, nlz, ntz, nsf1, nsf2, ndp, isZero, integralPartIsZero):
 
         parser = parsing.Parser()
         marker = parsing.Marker()
@@ -49,6 +49,8 @@ class TestIntegerValidation(unittest.TestCase):
         self.assertEqual(integer.minimumNumberOfSignificantFigures, nsf1)
         self.assertEqual(integer.maximumNumberOfSignificantFigures, nsf2)
         self.assertEqual(integer.numberOfDecimalPlaces, ndp)
+        self.assertEqual(integer.isZero, isZero)
+        self.assertEqual(integer.integralPartIsZero, integralPartIsZero)
 
     @parameterized.expand([
         ["123", {}, True, "123"],

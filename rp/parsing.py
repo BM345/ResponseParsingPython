@@ -106,10 +106,12 @@ class Parser(object):
         ntz = 0
         nsf = 0
         ndp = 0
-
+        
         p = 0
         q = 0
 
+        integralPartIsZero = True    
+    
         while marker.position < len(inputText):
             c = cut(inputText, marker.position)
 
@@ -119,6 +121,8 @@ class Parser(object):
 
                 if q == 0:
                     integralPart += c
+                    if c != "0":
+                        integralPartIsZero = False
                 else:
                     decimalPart += c
                     ndp += 1
@@ -207,6 +211,7 @@ class Parser(object):
             node.sign = sign
             node.signIsExplicit = signIsExplicit
             node.isZero = allZero
+            node.integralPartIsZero = integralPartIsZero
             node.numberOfLeadingZeros = nlz
             node.numberOfTrailingZeros = ntz
             node.minimumNumberOfSignificantFigures = minimumNSF
