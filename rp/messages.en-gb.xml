@@ -15,17 +15,4 @@
      <message id="mustHaveAtLeastNDP">Give your answer to at least #p1# decimal places.</message>
      <message id="mustHaveNoMoreThanNDP">Give your answer to no more than #p1# decimal places.</message>
      <message id="mustHaveExactlyNDP">Give your answer to #p1# decimal places.</message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
 </messages>
