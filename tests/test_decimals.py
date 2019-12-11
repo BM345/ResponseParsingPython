@@ -123,6 +123,21 @@ class TestDecimalValidation(unittest.TestCase):
         ["+000.0", constraints.mustHavePlus, False, "000.0"],
         ["+0.000", constraints.mustHavePlus, True, "0.000"],
         ["+000.000", constraints.mustHavePlus, False, "000.000"],
+           ["0.0012", constraints.mustHaveAtLeast3SF, False, "0.0012"],
+           ["0.00123", constraints.mustHaveAtLeast3SF, True, "0.00123"],
+           ["0.001234", constraints.mustHaveAtLeast3SF, True, "0.001234"],
+               ["0.00123", constraints.mustHaveAtLeast5SF, False, "0.00123"],
+           ["0.001234", constraints.mustHaveAtLeast5SF, False, "0.001234"],
+           ["0.0012345", constraints.mustHaveAtLeast5SF, True, "0.0012345"],
+             ["0.0012", constraints.mustHaveNoMoreThan3SF, True, "0.0012"],
+           ["0.00123", constraints.mustHaveNoMoreThan3SF, True, "0.00123"],
+           ["0.001234", constraints.mustHaveNoMoreThan3SF, False, "0.001234"],
+               ["0.0012345", constraints.mustHaveNoMoreThan6SF, True, "0.0012345"],
+           ["0.00123456", constraints.mustHaveNoMoreThan6SF, True, "0.00123456"],
+           ["0.001234567", constraints.mustHaveNoMoreThan6SF, False, "0.001234567"],
+              ["0.0012", constraints.mustHaveExactly3SF, False, "0.0012"],
+           ["0.00123", constraints.mustHaveExactly3SF, True, "0.00123"],
+           ["0.001234", constraints.mustHaveExactly3SF, False, "0.001234"],
 
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
