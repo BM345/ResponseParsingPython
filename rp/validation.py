@@ -28,84 +28,102 @@ class Validator(object):
         self.messages = messages.Messages(messagesFile)
 
     def validate(self, request):
+        result = self.parser.getParseResult(request.studentsResponse)
+
+        response = ValidationResponse()
+
         if request.expectedResponseType == "integer":
-            return self.validateInteger(request)
-        if request.expectedResponseType == "nonNegativeInteger":
-            return self.validateNonNegativeInteger(request)
-
-        raise ValueError("Unsupported response type '{0}'.".format(request.expectedResponseType))
-
-    def validateInteger(self, request):
-        r = self.parser.getParseResult(request.studentsResponse)
-
-        response = ValidationResponse()
-
-        if r != None and r.type == "number" and r.subtype == "integer":
-            response.isAccepted = True
-
-            self._applyLeadingZerosConstraints(request, r, response)
-
-            if "mustHaveExplicitSign" not in request.constraints:
-                request.constraints["mustHaveExplicitSign"] = False
-
-            if request.constraints["mustHaveExplicitSign"] == True and r.sign == "positive" and r.signIsExplicit == False:
-                response.isAccepted = False
-                response.messageText = self.messages.getMessageById("mustHaveSign")
-            elif request.constraints["mustHaveExplicitSign"] == False and r.sign == "positive" and r.signIsExplicit == True:
-                response.isAccepted = False
-                response.messageText = self.messages.getMessageById("dontHaveSign")
-
-            self._applySignificantFigureConstraints(request, r, response)
-
+            self.validateInteger(request, result, response)
+        elif request.expectedResponseType == "nonNegativeInteger":
+            self.validateNonNegativeInteger(request, result, response)
         else:
-            response.isAccepted = False
-            response.messageText = "Your answer should be a whole number."
+            raise ValueError("Unsupported response type '{0}'.".format(request.expectedResponseType))
 
         response.request = request
 
-        if r != None:
-            response.normalisedStudentsResponse = r.asciiMath
-            response.expression = r
+        if result != None:
+            response.normalisedStudentsResponse = result.asciiMath
+            response.expression = result
 
         return response
 
-    def validateNonNegativeInteger(self, request):
-        r = self.parser.getParseResult(request.studentsResponse)
+    def validateInteger(self, request, result, response):
+        response.isAccepted = True
 
-        response = ValidationResponse()
-
-        if r != None and r.type == "number" and r.subtype == "integer" and r.sign == "positive":
-            response.isAccepted = True
-
-            self._applyLeadingZerosConstraints(request, r, response)
-
-            if "mustHaveExplicitSign" not in request.constraints:
-                request.constraints["mustHaveExplicitSign"] = False
-
-            if request.constraints["mustHaveExplicitSign"] == True and r.signIsExplicit == False:
-                response.isAccepted = False
-                response.messageText = self.messages.getMessageById("mustHavePlusSign")
-            elif request.constraints["mustHaveExplicitSign"] == False and r.signIsExplicit == True:
-                response.isAccepted = False
-                response.messageText = self.messages.getMessageById("dontHavePlusSign")
-
-            self._applySignificantFigureConstraints(request, r, response)
-
-        elif r != None and r.type == "number" and r.subtype == "integer" and r.sign == "negative":
+        if result == None:
             response.isAccepted = False
-            response.messageText = "Your answer must be a positive number."
+            response.messageText = self.messages.getMessageById("mustBeSingleInteger")
+            return
 
-        else:
+        if result.type != "number":
             response.isAccepted = False
-            response.messageText = "Your answer should be a whole number."
+            response.messageText = self.messages.getMessageById("mustBeSingleInteger")
+            return
 
-        response.request = request
+        if result.subtype != "integer":
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustBeInteger")
+            return
 
-        if r != None:
-            response.normalisedStudentsResponse = r.asciiMath
-            response.expression = r
+        self._applyLeadingZerosConstraints(request, result, response)
 
-        return response
+        if response.isAccepted == False:
+            return
+
+        if "mustHaveExplicitSign" not in request.constraints:
+            request.constraints["mustHaveExplicitSign"] = False
+
+        if request.constraints["mustHaveExplicitSign"] == True and result.sign == "positive" and result.signIsExplicit == False:
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustHaveSign")
+            return
+
+        if request.constraints["mustHaveExplicitSign"] == False and result.sign == "positive" and result.signIsExplicit == True:
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("dontHaveSign")
+            return
+
+        self._applySignificantFigureConstraints(request, result, response)
+
+    def validateNonNegativeInteger(self, request, result, response):
+        response.isAccepted = True
+
+        if result == None:
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustBeSingleInteger")
+            return
+
+        if result.type != "number":
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustBeSingleInteger")
+            return
+
+        if result.subtype != "integer":
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustBeInteger")
+            return
+
+        if result.sign == "negative":
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustBePositive")
+            return
+
+        self._applyLeadingZerosConstraints(request, result, response)
+
+        if response.isAccepted == False:
+            return
+
+        if "mustHaveExplicitSign" not in request.constraints:
+            request.constraints["mustHaveExplicitSign"] = False
+
+        if request.constraints["mustHaveExplicitSign"] == True and result.signIsExplicit == False:
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustHavePlusSign")
+        elif request.constraints["mustHaveExplicitSign"] == False and result.signIsExplicit == True:
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("dontHavePlusSign")
+
+        self._applySignificantFigureConstraints(request, result, response)
 
     def _applyLeadingZerosConstraints(self, request, result, response):
 
@@ -115,7 +133,6 @@ class Validator(object):
         if request.constraints["allowLeadingZeros"] == False and result.numberOfLeadingZeros > 0 and not result.isZero:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("noLeadingZeros")
-
 
     def _applySignificantFigureConstraints(self, request, result, response):
 

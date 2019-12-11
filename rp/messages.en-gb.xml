@@ -8,9 +8,9 @@
      <message id="mustHaveExactlyNSF">Give your answer to #p1# significant figures.</message>
      <message id="mustHavePlusSign">Include a plus sign in your answer.</message>
      <message id="dontHavePlusSign">You don't need to write a plus sign before the number.</message>
-     <message id=""></message>
-     <message id=""></message>
-     <message id=""></message>
+     <message id="mustBeSingleInteger">Your answer must be a single, whole number.</message>
+     <message id="mustBeInteger">Your answer must be a whole number.</message>
+     <message id="mustBePositive">Your answer must be a positive number.</message>
      <message id=""></message>
      <message id=""></message>
      <message id=""></message>
