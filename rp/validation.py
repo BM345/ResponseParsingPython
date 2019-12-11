@@ -119,9 +119,12 @@ class Validator(object):
         if request.constraints["mustHaveExplicitSign"] == True and result.signIsExplicit == False:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("mustHavePlusSign")
-        elif request.constraints["mustHaveExplicitSign"] == False and result.signIsExplicit == True:
+            return
+
+        if request.constraints["mustHaveExplicitSign"] == False and result.signIsExplicit == True:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("dontHavePlusSign")
+            return
 
         self._applySignificantFigureConstraints(request, result, response)
 
@@ -133,6 +136,7 @@ class Validator(object):
         if request.constraints["allowLeadingZeros"] == False and result.numberOfLeadingZeros > 0 and not result.isZero:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("noLeadingZeros")
+            return
 
     def _applySignificantFigureConstraints(self, request, result, response):
 
@@ -142,6 +146,7 @@ class Validator(object):
             if result.maximumNumberOfSignificantFigures < n:
                 response.isAccepted = False
                 response.messageText = self.messages.getMessageById("mustHaveAtLeastNSF", [n])
+                return
 
         if "mustHaveNoMoreThanNSF" in request.constraints:
             n = request.constraints["mustHaveNoMoreThanNSF"]
@@ -149,6 +154,7 @@ class Validator(object):
             if result.minimumNumberOfSignificantFigures > n:
                 response.isAccepted = False
                 response.messageText = self.messages.getMessageById("mustHaveNoMoreThanNSF", [n])
+                return
 
         if "mustHaveExactlyNSF" in request.constraints:
             n = request.constraints["mustHaveExactlyNSF"]
@@ -156,3 +162,4 @@ class Validator(object):
             if result.maximumNumberOfSignificantFigures < n or result.minimumNumberOfSignificantFigures > n:
                 response.isAccepted = False
                 response.messageText = self.messages.getMessageById("mustHaveExactlyNSF", [n])
+                return
