@@ -166,3 +166,33 @@ The default is `not set`.
 
 <br /><br />
 
+## Currency Values
+
+Any of the constraints that can be applied to the `decimal` type can also be applied to the `currencyValue` type.
+
+### `"currency"`
+
+
+#### Allowed Values
+
+| | |
+|---|---|
+| `"USD"` | US Dollars |
+| `"GBP"` | UK Pounds |
+| `"EGP"` | Egyptian Pounds |
+
+At the moment, only `"USD"` and `"GBP"` will have any effect. If `"currency"` is set to either of these values, the student's response will be rejected if it is not written to 2 decimal places or 0 decimal places.
+
+#### Example
+
+```json
+{
+    "currency": "USD"
+}
+```
+
+<br /><br />
+
+
+
+

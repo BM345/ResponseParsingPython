@@ -59,3 +59,11 @@ mustHaveExactly3DP = {
 mustHaveExactly5DP = {
     "mustHaveExactlyNDP": 5
 }
+
+dollars = {
+    "currency": "USD"
+}
+
+pounds = {
+    "currency": "GBP"
+}

@@ -63,6 +63,7 @@ class TestDecimalValidation(unittest.TestCase):
         self.assertEqual(number.integralPartIsZero, integralPartIsZero)
 
     @parameterized.expand([
+        ["123", {}, True, "123"],
         ["1.23", {}, True, "1.23"],
         ["1.23", constraints.allowLeadingZeros, True, "1.23"],
         ["1.23", constraints.mustNotHavePlus, True, "1.23"],
