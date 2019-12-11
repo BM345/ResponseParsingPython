@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <messages>
-    <message id="noLeadingZeros">You don't need to write the zeros at the start of the number.</message>
+    <message id="noLeadingZeros">You don't need to write zeros at the start of the number.</message>
     <message id="mustHaveSign">Include a plus sign or a minus sign in your answer.</message>
      <message id="dontHaveSign">You don't need to write a plus sign before the number.</message>
      <message id="mustHaveAtLeastNSF">Give your answer to at least #p1# significant figures.</message>
      <message id="mustHaveNoMoreThanNSF">Give your answer to no more than #p1# significant figures.</message>
-     <message id=""></message>
+     <message id="mustHaveExactlyNSF">Give your answer to #p1# significant figures.</message>
      <message id=""></message>
      <message id=""></message>
      <message id=""></message>

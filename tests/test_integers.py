@@ -16,23 +16,32 @@ class TestIntegerValidation(unittest.TestCase):
 
     @parameterized.expand([
         ["123", "123", "", "positive", False, 0, 0, 3, 3, 0],
+        [" 123 ", "123", "", "positive", False, 0, 0, 3, 3, 0],
+        ["   123   ", "123", "", "positive", False, 0, 0, 3, 3, 0],
         ["00123", "00123", "", "positive", False, 2, 0, 3, 3, 0],
+        ["   00123   ", "00123", "", "positive", False, 2, 0, 3, 3, 0],
         ["+123", "123", "", "positive", True, 0, 0, 3, 3, 0],
+        ["   +   123   ", "123", "", "positive", True, 0, 0, 3, 3, 0],
         ["-123", "123", "", "negative", True, 0, 0, 3, 3, 0],
+        ["   -   123   ", "123", "", "negative", True, 0, 0, 3, 3, 0],
         ["-00123", "00123", "", "negative", True, 2, 0, 3, 3, 0],
         ["-0012300", "0012300", "", "negative", True, 2, 0, 3, 5, 0],
         ["-0012300456", "0012300456", "", "negative", True, 2, 0, 8, 8, 0],
         ["0", "0", "", "positive", False, 1, 0, 1, 1, 0],
+        ["   0   ", "0", "", "positive", False, 1, 0, 1, 1, 0],
         ["000", "000", "", "positive", False, 3, 0, 1, 1, 0],
+        ["   000   ", "000", "", "positive", False, 3, 0, 1, 1, 0],
         ["+0", "0", "", "positive", True, 1, 0, 1, 1, 0],
-        ["-0", "0", "", "negative", True, 1, 0, 1, 1, 0]
+        ["   +   0   ", "0", "", "positive", True, 1, 0, 1, 1, 0],
+        ["-0", "0", "", "negative", True, 1, 0, 1, 1, 0],
+        ["   -   0   ", "0", "", "negative", True, 1, 0, 1, 1, 0]
     ])
     def test_parse(self, studentsResponse, integralPart, decimalPart, sign, signIsExplicit, nlz, ntz, nsf1, nsf2, ndp):
 
         parser = parsing.Parser()
         marker = parsing.Marker()
 
-        integer = parser.parseNumber(studentsResponse, marker)
+        integer = parser.getParseResult(studentsResponse)
 
         self.assertEqual(integer.type, "number")
         self.assertEqual(integer.subtype, "integer")
@@ -103,6 +112,14 @@ class TestIntegerValidation(unittest.TestCase):
         ["123000", constraints.mustHaveNoMoreThan3SF, True, "123000"],
         ["1234", constraints.mustHaveNoMoreThan3SF, False, "1234"],
         ["1234567", constraints.mustHaveNoMoreThan6SF, False, "1234567"],
+        ["12300", constraints.mustHaveExactly3SF, True, "12300"],
+        ["12000", constraints.mustHaveExactly3SF, True, "12000"],
+        ["10000", constraints.mustHaveExactly3SF, True, "10000"],
+        ["12340", constraints.mustHaveExactly3SF, False, "12340"],
+        ["1230", constraints.mustHaveExactly5SF, False, "1230"],
+        ["12300", constraints.mustHaveExactly5SF, True, "12300"],
+        ["12345", constraints.mustHaveExactly5SF, True, "12345"],
+        ["123456", constraints.mustHaveExactly5SF, False, "123456"],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 

@@ -27,3 +27,11 @@ mustHaveNoMoreThan3SF = {
 mustHaveNoMoreThan6SF = {
     "mustHaveNoMoreThanNSF": 6
 }
+
+mustHaveExactly3SF = {
+    "mustHaveExactlyNSF": 3
+}
+
+mustHaveExactly5SF = {
+    "mustHaveExactlyNSF": 5
+}
