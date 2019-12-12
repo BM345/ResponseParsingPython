@@ -1,0 +1,47 @@
+  body {
+      background-color: #FAFAFA;
+      padding: 100px;
+      margin: 0px;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: lighter;
+      font-size: 20px;
+  }
+
+  .centrecolumn {
+      background-color: white;
+      border-radius: 1px;
+      box-shadow: 0px 5px 1px rgba(0, 0, 0, 0.05);
+      max-width: 1200px;
+      padding: 100px;
+      color: #202020;
+      margin: 0px auto;
+  }
+
+  input[type="text"] {
+      font-family: inherit;
+      font-weight: inherit;
+      color: inherit;
+      font-size: 30px;
+      padding: 0.25em 0.5em;
+      outline: none;
+      width: 500px;
+      text-align: center;
+      border-radius: 1px;
+      border: 1px solid #D0D0D0;
+      display: block;
+      margin: 0px auto;
+  }
+
+  .acceptorreject {
+      border-radius: 4px;
+      padding: 0.5em 1em;
+      text-align: center;
+      font-size: 17px;
+      max-width: 200px;
+      margin: 30px auto;
+  }
+
+  p {
+      margin: 30px auto;
+      text-align: center;
+  }
