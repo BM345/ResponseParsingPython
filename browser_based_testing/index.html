@@ -16,6 +16,28 @@
 
     <div class="centrecolumn">
         <input type="text" placeholder="Type your answer here." ng-model="studentsResponse" />
+        <div class="options">
+            <div class="optionrow">
+                <div class="option">
+                    <label>Expected Response Type:</label>
+                    <select ng-model="expectedResponseType">
+                        <option value="integer">Integer</option>
+                        <option value="nonNegativeInteger">Non-Negative Integer</option>
+                        <option value="decimal">Decimal</option>
+                        <option value="currencyValue">Currency Value</option>
+                    </select>
+                </div>
+                <div class="option">
+                    <label>Allow Leading Zeros:</label>
+                    <input type="checkbox" ng-model="allowLeadingZeros" />
+                </div>
+                <div class="option">
+                    <label>Must Have Explicit Sign:</label>
+                    <input type="checkbox" ng-model="mustHaveExplicitSign" />
+                </div>
+            </div>
+        </div>
+
         <div class="acceptorreject" style="background-color: hsl({{isAcceptedColour}}, 60%, 40%); color: white;">{{isAccepted}}</div>
         <p>{{messageText}}</p>
     </div>

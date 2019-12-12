@@ -17,6 +17,21 @@
       margin: 0px auto;
   }
 
+  label{
+       font-size: 14px;
+        font-weight: normal;
+        padding: 0.25em 0.5em;
+  }
+
+ select{
+      font-family: inherit;
+      font-weight: inherit;
+      color: inherit;
+      font-size: 14px;
+      padding: 0.25em 0.5em;
+      outline: none;
+  }
+
   input[type="text"] {
       font-family: inherit;
       font-weight: inherit;
@@ -30,6 +45,15 @@
       border: 1px solid #D0D0D0;
       display: block;
       margin: 0px auto;
+      box-sizing: border-box;
+  }
+
+  .options{
+      max-width: 500px;
+       margin: 30px auto;
+         border: 1px dashed #D0D0D0;
+ padding: 20px;
+  box-sizing: border-box;
   }
 
   .acceptorreject {

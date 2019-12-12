@@ -2,12 +2,16 @@ var app = angular.module("ResponseParsing", []);
 
 app.controller("MainController", ["$scope", "$http", function MainController($scope, $http) {
 
-    $scope.$watch("studentsResponse", function (newValue, oldValue) {
+
+    $scope.$watchGroup(["studentsResponse", "expectedResponseType", "allowLeadingZeros", "mustHaveExplicitSign"], function (newValue, oldValue) {
 
         var requestData = {
-            "studentsResponse": newValue,
-            "expectedResponseType": "integer",
-            "constraints": {}
+            "studentsResponse": newValue[0],
+            "expectedResponseType": newValue[1],
+            "constraints": {
+                "allowLeadingZeros": newValue[2],
+                "mustHaveExplicitSign": newValue[3]
+            }
         }
 
         $http.post("/api/validate", requestData).then(function (response) {
