@@ -26,9 +26,12 @@ This document describes what constraints can be applied to which response types.
 
 ### `"allowLeadingZeros"`
 
-If set to `false`, if the student's response has any leading zeros then it will **not** pass validation.
+#### Allowed Values
 
-The default is `false`.
+| Value | | Description | Examples that WOULD pass | Examples that WOULD NOT pass |
+|---|---|---|---|---|
+| `false` | *default* | In order to pass validation, the student's response **must not** have any leading zeros. | `12` | `0012` |
+| `true` | | The student's response will pass validation regardless of whether or not it has any leading zeros. | `12`, `0012` |
 
 #### Example
 
@@ -40,19 +43,40 @@ The default is `false`.
 
 <br /><br />
 
-### `"mustHaveExplicitSign"`
+### `"removeLeadingZerosFromNormalizedForm"`
 
-If set to `true`, in order to pass validation the student's response must have an explicit "+" or "-" sign at the start.
+#### Allowed Values
 
-If set to `false`, in order to pass validation the student's response must either have a "-" sign or no sign at the start. (If they put a "+" sign, the response will not pass validation.)
-
-The default is `false`.
+| Value | | Description |
+|---|---|---|
+| `false` | *default* | When the student's response is normalised, leading zeros **will not** be removed. |
+| `true` | | When the student's response is normalised, leading zeros **will** be removed. |
 
 #### Example
 
 ```json
 {
-  "mustHaveExplicitSign": false
+    "removeLeadingZerosFromNormalizedForm": true
+}
+```
+
+<br /><br />
+
+### `"sign"`
+
+#### Allowed Values
+
+| Value | | Description | Examples that WOULD pass | Examples that WOULD NOT pass |
+|---|---|---|---|---|
+|`"mustBeExplicit"`| | In order to pass validation, the student's response must have an explicit "+" or "-" sign at the start. | `+12`, `-12` | `12` | 
+|`"mustBeImplicit"`| | In order to pass validation, the student's response must either have a "-" sign at the start, or no sign (an implicit plus). | `12`, `-12` | `+12` |
+|`"canBeExplicitOrImplicit"`| *default* | The student's response will pass validation regardless of whether it has a "+" sign, a "-" sign, or no sign at the start. | `+12`, `12`, `-12` | |
+
+#### Example
+
+```json
+{
+  "sign": "mustBeExplicit"
 }
 ```
 
