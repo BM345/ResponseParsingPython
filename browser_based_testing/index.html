@@ -15,7 +15,10 @@
 <body ng-controller="MainController">
 
     <div class="centrecolumn">
-        <input type="text" placeholder="Type your answer here." ng-model="studentsResponse" />
+        <div class="inputrow">
+            <input class="studentsresponse" type="text" placeholder="Type your answer here." ng-model="studentsResponse" />
+
+        </div>
         <div class="options">
             <div class="optionrow">
                 <div class="option">
@@ -35,11 +38,45 @@
                     <label>Must Have Explicit Sign:</label>
                     <input type="checkbox" ng-model="mustHaveExplicitSign" />
                 </div>
+
+                <div class="optiongroup" ng-show="expectedResponseType == 'integer' || expectedResponseType == 'nonNegativeInteger' || expectedResponseType == 'decimal'">
+                    <h3>Significant Figures</h3>
+                    <div class="option">
+                        <label for="sffrom">Range: between</label>
+                        <input type="text" class="singlenumber" id="sffrom" ng-model="sf1" />
+                        <label for="sfto">and</label>
+                        <input type="text" class="singlenumber" id="sfto" ng-model="sf2" />
+                    </div>
+                    <div class="option">
+                        <label for="sfis">Exact value:</label>
+                        <input type="text" class="singlenumber" id="sfis" ng-model="nsf" />
+                    </div>
+                </div>
+
+                <div class="optiongroup" ng-show="expectedResponseType == 'decimal'">
+                    <h3>Decimal Places</h3>
+                    <div class="option">
+                        <label for="sffrom">Range: between</label>
+                        <input type="text" class="singlenumber" id="sffrom" ng-model="dp1" />
+                        <label for="sfto">and</label>
+                        <input type="text" class="singlenumber" id="sfto" ng-model="dp2" />
+                    </div>
+                    <div class="option">
+                        <label for="sfis">Exact value:</label>
+                        <input type="text" class="singlenumber" id="sfis" ng-model="ndp" />
+                    </div>
+                </div>
+
             </div>
         </div>
+        <div class="inputrow">
 
-        <div class="acceptorreject" style="background-color: hsl({{isAcceptedColour}}, 60%, 40%); color: white;">{{isAccepted}}</div>
-        <p>{{messageText}}</p>
+            <button class="submitbutton" ng-click="submit()" ng-show="developerMode == false">Submit</button>
+        </div>
+
+        <div class="acceptorreject" style="background-color: hsl({{isAcceptedColour}}, 60%, 40%); color: white;" ng-show="acceptOrRejectIsVisible">{{isAccepted}}</div>
+        <p ng-show="acceptOrRejectIsVisible">{{messageText}}</p>
+       <div style="text-align: center;"><code ng-show="acceptOrRejectIsVisible">ASCIIMath: {{normalisedStudentsResponse}}</code></div>
     </div>
 
 </body>

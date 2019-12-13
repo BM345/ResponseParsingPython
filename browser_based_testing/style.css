@@ -1,7 +1,7 @@
   body {
       background-color: #FAFAFA;
-      padding: 100px;
       margin: 0px;
+      padding: 100px;
       font-family: 'Open Sans', sans-serif;
       font-weight: lighter;
       font-size: 20px;
@@ -12,60 +12,112 @@
       border-radius: 1px;
       box-shadow: 0px 5px 1px rgba(0, 0, 0, 0.05);
       max-width: 1200px;
+      margin: 0px auto;
       padding: 100px;
       color: #202020;
-      margin: 0px auto;
   }
 
-  label{
-       font-size: 14px;
-        font-weight: normal;
-        padding: 0.25em 0.5em;
+  h3 {
+      font-size: 20px;
+      font-weight: normal;
+      text-decoration: underline;
   }
 
- select{
+  label {
+      font-weight: normal;
+      font-size: 14px;
+  }
+
+  select {
+      font-size: 14px;
+  }
+
+  select, input[type="number"], input[type="text"], button {
+      padding: 0.25em 1em;
+      outline: none;
       font-family: inherit;
       font-weight: inherit;
+      font-size: inherit;
       color: inherit;
-      font-size: 14px;
-      padding: 0.25em 0.5em;
-      outline: none;
+  }
+
+  input[type="number"]:focus, input[type="text"]:focus {
+      border: 1px solid hsl(200, 80%, 60%);
+  }
+
+  .singlenumber {
+      width: 30px;
   }
 
   input[type="text"] {
-      font-family: inherit;
-      font-weight: inherit;
-      color: inherit;
-      font-size: 30px;
-      padding: 0.25em 0.5em;
-      outline: none;
-      width: 500px;
-      text-align: center;
-      border-radius: 1px;
       border: 1px solid #D0D0D0;
-      display: block;
-      margin: 0px auto;
-      box-sizing: border-box;
+      border-radius: 2px;
   }
 
-  .options{
+  .inputrow {
+      text-align: center;
+  }
+
+  input[type="text"].studentsresponse {
+      width: 500px;
+      box-sizing: border-box;
+      font-size: 30px;
+      text-align: center;
+  }
+
+  .submitbutton {
+      background-color: hsl(200, 80%, 40%);
+      border: 1px solid hsl(200, 80%, 40%);
+      border-radius: 2px;
+      width: 200px;
+      box-sizing: border-box;
+      padding: 0.25em 0.5em;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+  }
+
+  .submitbutton:hover {
+      background-color: hsl(200, 80%, 50%);
+      border: 1px solid hsl(200, 80%, 50%);
+  }
+
+  .options {
+      border: 1px dashed #D0D0D0;
       max-width: 500px;
-       margin: 30px auto;
-         border: 1px dashed #D0D0D0;
- padding: 20px;
-  box-sizing: border-box;
+      box-sizing: border-box;
+      margin: 30px auto;
+      padding: 20px;
+      font-weight: normal;
+      font-size: 14px;
+  }
+
+  .option {
+      margin: 10px 0px;
+      min-height: 30px;
   }
 
   .acceptorreject {
-      border-radius: 4px;
-      padding: 0.5em 1em;
-      text-align: center;
-      font-size: 17px;
+      border-radius: 2px;
       max-width: 200px;
+      box-sizing: border-box;
       margin: 30px auto;
+      padding: 0.5em 1em;
+      font-size: 17px;
+      text-align: center;
   }
 
   p {
       margin: 30px auto;
       text-align: center;
+  }
+
+  code {
+      text-align: center;
+      font-size: 17px;
+      background-color: #FAFAFA;
+      border: 1px solid #F0F0F0;
+      border-radius: 2px;
+      padding: 0.25em 0.5em;
+      color: #404040;
   }

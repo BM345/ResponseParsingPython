@@ -28,14 +28,9 @@ def api_validate():
 
     validationResponse = validator.validate(validationRequest)
 
-    j2 = {
-        "isAccepted": validationResponse.isAccepted,
-        "messageText": validationResponse.messageText
-    }
-
     response.content_type = "application/json"
 
-    return json.dumps(j2)
+    return json.dumps(validationResponse, default=lambda o: o.__dict__)
 
 
 @route("/<fileName:path>")
