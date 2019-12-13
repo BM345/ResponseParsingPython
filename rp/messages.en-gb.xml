@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <messages>
+    <message id="onlyUseIntegerCharacters">Only use the characters 0 to 9 and a plus or minus sign in your answer. Your answer must be a single, whole number.</message>
+    <message id="onlyUseNonNegativeIntegerCharacters">Only use the characters 0 to 9 and the plus sign in your answer. Your answer must be a single, whole number.</message>
+    <message id="onlyUseDecimalCharacters">Only use the characters 0 to 9, the decimal point, and the plus and minus signs in your answer. Your answer must be a single integer or decimal.</message>
     <message id="noLeadingZeros">You don't need to write zeros at the start of the number.</message>
     <message id="mustHaveSign">Include a plus sign or a minus sign in your answer.</message>
      <message id="dontHaveSign">You don't need to write a plus sign before the number.</message>

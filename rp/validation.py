@@ -25,7 +25,11 @@ class Validator(object):
     def __init__(self, messagesFile="./rp/messages.en-gb.xml"):
 
         self.parser = parsing.Parser()
-        self.messages = messages.Messages(messagesFile)
+        self.messages = messages.Messages(messagesFile )
+
+        self.integerAllowedCharacters = "0123456789+- "
+        self.nonNegativeIntegerAllowedCharacters = "0123456789+ "
+        self.decimalAllowedCharacters = "0123456789.+- "
 
     def validate(self, request):
         result = self.parser.getParseResult(request.studentsResponse)
@@ -53,6 +57,12 @@ class Validator(object):
 
     def validateInteger(self, request, result, response):
         response.isAccepted = True
+
+        for c in request.studentsResponse:
+            if c not in self.integerAllowedCharacters:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("onlyUseIntegerCharacters")
+                return
 
         if result == None:
             response.isAccepted = False
@@ -91,6 +101,12 @@ class Validator(object):
 
     def validateNonNegativeInteger(self, request, result, response):
         response.isAccepted = True
+
+        for c in request.studentsResponse:
+            if c not in self.nonNegativeIntegerAllowedCharacters:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("onlyUseNonNegativeIntegerCharacters")
+                return
 
         if result == None:
             response.isAccepted = False
@@ -135,6 +151,12 @@ class Validator(object):
     def validateDecimal(self, request, result, response):
         response.isAccepted = True
 
+        for c in request.studentsResponse:
+            if c not in self.decimalAllowedCharacters:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("onlyUseDecimalCharacters")
+                return
+
         if result == None or result.type != "number":
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("mustBeSingleNumber")
@@ -170,6 +192,12 @@ class Validator(object):
 
     def validateCurrencyValue(self, request, result, response):
         response.isAccepted = True
+
+        for c in request.studentsResponse:
+            if c not in self.decimalAllowedCharacters:
+                response.isAccepted = False
+                response.messageText = self.messages.getMessageById("onlyUseDecimalCharacters")
+                return
 
         if result == None or result.type != "number":
             response.isAccepted = False
