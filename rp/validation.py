@@ -25,7 +25,7 @@ class Validator(object):
     def __init__(self, messagesFile="./rp/messages.en-gb.xml"):
 
         self.parser = parsing.Parser()
-        self.messages = messages.Messages(messagesFile )
+        self.messages = messages.Messages(messagesFile)
 
         self.integerAllowedCharacters = "0123456789+- "
         self.nonNegativeIntegerAllowedCharacters = "0123456789+ "
@@ -244,6 +244,18 @@ class Validator(object):
 
     def _applySignificantFigureConstraints(self, request, result, response):
 
+        if "mustHaveExactlyNSF" in request.constraints:
+            n = request.constraints["mustHaveExactlyNSF"]
+
+            if result.maximumNumberOfSignificantFigures < n or result.minimumNumberOfSignificantFigures > n:
+                response.isAccepted = False
+                if n == 1:
+                    response.messageText = self.messages.getMessageById("mustHaveExactly1SF")
+                else:
+                    response.messageText = self.messages.getMessageById("mustHaveExactlyNSF", [n])
+
+            return
+
         if "mustHaveAtLeastNSF" in request.constraints:
             n = request.constraints["mustHaveAtLeastNSF"]
 
@@ -266,18 +278,19 @@ class Validator(object):
                     response.messageText = self.messages.getMessageById("mustHaveNoMoreThanNSF", [n])
                 return
 
-        if "mustHaveExactlyNSF" in request.constraints:
-            n = request.constraints["mustHaveExactlyNSF"]
+    def _applyDecimalPlaceConstraints(self, request, result, response):
 
-            if result.maximumNumberOfSignificantFigures < n or result.minimumNumberOfSignificantFigures > n:
+        if "mustHaveExactlyNDP" in request.constraints:
+            n = request.constraints["mustHaveExactlyNDP"]
+
+            if result.numberOfDecimalPlaces != n:
                 response.isAccepted = False
                 if n == 1:
-                    response.messageText = self.messages.getMessageById("mustHaveExactly1SF")
+                    response.messageText = self.messages.getMessageById("mustHaveExactly1DP")
                 else:
-                    response.messageText = self.messages.getMessageById("mustHaveExactlyNSF", [n])
-                return
+                    response.messageText = self.messages.getMessageById("mustHaveExactlyNDP", [n])
 
-    def _applyDecimalPlaceConstraints(self, request, result, response):
+            return
 
         if "mustHaveAtLeastNDP" in request.constraints:
             n = request.constraints["mustHaveAtLeastNDP"]
@@ -299,15 +312,4 @@ class Validator(object):
                     response.messageText = self.messages.getMessageById("mustHaveNoMoreThan1DP")
                 else:
                     response.messageText = self.messages.getMessageById("mustHaveNoMoreThanNDP", [n])
-                return
-
-        if "mustHaveExactlyNDP" in request.constraints:
-            n = request.constraints["mustHaveExactlyNDP"]
-
-            if result.numberOfDecimalPlaces != n:
-                response.isAccepted = False
-                if n == 1:
-                    response.messageText = self.messages.getMessageById("mustHaveExactly1DP")
-                else:
-                    response.messageText = self.messages.getMessageById("mustHaveExactlyNDP", [n])
                 return
