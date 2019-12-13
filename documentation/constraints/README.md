@@ -8,6 +8,8 @@ This document describes what constraints can be applied to which response types.
 
 - [Integers](#integers)
 - [Non-negative Integers](#non-negative-integers)
+- [Decimals](#decimals)
+- [Currency Values](#currency-values)
 
 <br /><br />
 
@@ -33,7 +35,7 @@ This document describes what constraints can be applied to which response types.
 | `false` | *default* | In order to pass validation, the student's response **must not** have any leading zeros. | `12` | `0012` |
 | `true` | | The student's response will pass validation regardless of whether or not it has any leading zeros. | `12`, `0012` |
 
-#### Example
+#### Example (JSON)
 
 ```json
 {
@@ -52,7 +54,7 @@ This document describes what constraints can be applied to which response types.
 | `false` | *default* | When the student's response is normalised, leading zeros **will not** be removed. |
 | `true` | | When the student's response is normalised, leading zeros **will** be removed. |
 
-#### Example
+#### Example (JSON)
 
 ```json
 {
@@ -72,7 +74,7 @@ This document describes what constraints can be applied to which response types.
 |`"mustBeImplicit"`| | In order to pass validation, the student's response must either have a "-" sign at the start, or no sign (an implicit plus). | `12`, `-12` | `+12` |
 |`"canBeExplicitOrImplicit"`| *default* | The student's response will pass validation regardless of whether it has a "+" sign, a "-" sign, or no sign at the start. | `+12`, `12`, `-12` | |
 
-#### Example
+#### Example (JSON)
 
 ```json
 {
@@ -84,11 +86,15 @@ This document describes what constraints can be applied to which response types.
 
 ### `"mustHaveAtLeastNSF"`
 
-In order to pass validation, the student's response must have a **minimum** of *n* significant figures.
+#### Allowed Values
+
+| Value | Description |
+|---|---|
+| any integer *n* greater than 0 | In order to pass validation, the student's response must have a **minimum** of *n* significant figures. |
 
 The default is `not set`.
 
-#### Example
+#### Example (JSON)
 
 ```json
 {
@@ -100,11 +106,15 @@ The default is `not set`.
 
 ### `"mustHaveNoMoreThanNSF"`
 
-In order to pass validation, the student's response must have a **maximum** of *n* significant figures.
+#### Allowed Values
+
+| Value | Description |
+|---|---|
+| any integer *n* greater than 0 | In order to pass validation, the student's response must have a **maximum** of *n* significant figures. |
 
 The default is `not set`.
 
-#### Example
+#### Example (JSON)
 
 ```json
 {
@@ -116,11 +126,15 @@ The default is `not set`.
 
 ### `"mustHaveExactlyNSF"`
 
-In order to pass validation, the student's response must have **exactly** *n* significant figures.
+#### Allowed Values
+
+| Value | Description |
+|---|---|
+| any integer *n* greater than 0 | In order to pass validation, the student's response must have **exactly** *n* significant figures. |
 
 The default is `not set`.
 
-#### Example
+#### Example (JSON)
 
 ```json
 {
@@ -138,17 +152,21 @@ This response type has the same constraints as the `integer` type, but of course
 
 ## Decimals
 
-The `"mustHaveExplicitSign"`, `"mustHaveAtLeastNSF"`, `"mustHaveNoMoreThanNSF"` and `"mustHaveExactlyNSF"` constraints from the `integer` type can also be applied to the `decimal` type, as well as the following.
+The `"sign"`, `"mustHaveAtLeastNSF"`, `"mustHaveNoMoreThanNSF"` and `"mustHaveExactlyNSF"` constraints from the `integer` type can also be applied to the `decimal` type, as well as the following.
 
 <br /><br />
 
 ### `"mustHaveAtLeastNDP"`
 
-In order to pass validation, the student's response must have a **minimum** of *n* decimal places.
+#### Allowed Values
+
+| Value | Description |
+|---|---|
+| any integer *n* greater than 0 | In order to pass validation, the student's response must have a **minimum** of *n* decimal places. |
 
 The default is `not set`.
 
-#### Example
+#### Example (JSON)
 
 ```json
 {
@@ -160,11 +178,15 @@ The default is `not set`.
 
 ### `"mustHaveNoMoreThanNDP"`
 
-In order to pass validation, the student's response must have a **maximum** of *n* decimal places.
+#### Allowed Values
+
+| Value | Description |
+|---|---|
+| any integer *n* greater than 0 | In order to pass validation, the student's response must have a **maximum** of *n* decimal places. |
 
 The default is `not set`.
 
-#### Example
+#### Example (JSON)
 
 ```json
 {
@@ -176,11 +198,15 @@ The default is `not set`.
 
 ### `"mustHaveExactlyNDP"`
 
-In order to pass validation, the student's response must have **exactly** *n* decimal places.
+#### Allowed Values
+
+| Value | Description |
+|---|---|
+| any integer *n* greater than 0 | In order to pass validation, the student's response must have **exactly** *n* decimal places. |
 
 The default is `not set`.
 
-#### Example
+#### Example (JSON)
 
 ```json
 {
@@ -192,22 +218,20 @@ The default is `not set`.
 
 ## Currency Values
 
-Any of the constraints that can be applied to the `decimal` type can also be applied to the `currencyValue` type.
-
 ### `"currency"`
 
 
 #### Allowed Values
 
-| | |
-|---|---|
-| `"USD"` | US Dollars |
-| `"GBP"` | UK Pounds |
-| `"EGP"` | Egyptian Pounds |
+| Value | Description | Examples that WOULD pass | Examples that WOULD NOT pass |
+|---|---|---|---|
+| `"USD"` | US Dollars | `12`, `12.50` | `12.5`, `12.500` |
+| `"GBP"` | UK Pounds | `12`, `12.50` | `12.5`, `12.500` |
+| `"EGP"` | Egyptian Pounds | `12`, `12.5`, `12.50`, `12.500` | |
 
 At the moment, only `"USD"` and `"GBP"` will have any effect. If `"currency"` is set to either of these values, the student's response will be rejected if it is not written to 2 decimal places or 0 decimal places.
 
-#### Example
+#### Example (JSON)
 
 ```json
 {
