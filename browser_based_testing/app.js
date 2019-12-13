@@ -108,7 +108,8 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
         "nsf",
         "dp1",
         "dp2",
-        "ndp"], function (newValue, oldValue) {
+        "ndp",
+        "currency"], function (newValue, oldValue) {
 
             if ($scope.developerMode) {
                 $scope.getValidationResponse();
