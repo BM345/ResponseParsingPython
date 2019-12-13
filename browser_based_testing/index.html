@@ -56,14 +56,25 @@
                 <div class="optiongroup" ng-show="expectedResponseType == 'decimal'">
                     <h3>Decimal Places</h3>
                     <div class="option">
-                        <label for="sffrom">Range: between</label>
-                        <input type="text" class="singlenumber" id="sffrom" ng-model="dp1" />
-                        <label for="sfto">and</label>
-                        <input type="text" class="singlenumber" id="sfto" ng-model="dp2" />
+                        <label for="dpfrom">Range: between</label>
+                        <input type="text" class="singlenumber" id="dpfrom" ng-model="dp1" />
+                        <label for="dpto">and</label>
+                        <input type="text" class="singlenumber" id="dpto" ng-model="dp2" />
                     </div>
                     <div class="option">
-                        <label for="sfis">Exact value:</label>
-                        <input type="text" class="singlenumber" id="sfis" ng-model="ndp" />
+                        <label for="dpis">Exact value:</label>
+                        <input type="text" class="singlenumber" id="dpis" ng-model="ndp" />
+                    </div>
+                </div>
+
+                <div class="optiongroup" ng-show="expectedResponseType == 'currencyValue'">
+                    <h3>Currency</h3>
+                    <div class="option">
+                        <select ng-model="currency">
+                            <option value="USD">US Dollars</option>
+                            <option value="GBP">UK Pounds</option>
+                            <option value="EGP">Egyptian Pounds</option>
+                        </select>
                     </div>
                 </div>
 
@@ -76,7 +87,7 @@
 
         <div class="acceptorreject" style="background-color: hsl({{isAcceptedColour}}, 60%, 40%); color: white;" ng-show="acceptOrRejectIsVisible">{{isAccepted}}</div>
         <p ng-show="acceptOrRejectIsVisible">{{messageText}}</p>
-       <div style="text-align: center;"><code ng-show="acceptOrRejectIsVisible">ASCIIMath: {{normalisedStudentsResponse}}</code></div>
+        <div style="text-align: center;"><code ng-show="acceptOrRejectIsVisible">ASCIIMath: {{normalisedStudentsResponse}}</code></div>
     </div>
 
 </body>

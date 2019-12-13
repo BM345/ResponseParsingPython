@@ -157,7 +157,7 @@ class Validator(object):
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("dontHaveSign")
             return
-            
+
         self._applySignificantFigureConstraints(request, result, response)
 
         if response.isAccepted == False:
@@ -167,7 +167,6 @@ class Validator(object):
 
         if response.isAccepted == False:
             return
-
 
     def validateCurrencyValue(self, request, result, response):
         response.isAccepted = True
@@ -193,6 +192,9 @@ class Validator(object):
         if request.constraints["mustHaveExplicitSign"] == False and result.sign == "positive" and result.signIsExplicit == True:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("dontHaveSign")
+            return
+
+        if not (request.constraints["currency"] == "USD" or request.constraints["currency"] == "GBP"):
             return
 
         if result.numberOfDecimalPlaces != 0 and result.numberOfDecimalPlaces != 2:

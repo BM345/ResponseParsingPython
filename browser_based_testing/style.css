@@ -84,6 +84,7 @@
 
   .options {
       border: 1px dashed #D0D0D0;
+      border-radius: 2px;
       max-width: 500px;
       box-sizing: border-box;
       margin: 30px auto;

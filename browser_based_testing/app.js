@@ -14,6 +14,7 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
     $scope.dp1 = "";
     $scope.dp2 = "";
     $scope.ndp = "";
+    $scope.currency = "USD";
 
     $scope.acceptOrRejectIsVisible = false;
 
@@ -50,6 +51,10 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
 
         if ($scope.ndp.match(/^[0-9]+$/g)) {
             requestData.constraints.mustHaveExactlyNDP = parseInt($scope.ndp);
+        }
+
+        if ($scope.expectedResponseType == "currencyValue") {
+            requestData.constraints.currency = $scope.currency;
         }
 
         if ($scope.developerMode) {
