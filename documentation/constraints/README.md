@@ -1,15 +1,6 @@
-# Constraints
+# Validation and Normalization Parameters
 
-This document describes what constraints can be applied to which response types.
-
-<br /><br />
-
-## Table of Contents
-
-- [Integers](#integers)
-- [Non-negative Integers](#non-negative-integers)
-- [Decimals](#decimals)
-- [Currency Values](#currency-values)
+This document describes which validation and normalization parameters can be set for which response types.
 
 <br /><br />
 
@@ -18,13 +9,13 @@ This document describes what constraints can be applied to which response types.
 | Name | String | Description |
 |---|---|---|
 | Integer | `"integer"` | All whole numbers from -∞ to +∞ |
-| Non-negative Integers | `"nonNegativeIntegers"` |  All whole numbers from 0 to +∞, **including** 0 |
+| Non-negative Integer | `"nonNegativeInteger"` |  All whole numbers from 0 to +∞, **including** 0 |
 | Decimal | `"decimal"` | All rational numbers from -∞ to +∞ |
-| Currency Value | `"currencyValue"` | All rational numbers from -∞ to +∞, optionally with a currency symbol |
+| Currency Value | `"currencyValue"` | All rational numbers from -∞ to +∞ |
 
 <br /><br />
 
-## Integers
+## Parameters that can be set for integers
 
 ### `"allowLeadingZeros"`
 
@@ -51,8 +42,8 @@ This document describes what constraints can be applied to which response types.
 
 | Value | | Description |
 |---|---|---|
-| `false` | *default* | When the student's response is normalised, leading zeros **will not** be removed. |
-| `true` | | When the student's response is normalised, leading zeros **will** be removed. |
+| `false` | *default* | When the student's response is normalized, leading zeros **will not** be removed. |
+| `true` | | When the student's response is normalized, leading zeros **will** be removed. |
 
 #### Example (JSON)
 
@@ -144,15 +135,15 @@ The default is `not set`.
 
 <br /><br />
 
-## Non-negative Integers
+## Parameters that can be set for non-negative integers
 
-This response type has the same constraints as the `integer` type, but of course it doesn't allow negative-integer answers. (This means that the `"mustHaveExplicitSign"` constraint now only applies to the plus sign.)
+This response type can have the same parameters as the `integer` type, but of course it doesn't allow negative-integer answers.
 
 <br /><br />
 
-## Decimals
+## Parameters that can be set for decimals
 
-The `"sign"`, `"mustHaveAtLeastNSF"`, `"mustHaveNoMoreThanNSF"` and `"mustHaveExactlyNSF"` constraints from the `integer` type can also be applied to the `decimal` type, as well as the following.
+The `"sign"`, `"mustHaveAtLeastNSF"`, `"mustHaveNoMoreThanNSF"` and `"mustHaveExactlyNSF"` parameters from the `integer` type can also be set for the `decimal` type, as well as the following.
 
 <br /><br />
 
@@ -216,7 +207,7 @@ The default is `not set`.
 
 <br /><br />
 
-## Currency Values
+## Parameters that can be set for currency values
 
 ### `"currency"`
 
@@ -229,7 +220,7 @@ The default is `not set`.
 | `"GBP"` | UK Pounds | `12`, `12.50` | `12.5`, `12.500` |
 | `"EGP"` | Egyptian Pounds | `12`, `12.5`, `12.50`, `12.500` | |
 
-At the moment, only `"USD"` and `"GBP"` will have any effect. If `"currency"` is set to either of these values, the student's response will be rejected if it is not written to 2 decimal places or 0 decimal places.
+At the moment, only `"USD"` and `"GBP"` will have any effect. If `"currency"` is set to either of these values, the student's response will be rejected if it is **not** written to 2 decimal places or 0 decimal places.
 
 #### Example (JSON)
 
