@@ -38,6 +38,8 @@ class Validator(object):
             self.validateNonNegativeInteger(request, result, response)
         elif request.expectedResponseType == "decimal":
             self.validateDecimal(request, result, response)
+        elif request.expectedResponseType == "currencyValue":
+            self.validateCurrencyValue(request, result, response)
         else:
             raise ValueError("Unsupported response type '{0}'.".format(request.expectedResponseType))
 
@@ -155,7 +157,7 @@ class Validator(object):
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("dontHaveSign")
             return
-            
+
         self._applySignificantFigureConstraints(request, result, response)
 
         if response.isAccepted == False:
@@ -164,6 +166,40 @@ class Validator(object):
         self._applyDecimalPlaceConstraints(request, result, response)
 
         if response.isAccepted == False:
+            return
+
+    def validateCurrencyValue(self, request, result, response):
+        response.isAccepted = True
+
+        if result == None or result.type != "number":
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustBeSingleNumber")
+            return
+
+        self._applyLeadingZerosConstraints(request, result, response)
+
+        if response.isAccepted == False:
+            return
+
+        if "mustHaveExplicitSign" not in request.constraints:
+            request.constraints["mustHaveExplicitSign"] = False
+
+        if request.constraints["mustHaveExplicitSign"] == True and result.sign == "positive" and result.signIsExplicit == False:
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustHaveSign")
+            return
+
+        if request.constraints["mustHaveExplicitSign"] == False and result.sign == "positive" and result.signIsExplicit == True:
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("dontHaveSign")
+            return
+
+        if not (request.constraints["currency"] == "USD" or request.constraints["currency"] == "GBP"):
+            return
+
+        if result.numberOfDecimalPlaces != 0 and result.numberOfDecimalPlaces != 2:
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustHaveExactlyNDP", [2])
             return
 
     def _applyLeadingZerosConstraints(self, request, result, response):

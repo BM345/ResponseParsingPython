@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ng-app="ResponseParsing">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i&amp;subset=greek,greek-ext,latin-ext" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.min.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+
+</head>
+
+<body ng-controller="MainController">
+
+    <div class="centrecolumn">
+        <div class="inputrow">
+            <input class="studentsresponse" type="text" placeholder="Type your answer here." ng-model="studentsResponse" />
+
+        </div>
+        <div class="options">
+            <div class="optionrow">
+                <div class="option">
+                    <label>Expected Response Type:</label>
+                    <select ng-model="expectedResponseType">
+                        <option value="integer">Integer</option>
+                        <option value="nonNegativeInteger">Non-Negative Integer</option>
+                        <option value="decimal">Decimal</option>
+                        <option value="currencyValue">Currency Value</option>
+                    </select>
+                </div>
+                <div class="option">
+                    <label>Allow Leading Zeros:</label>
+                    <input type="checkbox" ng-model="allowLeadingZeros" />
+                </div>
+                <div class="option">
+                    <label>Must Have Explicit Sign:</label>
+                    <input type="checkbox" ng-model="mustHaveExplicitSign" />
+                </div>
+
+                <div class="optiongroup" ng-show="expectedResponseType == 'integer' || expectedResponseType == 'nonNegativeInteger' || expectedResponseType == 'decimal'">
+                    <h3>Significant Figures</h3>
+                    <div class="option">
+                        <label for="sffrom">Range: between</label>
+                        <input type="text" class="singlenumber" id="sffrom" ng-model="sf1" />
+                        <label for="sfto">and</label>
+                        <input type="text" class="singlenumber" id="sfto" ng-model="sf2" />
+                    </div>
+                    <div class="option">
+                        <label for="sfis">Exact value:</label>
+                        <input type="text" class="singlenumber" id="sfis" ng-model="nsf" />
+                    </div>
+                </div>
+
+                <div class="optiongroup" ng-show="expectedResponseType == 'decimal'">
+                    <h3>Decimal Places</h3>
+                    <div class="option">
+                        <label for="dpfrom">Range: between</label>
+                        <input type="text" class="singlenumber" id="dpfrom" ng-model="dp1" />
+                        <label for="dpto">and</label>
+                        <input type="text" class="singlenumber" id="dpto" ng-model="dp2" />
+                    </div>
+                    <div class="option">
+                        <label for="dpis">Exact value:</label>
+                        <input type="text" class="singlenumber" id="dpis" ng-model="ndp" />
+                    </div>
+                </div>
+
+                <div class="optiongroup" ng-show="expectedResponseType == 'currencyValue'">
+                    <h3>Currency</h3>
+                    <div class="option">
+                        <select ng-model="currency">
+                            <option value="USD">US Dollars</option>
+                            <option value="GBP">UK Pounds</option>
+                            <option value="EGP">Egyptian Pounds</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="inputrow">
+
+            <button class="submitbutton" ng-click="submit()" ng-show="developerMode == false">Submit</button>
+        </div>
+
+        <div class="acceptorreject" style="background-color: hsl({{isAcceptedColour}}, 60%, 40%); color: white;" ng-show="acceptOrRejectIsVisible">{{isAccepted}}</div>
+        <p ng-show="acceptOrRejectIsVisible">{{messageText}}</p>
+        <div style="text-align: center;"><code ng-show="acceptOrRejectIsVisible">ASCIIMath: {{normalisedStudentsResponse}}</code></div>
+    </div>
+
+</body>
+
+</html>
