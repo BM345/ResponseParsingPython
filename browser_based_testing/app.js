@@ -2,12 +2,13 @@ var app = angular.module("ResponseParsing", []);
 
 app.controller("MainController", ["$scope", "$http", function MainController($scope, $http) {
 
-    $scope.developerMode = false;
+    $scope.developerMode = true;
 
     $scope.expectedResponseType = "integer";
 
     $scope.allowLeadingZeros = false;
-    $scope.mustHaveExplicitSign = false;
+    $scope.removeLeadingZerosFromNormalizedForm = false;
+    $scope.sign = "canBeExplicitOrImplicit";
     $scope.sf1 = "";
     $scope.sf2 = "";
     $scope.nsf = "";
@@ -25,7 +26,8 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
             "expectedResponseType": $scope.expectedResponseType,
             "constraints": {
                 "allowLeadingZeros": $scope.allowLeadingZeros,
-                "mustHaveExplicitSign": $scope.mustHaveExplicitSign,
+                "removeLeadingZerosFromNormalizedForm": $scope.removeLeadingZerosFromNormalizedForm,
+                "sign": $scope.sign,
             }
         }
 
@@ -102,7 +104,8 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
     $scope.$watchGroup(["studentsResponse",
         "expectedResponseType",
         "allowLeadingZeros",
-        "mustHaveExplicitSign",
+        "removeLeadingZerosFromNormalizedForm",
+        "sign",
         "sf1",
         "sf2",
         "nsf",
@@ -123,8 +126,16 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
 
 
     $scope.$watchGroup(["expectedResponseType",
-        "allowLeadingZeros",
-        "mustHaveExplicitSign"], function (newValue, oldValue) {
+    "allowLeadingZeros",
+    "removeLeadingZerosFromNormalizedForm",
+    "sign",
+    "sf1",
+    "sf2",
+    "nsf",
+    "dp1",
+    "dp2",
+    "ndp",
+    "currency"], function (newValue, oldValue) {
 
             if (!$scope.developerMode) {
                 $scope.reset();

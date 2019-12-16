@@ -22,7 +22,7 @@
         <div class="options">
             <div class="optionrow">
                 <div class="option">
-                    <label>Expected Response Type:</label>
+                    <label>Expected response type:</label>
                     <select ng-model="expectedResponseType">
                         <option value="integer">Integer</option>
                         <option value="nonNegativeInteger">Non-Negative Integer</option>
@@ -31,13 +31,21 @@
                     </select>
                 </div>
                 <div class="option">
-                    <label>Allow Leading Zeros:</label>
+                    <label>Allow leading zeros:</label>
                     <input type="checkbox" ng-model="allowLeadingZeros" />
                 </div>
                 <div class="option">
-                    <label>Must Have Explicit Sign:</label>
-                    <input type="checkbox" ng-model="mustHaveExplicitSign" />
+                    <label>Remove leading zeros from normalized form:</label>
+                    <input type="checkbox" ng-model="removeLeadingZerosFromNormalizedForm" />
                 </div>
+                <div class="option">
+                    <label>Sign:</label>
+                    <select ng-model="sign">
+                        <option value="mustBeExplicit">Must be explicit</option>
+                        <option value="mustBeImplicit">Must be implicit</option>
+                        <option value="canBeExplicitOrImplicit">Can be explicit or implicit</option>
+                    </select>
+                 </div>
 
                 <div class="optiongroup" ng-show="expectedResponseType == 'integer' || expectedResponseType == 'nonNegativeInteger' || expectedResponseType == 'decimal'">
                     <h3>Significant Figures</h3>
