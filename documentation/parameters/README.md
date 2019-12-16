@@ -237,6 +237,8 @@ The default is `not set`.
 
 ## Parameters that can be set for currency values
 
+The `"allowLeadingZeros"`, `"removeLeadingZerosFromNormalizedForm"`, `"sign"`, and `"normalizeSign"` parameters from the `integer` type can also be set for the `currencyValue` type, as well as the following.
+
 ### `"currency"`
 
 
