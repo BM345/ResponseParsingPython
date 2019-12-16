@@ -171,7 +171,7 @@ This response type can have the same parameters as the `integer` type, but of co
 
 ## Parameters that can be set for decimals
 
-The `"sign"`, `"mustHaveAtLeastNSF"`, `"mustHaveNoMoreThanNSF"` and `"mustHaveExactlyNSF"` parameters from the `integer` type can also be set for the `decimal` type, as well as the following.
+The `"allowLeadingZeros"`, `"removeLeadingZerosFromNormalizedForm"`, `"sign"`, `"normalizeSign"`, `"mustHaveAtLeastNSF"`, `"mustHaveNoMoreThanNSF"` and `"mustHaveExactlyNSF"` parameters from the `integer` type can also be set for the `decimal` type, as well as the following.
 
 <br /><br />
 
