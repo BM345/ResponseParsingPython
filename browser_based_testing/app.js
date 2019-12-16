@@ -2,7 +2,7 @@ var app = angular.module("ResponseParsing", []);
 
 app.controller("MainController", ["$scope", "$http", function MainController($scope, $http) {
 
-    $scope.developerMode = true;
+    $scope.developerMode = false;
 
     $scope.expectedResponseType = "integer";
 

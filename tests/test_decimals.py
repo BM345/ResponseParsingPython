@@ -155,6 +155,15 @@ class TestDecimalValidation(unittest.TestCase):
         ["00.12", merge(constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "0.12"],
         ["000.12", merge(constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "0.12"],
         [".12", {}, True, "0.12"],
+        ["+1.23", {}, True, "+1.23"],
+        ["1.23", {}, True, "1.23"],
+        ["-1.23", {}, True, "-1.23"],
+        ["+1.23", constraints.makeExplicit, True, "+1.23"],
+        ["1.23", constraints.makeExplicit, True, "+1.23"],
+        ["-1.23", constraints.makeExplicit, True, "-1.23"],
+        ["+1.23", constraints.makeImplicit, True, "1.23"],
+        ["1.23", constraints.makeImplicit, True, "1.23"],
+        ["-1.23", constraints.makeImplicit, True, "-1.23"],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 

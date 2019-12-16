@@ -16,6 +16,14 @@ mustNotHavePlus = {
     "sign": "mustBeImplicit"
 }
 
+makeExplicit = {
+    "normalizeSign": "makeExplicit"
+}
+
+makeImplicit = {
+    "normalizeSign": "makeImplicit"
+}
+
 mustHaveAtLeast3SF = {
     "mustHaveAtLeastNSF": 3
 }

@@ -20,6 +20,8 @@ class ParserSettings(object):
         self.removeLeadingZerosFromSimplifiedForms = False
         self.addLeadingZeroToDecimalsForSimplifiedForms = True
 
+        self.normaliseSigns = "notSet"
+
 
 def cut(text, startIndex, length=1):
     a = startIndex
@@ -106,12 +108,12 @@ class Parser(object):
         ntz = 0
         nsf = 0
         ndp = 0
-        
+
         p = 0
         q = 0
 
-        integralPartIsZero = True    
-    
+        integralPartIsZero = True
+
         while marker.position < len(inputText):
             c = cut(inputText, marker.position)
 
@@ -167,7 +169,7 @@ class Parser(object):
                 ntz = p
             else:
                 minimumNSF = nsf
-                maximumNSF = nsf+p
+                maximumNSF = nsf + p
 
         end = marker.position
 
@@ -203,7 +205,16 @@ class Parser(object):
             node.start = start
             node.end = end
             node._text = ts + t
-            node.value = t1 + t2 if allZero else ts + t1 + t2
+
+            s = ts
+
+            if sign == "positive":
+                if self.settings.normaliseSigns == "makeExplicit":
+                    s = "+"
+                elif self.settings.normaliseSigns == "makeImplicit":
+                    s = ""
+
+            node.value = t1 + t2 if allZero else s + t1 + t2
 
             node.integralPart = integralPart
             node.decimalPart = decimalPart

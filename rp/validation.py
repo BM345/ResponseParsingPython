@@ -35,6 +35,12 @@ class Validator(object):
         if "removeLeadingZerosFromNormalizedForm" in request.constraints and request.constraints["removeLeadingZerosFromNormalizedForm"] == True:
             self.parser.settings.removeLeadingZerosFromSimplifiedForms = True
 
+        if "normalizeSign" in request.constraints:
+            if request.constraints["normalizeSign"] == "makeExplicit":
+                self.parser.settings.normaliseSigns = "makeExplicit"
+            if request.constraints["normalizeSign"] == "makeImplicit":
+                self.parser.settings.normaliseSigns = "makeImplicit"
+
         result = self.parser.getParseResult(request.studentsResponse)
 
         response = ValidationResponse()

@@ -123,6 +123,15 @@ class TestIntegerValidation(unittest.TestCase):
         ["-012", merge(constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "-12"],
         ["-0012", merge(constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "-12"],
         ["-00012", merge(constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "-12"],
+        ["+12", constraints.makeExplicit, True, "+12"],
+        ["12", constraints.makeExplicit, True, "+12"],
+        ["-12", constraints.makeExplicit, True, "-12"],
+        ["+12", constraints.makeImplicit, True, "12"],
+        ["12", constraints.makeImplicit, True, "12"],
+        ["-12", constraints.makeImplicit, True, "-12"],
+        ["+12", {}, True, "+12"],
+        ["12", {}, True, "12"],
+        ["-12", {}, True, "-12"],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 
