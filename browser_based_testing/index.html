@@ -20,6 +20,7 @@
 
         </div>
         <div class="options">
+            <h2>Validation Parameters</h2>
             <div class="optionrow">
                 <div class="option">
                     <label>Expected response type:</label>
@@ -35,17 +36,13 @@
                     <input type="checkbox" ng-model="allowLeadingZeros" />
                 </div>
                 <div class="option">
-                    <label>Remove leading zeros from normalized form:</label>
-                    <input type="checkbox" ng-model="removeLeadingZerosFromNormalizedForm" />
-                </div>
-                <div class="option">
                     <label>Sign:</label>
                     <select ng-model="sign">
                         <option value="mustBeExplicit">Must be explicit</option>
                         <option value="mustBeImplicit">Must be implicit</option>
                         <option value="canBeExplicitOrImplicit">Can be explicit or implicit</option>
                     </select>
-                 </div>
+                </div>
 
                 <div class="optiongroup" ng-show="expectedResponseType == 'integer' || expectedResponseType == 'nonNegativeInteger' || expectedResponseType == 'decimal'">
                     <h3>Significant Figures</h3>
@@ -88,6 +85,23 @@
 
             </div>
         </div>
+
+        <div class="options">
+            <h2>Normalization Parameters</h2>
+            <div class="option">
+                <label>Remove leading zeros from normalized form:</label>
+                <input type="checkbox" ng-model="removeLeadingZerosFromNormalizedForm" />
+            </div>
+            <div class="option">
+                <label>Sign:</label>
+                <select ng-model="normaliseSign">
+                    <option value="notSet">Do nothing</option>
+                    <option value="makeExplicit">Make explicit</option>
+                    <option value="makeImplicit">Make implicit</option>
+                </select>
+            </div>
+        </div>
+
         <div class="inputrow">
 
             <button class="submitbutton" ng-click="submit()" ng-show="developerMode == false">Submit</button>

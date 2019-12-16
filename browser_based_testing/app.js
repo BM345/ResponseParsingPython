@@ -2,12 +2,11 @@ var app = angular.module("ResponseParsing", []);
 
 app.controller("MainController", ["$scope", "$http", function MainController($scope, $http) {
 
-    $scope.developerMode = false;
+    $scope.developerMode = true;
 
     $scope.expectedResponseType = "integer";
 
     $scope.allowLeadingZeros = false;
-    $scope.removeLeadingZerosFromNormalizedForm = false;
     $scope.sign = "canBeExplicitOrImplicit";
     $scope.sf1 = "";
     $scope.sf2 = "";
@@ -16,6 +15,9 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
     $scope.dp2 = "";
     $scope.ndp = "";
     $scope.currency = "USD";
+
+    $scope.removeLeadingZerosFromNormalizedForm = false;
+    $scope.normaliseSign = "notSet";
 
     $scope.acceptOrRejectIsVisible = false;
 
@@ -27,6 +29,7 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
             "constraints": {
                 "allowLeadingZeros": $scope.allowLeadingZeros,
                 "removeLeadingZerosFromNormalizedForm": $scope.removeLeadingZerosFromNormalizedForm,
+                "normalizeSign": $scope.normaliseSign,
                 "sign": $scope.sign,
             }
         }
@@ -96,15 +99,14 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
     }
 
     $scope.submit = function () {
-
         $scope.getValidationResponse();
-
     }
 
     $scope.$watchGroup(["studentsResponse",
         "expectedResponseType",
         "allowLeadingZeros",
         "removeLeadingZerosFromNormalizedForm",
+        "normaliseSign",
         "sign",
         "sf1",
         "sf2",
@@ -113,34 +115,29 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
         "dp2",
         "ndp",
         "currency"], function (newValue, oldValue) {
-
             if ($scope.developerMode) {
                 $scope.getValidationResponse();
             }
             else {
                 $scope.reset();
-
             }
-
         });
 
-
     $scope.$watchGroup(["expectedResponseType",
-    "allowLeadingZeros",
-    "removeLeadingZerosFromNormalizedForm",
-    "sign",
-    "sf1",
-    "sf2",
-    "nsf",
-    "dp1",
-    "dp2",
-    "ndp",
-    "currency"], function (newValue, oldValue) {
-
+        "allowLeadingZeros",
+        "removeLeadingZerosFromNormalizedForm",
+        "normaliseSign",
+        "sign",
+        "sf1",
+        "sf2",
+        "nsf",
+        "dp1",
+        "dp2",
+        "ndp",
+        "currency"], function (newValue, oldValue) {
             if (!$scope.developerMode) {
                 $scope.reset();
             }
-
         });
 
 }]);
