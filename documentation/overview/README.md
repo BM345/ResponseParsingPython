@@ -13,8 +13,6 @@ This document describes how the response parsing and validation system would wor
     - [In the code](#in-the-code-1)
   - [How does the parser work?](#how-does-the-parser-work)
   - [Unit Tests](#unit-tests)
-  - [Features Roadmap](#features-roadmap)
-    - [Version 1.0](#version-10)
 
 ## An overview of the system
 
@@ -412,15 +410,4 @@ A student can type a huge variety of different things into the answer box, and e
 
 One of the advantages of having a single entry / exit point for data in the system (the incoming and outgoing data packets) is that it makes it very easy to create unit tests for.
 
-## Features Roadmap
-
-### Version 1.0
-
-- Be able to parse and validate the following answer types
-  - Integers (which includes all integers, both positive and negative)
-  - Non-negative integers (all positive integers, as well as zero)
-  - Decimals
-  - Currency Values
-- Follow design principles that make the system extensible to more answer types later
-- Have a comprehensive set of unit tests for the above four answer types
 
