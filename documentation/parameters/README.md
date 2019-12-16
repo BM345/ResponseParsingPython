@@ -75,6 +75,34 @@ This document describes which validation and normalization parameters can be set
 
 <br /><br />
 
+### `"normalizeSign"`
+
+#### Allowed Values
+
+| Value | | Description |
+|---|---|---|
+|`"makeExplicit"`| | When the student's response is normalized, if it is a positive number, it will be given an explicit plus sign. |
+|`"makeImplicit"`| | When the student's response is normalized, if it is a positive number, and it has an explicit plus sign, the plus sign will be removed. |
+|`"notSet"`| *default* | No change will be made to plus signs when the student's response is normalized. |
+
+#### Example (JSON)
+
+```json
+{
+  "normalizeSign": "makeImplicit"
+}
+```
+
+<br /><br />
+
+<div style="background-color: hsl(30, 50%, 80%); color: hsl(30, 70%, 50%); padding: 1em 2em; border-radius: 2px; border: 1px solid hsl(30, 50%, 60%);">
+<h3>Tip</h3>
+<p>For most questions, you will want to set "sign" to "canBeExplicitOrImplicit" and "normalizeSign" to "makeImplicit". This will allow students to either type a plus sign or not for positive numbers, but their response can still be checked against the key (assuming the key does not have a plus sign).</p>
+<p>In other words, if the key is '12', a student can type '12' or '+12', and their response will both pass validation and then be normalized to '12'.</p>
+</div>
+
+<br /><br />
+
 ### `"mustHaveAtLeastNSF"`
 
 #### Allowed Values
