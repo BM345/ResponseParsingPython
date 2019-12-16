@@ -32,9 +32,15 @@ class Validator(object):
         self.decimalAllowedCharacters = "0123456789.+- "
 
     def validate(self, request):
+        if "removeLeadingZerosFromNormalizedForm" in request.constraints and request.constraints["removeLeadingZerosFromNormalizedForm"] == True:
+            self.parser.settings.removeLeadingZerosFromSimplifiedForms = True
+
         result = self.parser.getParseResult(request.studentsResponse)
 
         response = ValidationResponse()
+
+        if "sign" not in request.constraints:
+            request.constraints["sign"] = "canBeExplicitOrImplicit"
 
         if request.expectedResponseType == "integer":
             self.validateInteger(request, result, response)
@@ -84,15 +90,12 @@ class Validator(object):
         if response.isAccepted == False:
             return
 
-        if "mustHaveExplicitSign" not in request.constraints:
-            request.constraints["mustHaveExplicitSign"] = False
-
-        if request.constraints["mustHaveExplicitSign"] == True and result.sign == "positive" and result.signIsExplicit == False:
+        if request.constraints["sign"] == "mustBeExplicit" and result.sign == "positive" and result.signIsExplicit == False:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("mustHaveSign")
             return
 
-        if request.constraints["mustHaveExplicitSign"] == False and result.sign == "positive" and result.signIsExplicit == True:
+        if request.constraints["sign"] == "mustBeImplicit" and result.sign == "positive" and result.signIsExplicit == True:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("dontHaveSign")
             return
@@ -133,15 +136,12 @@ class Validator(object):
         if response.isAccepted == False:
             return
 
-        if "mustHaveExplicitSign" not in request.constraints:
-            request.constraints["mustHaveExplicitSign"] = False
-
-        if request.constraints["mustHaveExplicitSign"] == True and result.signIsExplicit == False:
+        if request.constraints["sign"] == "mustBeExplicit" and result.signIsExplicit == False:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("mustHavePlusSign")
             return
 
-        if request.constraints["mustHaveExplicitSign"] == False and result.signIsExplicit == True:
+        if request.constraints["sign"] == "mustBeImplicit" and result.signIsExplicit == True:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("dontHavePlusSign")
             return
@@ -167,15 +167,12 @@ class Validator(object):
         if response.isAccepted == False:
             return
 
-        if "mustHaveExplicitSign" not in request.constraints:
-            request.constraints["mustHaveExplicitSign"] = False
-
-        if request.constraints["mustHaveExplicitSign"] == True and result.sign == "positive" and result.signIsExplicit == False:
+        if request.constraints["sign"] == "mustBeExplicit" and result.sign == "positive" and result.signIsExplicit == False:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("mustHaveSign")
             return
 
-        if request.constraints["mustHaveExplicitSign"] == False and result.sign == "positive" and result.signIsExplicit == True:
+        if request.constraints["sign"] == "mustBeImplicit" and result.sign == "positive" and result.signIsExplicit == True:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("dontHaveSign")
             return
@@ -209,15 +206,12 @@ class Validator(object):
         if response.isAccepted == False:
             return
 
-        if "mustHaveExplicitSign" not in request.constraints:
-            request.constraints["mustHaveExplicitSign"] = False
-
-        if request.constraints["mustHaveExplicitSign"] == True and result.sign == "positive" and result.signIsExplicit == False:
+        if request.constraints["sign"] == "mustBeExplicit" and result.sign == "positive" and result.signIsExplicit == False:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("mustHaveSign")
             return
 
-        if request.constraints["mustHaveExplicitSign"] == False and result.sign == "positive" and result.signIsExplicit == True:
+        if request.constraints["sign"] == "mustBeImplicit" and result.sign == "positive" and result.signIsExplicit == True:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("dontHaveSign")
             return

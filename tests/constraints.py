@@ -4,12 +4,16 @@ allowLeadingZeros = {
     "allowLeadingZeros": True
 }
 
+removeLeadingZerosFromNormalizedForm = {
+    "removeLeadingZerosFromNormalizedForm": True
+}
+
 mustHavePlus = {
-    "mustHaveExplicitSign": True
+    "sign": "mustBeExplicit"
 }
 
 mustNotHavePlus = {
-    "mustHaveExplicitSign": False
+    "sign": "mustBeImplicit"
 }
 
 mustHaveAtLeast3SF = {
