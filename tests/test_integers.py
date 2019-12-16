@@ -132,6 +132,8 @@ class TestIntegerValidation(unittest.TestCase):
         ["+12", {}, True, "+12"],
         ["12", {}, True, "12"],
         ["-12", {}, True, "-12"],
+        ["+", {}, False, "+"],
+        ["-", {}, False, "-"],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 

@@ -91,6 +91,11 @@ class Validator(object):
             response.messageText = self.messages.getMessageById("mustBeInteger")
             return
 
+        if result.integralPart == "" and result.decimalPart == "":
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustBeSingleInteger")
+            return
+
         self._applyLeadingZerosConstraints(request, result, response)
 
         if response.isAccepted == False:
@@ -137,6 +142,11 @@ class Validator(object):
             response.messageText = self.messages.getMessageById("mustBePositive")
             return
 
+        if result.integralPart == "" and result.decimalPart == "":
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustBeSingleInteger")
+            return
+
         self._applyLeadingZerosConstraints(request, result, response)
 
         if response.isAccepted == False:
@@ -164,6 +174,11 @@ class Validator(object):
                 return
 
         if result == None or result.type != "number":
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustBeSingleNumber")
+            return
+
+        if result.integralPart == "" and result.decimalPart == "":
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("mustBeSingleNumber")
             return
@@ -203,6 +218,11 @@ class Validator(object):
                 return
 
         if result == None or result.type != "number":
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("mustBeSingleNumber")
+            return
+
+        if result.integralPart == "" and result.decimalPart == "":
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("mustBeSingleNumber")
             return

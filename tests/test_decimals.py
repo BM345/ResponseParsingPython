@@ -164,6 +164,8 @@ class TestDecimalValidation(unittest.TestCase):
         ["+1.23", constraints.makeImplicit, True, "1.23"],
         ["1.23", constraints.makeImplicit, True, "1.23"],
         ["-1.23", constraints.makeImplicit, True, "-1.23"],
+        ["+", {}, False, "+"],
+        ["-", {}, False, "-"],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 

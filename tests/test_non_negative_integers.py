@@ -74,6 +74,8 @@ class TestNonNegativeIntegerValidation(unittest.TestCase):
         ["12300", constraints.mustHaveExactly5SF, True, "12300"],
         ["12345", constraints.mustHaveExactly5SF, True, "12345"],
         ["123456", constraints.mustHaveExactly5SF, False, "123456"],
+        ["+", {}, False, "+"],
+        ["-", {}, False, "-"],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 
