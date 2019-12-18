@@ -32,6 +32,9 @@ class Validator(object):
         self.decimalAllowedCharacters = "0123456789.+- "
 
     def validate(self, request):
+        if request.constraints == None:
+            request.constraints = {}
+
         if "removeLeadingZerosFromNormalizedForm" in request.constraints and request.constraints["removeLeadingZerosFromNormalizedForm"] == True:
             self.parser.settings.removeLeadingZerosFromSimplifiedForms = True
 
