@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messages>
+    <message id="onlyUseIntegerCharacters">لا تستخدم في إجابتك سوى الأرقام من 0 إلى 9 وعلامتَي الزائد والناقص. يجب أن تكون إجابتك في صورة عدد صحيح واحد.</message>
+    <message id="onlyUseNonNegativeIntegerCharacters">لا تستخدم في إجابتك سوى الأرقام من 0 إلى 9 وعلامة الزائد فقط. يجب أن تكون إجابتك في صورة عدد صحيح واحد.</message>
+    <message id="onlyUseDecimalCharacters">لا تستخدم في إجابتك سوى الأرقام من 0 إلى 9، والعلامة العشرية، وعلامتَي الزائد والناقص. يجب أن تكون إجابتك في صورة عدد عشري أو عدد صحيح واحد.</message>
+    <message id="noLeadingZeros">يجب ألا تكتب أصفارًا في بداية العدد.</message>
+    <message id="mustHaveSign">اكتب علامة زائد أو ناقص في إجابتك.</message>
+    <message id="dontHaveSign">يجب ألا تكتب علامة زائد قبل العدد.</message>
+    <message id="mustHaveAtLeastNSF">قرِّب إجابتك لأقرب #p1# من الأرقام المعنوية على الأقل.</message>
+    <message id="mustHaveNoMoreThanNSF">قرِّب إجابتك لأقرب #p1# من الأرقام المعنوية على الأكثر.</message>
+    <message id="mustHaveExactlyNSF">قرِّب إجابتك لأقرب #p1# من الأرقام المعنوية.</message>
+    <message id="mustHaveAtLeast1SF">قرِّب إجابتك لأقرب رقم معنوي واحد على الأقل.</message>
+    <message id="mustHaveNoMoreThan1SF">قرِّب إجابتك لأقرب رقم معنوي واحد على الأكثر.</message>
+    <message id="mustHaveExactly1SF">قرِّب إجابتك لأقرب رقم معنوي.</message>
+    <message id="mustHavePlusSign">اكتب علامة زائد في إجابتك.</message>
+    <message id="dontHavePlusSign">يجب ألا تكتب علامة زائد قبل العدد.</message>
+    <message id="mustBeSingleInteger">يجب أن تكون إجابتك في صورة عدد صحيح واحد.</message>
+    <message id="mustBeInteger">يجب أن تكون إجابتك في صورة عدد صحيح.</message>
+    <message id="mustBePositive">يجب أن تكون إجابتك في صورة عدد موجب.</message>
+    <message id="mustBeSingleNumber">يجب أن تكون إجابتك في صورة عدد عشري أو عدد صحيح واحد.</message>
+    <message id="mustHaveAtLeastNDP">قرِّب إجابتك لأقرب #p1# من المنازل العشرية على الأقل.</message>
+    <message id="mustHaveNoMoreThanNDP">قرِّب إجابتك لأقرب #p1# من المنازل العشرية على الأكثر.</message>
+    <message id="mustHaveExactlyNDP">قرِّب إجابتك لأقرب #p1# من المنازل العشرية.</message>
+    <message id="mustHaveAtLeast1DP">قرِّب إجابتك لأقرب منزلة عشرية واحدة على الأقل.</message>
+    <message id="mustHaveNoMoreThan1DP">قرِّب إجابتك لأقرب منزلة عشرية واحدة على الأكثر.</message>
+    <message id="mustHaveExactly1DP">قرِّب إجابتك لأقرب منزلة عشرية.</message>
+</messages>

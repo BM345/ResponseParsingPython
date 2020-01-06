@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messages>
+    <message id="onlyUseIntegerCharacters">Utiliza solo cifras del 0 al 9 y los signos más y menos en la respuesta. La respuesta debe ser un único número entero.</message>
+    <message id="onlyUseNonNegativeIntegerCharacters">Utiliza solo cifras del 0 al 9 y el signo más en la respuesta. La respuesta debe ser un único número entero.</message>
+    <message id="onlyUseDecimalCharacters">Utiliza solo cifras del 0 al 9, la coma decimal, y los signos más y menos en la respuesta. La respuesta debe ser un único número entero o un decimal.</message>
+    <message id="noLeadingZeros">No hace falta que escribas un cero al principio del número.</message>
+    <message id="mustHaveSign">Añade un signo más o un signo menos e la respuesta.</message>
+    <message id="dontHaveSign">No hace falta que le añadas un signo más al número.</message>
+    <message id="mustHaveAtLeastNSF">Redondea la respuesta a #p1# cifras significativas como mínimo.</message>
+    <message id="mustHaveNoMoreThanNSF">Redondea la respuesta a no más de #p1# cifras significativas.</message>
+    <message id="mustHaveExactlyNSF">Redondea la respuesta a #p1# cifras significativas.</message>
+    <message id="mustHaveAtLeast1SF">Redondea la respuesta a una cifra significativa como mínimo.</message>
+    <message id="mustHaveNoMoreThan1SF">Redondea la respuesta a no más de una cifra significativa.</message>
+    <message id="mustHaveExactly1SF">Redondea la respuesta a una cifra significativa.</message>
+    <message id="mustHavePlusSign">Añade un signo más en la respuesta.</message>
+    <message id="dontHavePlusSign">No hace falta que le añadas un signo más al número.</message>
+    <message id="mustBeSingleInteger">La respuesta debe ser un único número entero.</message>
+    <message id="mustBeInteger">La respuesta debe ser un número entero.</message>
+    <message id="mustBePositive">La respuesta debe ser un número positivo.</message>
+    <message id="mustBeSingleNumber">La respuesta debe ser un único número entero o un decimal.</message>
+    <message id="mustHaveAtLeastNDP">Redondea la respuesta a #p1# cifras decimales como mínimo.</message>
+    <message id="mustHaveNoMoreThanNDP">Redondea la respuesta a no más de #p1# cifras decimales.</message>
+    <message id="mustHaveExactlyNDP">Redondea la respuesta a #p1# cifras decimales.</message>
+    <message id="mustHaveAtLeast1DP">Redondea la respuesta a una cifra decimal como mínimo.</message>
+    <message id="mustHaveNoMoreThan1DP">Redondea la respuesta a no más de una cifra decimal.</message>
+    <message id="mustHaveExactly1DP">Redondea la respuesta a una cifra decimal.</message>
+</messages>

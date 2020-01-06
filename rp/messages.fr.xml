@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messages>
+    <message id="onlyUseIntegerCharacters">N'utilisez que les caractères 0 à 9 et les signes plus et moins dans votre réponse. Votre réponse doit être un seul nombre entier.</message>
+    <message id="onlyUseNonNegativeIntegerCharacters">N'utilisez que les caractères 0 à 9 et le signe plus dans votre réponse. Votre réponse doit être un seul nombre entier.</message>
+    <message id="onlyUseDecimalCharacters">N'utilisez que les caractères 0 à 9, la virgule décimale et les signes plus et moins dans votre réponse. Votre réponse doit être un seul nombre entier ou décimal.</message>
+    <message id="noLeadingZeros">Vous n'avez pas besoin d'écrire zéro au début du nombre.</message>
+    <message id="mustHaveSign">Incluez un signe plus ou moins dans votre réponse.</message>
+    <message id="dontHaveSign">Vous n'avez pas besoin d'écrire un signe plus avant le nombre.</message>
+    <message id="mustHaveAtLeastNSF">Donnez votre réponse à au moins #p1# chiffres significatifs.</message>
+    <message id="mustHaveNoMoreThanNSF">Donnez votre réponse à pas plus de #p1# chiffres significatifs.</message>
+    <message id="mustHaveExactlyNSF">Donnez votre réponse à #p1# chiffres significatifs.</message>
+    <message id="mustHaveAtLeast1SF">Donnez votre réponse à au moins un chiffre significatif.</message>
+    <message id="mustHaveNoMoreThan1SF">Donnez votre réponse à au plus un chiffre significatif.</message>
+    <message id="mustHaveExactly1SF">Donnez votre réponse à 1 chiffre significatif.</message>
+    <message id="mustHavePlusSign">Incluez un signe plus dans votre réponse.</message>
+    <message id="dontHavePlusSign">Vous n'avez pas besoin d'écrire un signe plus avant le nombre.</message>
+    <message id="mustBeSingleInteger">Votre réponse doit être un seul nombre entier.</message>
+    <message id="mustBeInteger">Votre réponse doit être un nombre entier.</message>
+    <message id="mustBePositive">Votre réponse doit être un nombre positif.</message>
+    <message id="mustBeSingleNumber">Votre réponse doit être un seul nombre entier ou décimal.</message>
+    <message id="mustHaveAtLeastNDP">Donnez votre réponse à au moins #p1# décimales.</message>
+    <message id="mustHaveNoMoreThanNDP">Donnez votre réponse à pas plus de #p1# décimales.</message>
+    <message id="mustHaveExactlyNDP">Donnez votre réponse à #p1# décimales.</message>
+    <message id="mustHaveAtLeast1DP">Donnez votre réponse à au moins 1 décimale.</message>
+    <message id="mustHaveNoMoreThan1DP">Donnez votre réponse à au plus une décimale.</message>
+    <message id="mustHaveExactly1DP">Donnez votre réponse à une décimale.</message>
+</messages>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messages>
+    <message id="onlyUseIntegerCharacters">Use apenas os caracteres de 0 a 9 e os sinais de mais e menos na sua resposta. Sua resposta deve ser um único número inteiro.</message>
+    <message id="onlyUseNonNegativeIntegerCharacters">Use apenas os caracteres de 0 a 9 e o sinal de mais na sua resposta. Sua resposta deve ser um único número inteiro.</message>
+    <message id="onlyUseDecimalCharacters">Use apenas os caracteres de 0 a 9, a vírgula e os sinais de mais e menos na sua resposta. Sua resposta deve ser um único inteiro ou decimal.</message>
+    <message id="noLeadingZeros">Você não precisa escrever zeros no início do número.</message>
+    <message id="mustHaveSign">Inclua um sinal de mais ou menos na sua resposta.</message>
+    <message id="dontHaveSign">Você não precisa escrever um sinal de mais antes do número.</message>
+    <message id="mustHaveAtLeastNSF">Dê sua resposta com pelo menos #p1# algarismos significativos.</message>
+    <message id="mustHaveNoMoreThanNSF">Dê sua resposta com no máximo #p1# algarismos significativos.</message>
+    <message id="mustHaveExactlyNSF">Dê sua resposta com #p1# algarismos significativos.</message>
+    <message id="mustHaveAtLeast1SF">Dê sua resposta com pelo menos 1 algarismo significativo.</message>
+    <message id="mustHaveNoMoreThan1SF">Dê sua resposta com no máximo 1 algarismo significativo.</message>
+    <message id="mustHaveExactly1SF">Dê sua resposta com 1 algarismo significativo.</message>
+    <message id="mustHavePlusSign">Inclua um sinal de mais na sua resposta.</message>
+    <message id="dontHavePlusSign">Você não precisa escrever um sinal de mais antes do número.</message>
+    <message id="mustBeSingleInteger">Sua resposta deve ser um únco número inteiro.</message>
+    <message id="mustBeInteger">Sua resposta deve ser um número inteiro.</message>
+    <message id="mustBePositive">Sua resposta deve ser um número positivo.</message>
+    <message id="mustBeSingleNumber">Sua resposta deve ser um único inteiro ou decimal.</message>
+    <message id="mustHaveAtLeastNDP">Dê sua resposta com pelo menos #p1# casas decimais.</message>
+    <message id="mustHaveNoMoreThanNDP">Dê sua resposta com no máximo #p1# casas decimais.</message>
+    <message id="mustHaveExactlyNDP">Dê sua resposta com #p1# casas decimais.</message>
+    <message id="mustHaveAtLeast1DP">Dê sua resposta com pelo menos 1 casa decimal.</message>
+    <message id="mustHaveNoMoreThan1DP">Dê a sua resposta com no máximo 1 casa decimal.</message>
+    <message id="mustHaveExactly1DP">Dê sua resposta com 1 casa decimal.</message>
+</messages>
