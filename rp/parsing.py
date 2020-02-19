@@ -18,7 +18,9 @@ class ParserSettings(object):
     def __init__(self):
 
         self.removeLeadingZerosFromSimplifiedForms = False
+        self.removeTrailingZerosFromSimplifiedForms = False
         self.addLeadingZeroToDecimalsForSimplifiedForms = True
+        self.removeTrailingDecimalPointFromSimplifiedForms = True
 
         self.normaliseSigns = "notSet"
 
@@ -176,6 +178,14 @@ class Parser(object):
         subtype = "integer" if q == 0 else "decimalNumber"
 
         t1 = ""
+        t2 = ""
+
+        if self.settings.removeTrailingZerosFromSimplifiedForms:
+            t2 = decimalPart[:-ntz]
+        else:
+            t2 = decimalPart
+
+        t2 = "" if t2 == "." and self.settings.removeTrailingDecimalPointFromSimplifiedForms else t2
 
         if integralPart == "" and (decimalPart == "" or decimalPart == "."):
             t1 = ""
@@ -191,8 +201,6 @@ class Parser(object):
                     t1 = "0" if t1 == "" else t1
             else:
                 t1 = integralPart
-
-        t2 = "" if decimalPart == "." else decimalPart
 
         if ts + t == "":
             return None

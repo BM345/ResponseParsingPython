@@ -7,6 +7,7 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
     $scope.expectedResponseType = "integer";
 
     $scope.allowLeadingZeros = false;
+    $scope.allowTrailingZeros = true;
     $scope.sign = "canBeExplicitOrImplicit";
     $scope.sf1 = "";
     $scope.sf2 = "";
@@ -17,6 +18,8 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
     $scope.currency = "USD";
 
     $scope.removeLeadingZerosFromNormalizedForm = false;
+    $scope.removeTrailingZerosFromNormalizedForm = false;
+    $scope.removeTrailingDecimalPointFromNormalizedForm = true;
     $scope.normaliseSign = "notSet";
 
     $scope.acceptOrRejectIsVisible = false;
@@ -28,7 +31,10 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
             "expectedResponseType": $scope.expectedResponseType,
             "constraints": {
                 "allowLeadingZeros": $scope.allowLeadingZeros,
+                "allowTrailingZeros": $scope.allowTrailingZeros,
                 "removeLeadingZerosFromNormalizedForm": $scope.removeLeadingZerosFromNormalizedForm,
+                "removeTrailingZerosFromNormalizedForm": $scope.removeTrailingZerosFromNormalizedForm,
+                "removeTrailingDecimalPointFromNormalizedForm": $scope.removeTrailingDecimalPointFromNormalizedForm,
                 "normalizeSign": $scope.normaliseSign,
                 "sign": $scope.sign,
             }
@@ -105,7 +111,10 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
     $scope.$watchGroup(["studentsResponse",
         "expectedResponseType",
         "allowLeadingZeros",
+        "allowTrailingZeros",
         "removeLeadingZerosFromNormalizedForm",
+        "removeTrailingZerosFromNormalizedForm",
+        "removeTrailingDecimalPointFromNormalizedForm",
         "normaliseSign",
         "sign",
         "sf1",
@@ -125,7 +134,10 @@ app.controller("MainController", ["$scope", "$http", function MainController($sc
 
     $scope.$watchGroup(["expectedResponseType",
         "allowLeadingZeros",
+        "allowTrailingZeros",
         "removeLeadingZerosFromNormalizedForm",
+        "removeTrailingZerosFromNormalizedForm",
+        "removeTrailingDecimalPointFromNormalizedForm",
         "normaliseSign",
         "sign",
         "sf1",

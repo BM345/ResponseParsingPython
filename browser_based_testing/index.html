@@ -35,6 +35,10 @@
                     <label>Allow leading zeros:</label>
                     <input type="checkbox" ng-model="allowLeadingZeros" />
                 </div>
+                <div class="option" ng-show="expectedResponseType == 'decimal' || expectedResponseType == 'currencyValue'">
+                    <label>Allow trailing zeros:</label>
+                    <input type="checkbox" ng-model="allowTrailingZeros" />
+                </div>
                 <div class="option">
                     <label>Sign:</label>
                     <select ng-model="sign">
@@ -91,6 +95,14 @@
             <div class="option">
                 <label>Remove leading zeros from normalized form:</label>
                 <input type="checkbox" ng-model="removeLeadingZerosFromNormalizedForm" />
+            </div>
+            <div class="option" ng-show="expectedResponseType == 'decimal' || expectedResponseType == 'currencyValue'">
+                <label>Remove trailing zeros from normalized form:</label>
+                <input type="checkbox" ng-model="removeTrailingZerosFromNormalizedForm" />
+            </div>
+            <div class="option" ng-show="expectedResponseType == 'decimal' || expectedResponseType == 'currencyValue'">
+                <label>Remove trailing decimal point from normalized form:</label>
+                <input type="checkbox" ng-model="removeTrailingDecimalPointFromNormalizedForm" />
             </div>
             <div class="option">
                 <label>Sign:</label>

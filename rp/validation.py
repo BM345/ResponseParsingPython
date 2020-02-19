@@ -38,6 +38,12 @@ class Validator(object):
         if "removeLeadingZerosFromNormalizedForm" in request.constraints and request.constraints["removeLeadingZerosFromNormalizedForm"] == True:
             self.parser.settings.removeLeadingZerosFromSimplifiedForms = True
 
+        if "removeTrailingZerosFromNormalizedForm" in request.constraints and request.constraints["removeTrailingZerosFromNormalizedForm"] == True:
+            self.parser.settings.removeTrailingZerosFromSimplifiedForms = True
+
+        if "removeTrailingDecimalPointFromNormalizedForm" in request.constraints and request.constraints["removeTrailingDecimalPointFromNormalizedForm"] == False:
+            self.parser.settings.removeTrailingDecimalPointFromSimplifiedForms = False
+
         if "normalizeSign" in request.constraints:
             if request.constraints["normalizeSign"] == "makeExplicit":
                 self.parser.settings.normaliseSigns = "makeExplicit"
@@ -190,6 +196,11 @@ class Validator(object):
 
         if response.isAccepted == False:
             return
+            
+        self._applyTrailingZerosConstraints(request, result, response)
+
+        if response.isAccepted == False:
+            return
 
         if request.constraints["sign"] == "mustBeExplicit" and result.sign == "positive" and result.signIsExplicit == False:
             response.isAccepted = False
@@ -235,6 +246,11 @@ class Validator(object):
         if response.isAccepted == False:
             return
 
+        self._applyTrailingZerosConstraints(request, result, response)
+
+        if response.isAccepted == False:
+            return
+
         if request.constraints["sign"] == "mustBeExplicit" and result.sign == "positive" and result.signIsExplicit == False:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("mustHaveSign")
@@ -263,6 +279,16 @@ class Validator(object):
         if request.constraints["allowLeadingZeros"] == False and result.numberOfLeadingZeros > n:
             response.isAccepted = False
             response.messageText = self.messages.getMessageById("noLeadingZeros")
+            return
+
+    def _applyTrailingZerosConstraints(self, request, result, response):
+
+        if "allowTrailingZeros" not in request.constraints:
+            request.constraints["allowTrailingZeros"] = True
+
+        if request.constraints["allowTrailingZeros"] == False and result.numberOfTrailingZeros > 0:
+            response.isAccepted = False
+            response.messageText = self.messages.getMessageById("noTrailingZeros")
             return
 
     def _applySignificantFigureConstraints(self, request, result, response):
