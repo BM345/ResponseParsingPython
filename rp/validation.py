@@ -38,7 +38,7 @@ class Validator(object):
         if "removeLeadingZerosFromNormalizedForm" in request.constraints and request.constraints["removeLeadingZerosFromNormalizedForm"] == True:
             self.parser.settings.removeLeadingZerosFromSimplifiedForms = True
 
-        if "removeTrailingZerosFromNormalizedForm" in request.constraints and request.constraints["removeTrailingZerosFromNormalizedForm"] == True:
+        if "removeTrailingZerosFromNormalizedForm" in request.constraints and request.constraints["removeTrailingZerosFromNormalizedForm"] == True and request.expectedResponseType != "currencyValue":
             self.parser.settings.removeTrailingZerosFromSimplifiedForms = True
 
         if "removeTrailingDecimalPointFromNormalizedForm" in request.constraints and request.constraints["removeTrailingDecimalPointFromNormalizedForm"] == False:
@@ -242,11 +242,6 @@ class Validator(object):
             return
 
         self._applyLeadingZerosConstraints(request, result, response)
-
-        if response.isAccepted == False:
-            return
-
-        self._applyTrailingZerosConstraints(request, result, response)
 
         if response.isAccepted == False:
             return
