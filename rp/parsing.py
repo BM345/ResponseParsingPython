@@ -180,7 +180,7 @@ class Parser(object):
         t1 = ""
         t2 = ""
 
-        if self.settings.removeTrailingZerosFromSimplifiedForms:
+        if self.settings.removeTrailingZerosFromSimplifiedForms and ntz > 0:
             t2 = decimalPart[:-ntz]
         else:
             t2 = decimalPart
