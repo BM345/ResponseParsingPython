@@ -180,6 +180,7 @@ The `"allowLeadingZeros"`, `"removeLeadingZerosFromNormalizedForm"`, `"sign"`, `
 A trailing zero is any zero that appears **at the end of a number** and **after the decimal point**.
 
 ![](trailing-zeros.png)
+![](trailing-zeros-2.png)
 
 #### Allowed Values
 
