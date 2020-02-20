@@ -236,6 +236,27 @@ A trailing zero is any zero that appears **at the end of a number** and **after 
 
 <br /><br />
 
+### `"addSingleLeadingZeroToNormalizedForm"`
+
+A student may enter '.12' as an answer to a decimal question. This is a valid decimal, and so should be allowed, but the answer has probably been stored in the XML as '0.12', so a '0' must be added to the normalized form.
+
+#### Allowed Values
+
+| Value | | Description |
+|---|---|---|
+| `false` | | When the student's response is normalized, if it has no digits before the decimal point, then a '0' **will not** be added. |
+| `true` | *default* | When the student's response is normalized, if it has no digits before the decimal point, then a '0' **will** be added. |
+
+#### Example (JSON)
+
+```json
+{
+    "addSingleLeadingZeroToNormalizedForm": false
+}
+```
+
+<br /><br />
+
 ### `"mustHaveAtLeastNDP"`
 
 #### Allowed Values
