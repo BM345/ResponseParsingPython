@@ -166,6 +166,13 @@ class TestDecimalValidation(unittest.TestCase):
         ["-1.23", constraints.makeImplicit, True, "-1.23"],
         ["+", {}, False, "+"],
         ["-", {}, False, "-"],
+        ["00012.000", merge(constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "12.000"],
+        ["00012.000", merge(constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm, constraints.dontAllowTrailingZeros), False, "12.000"],
+        ["00012.000", merge(constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm, constraints.removeTrailingZerosFromNormalizedForm), True, "12"],
+        ["00012.000", merge(constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm, constraints.removeTrailingZerosFromNormalizedForm, constraints.dontRemoveTrailingDecimalPoint), True, "12."],
+        ["+00012.000", merge(constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "+12.000"],
+        ["+00012.000", merge(constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm, constraints.removeTrailingZerosFromNormalizedForm), True, "+12"],
+        ["+00012.000", merge(constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm, constraints.removeTrailingZerosFromNormalizedForm, constraints.dontRemoveTrailingDecimalPoint), True, "+12."],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 

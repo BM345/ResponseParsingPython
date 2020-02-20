@@ -8,6 +8,18 @@ removeLeadingZerosFromNormalizedForm = {
     "removeLeadingZerosFromNormalizedForm": True
 }
 
+dontAllowTrailingZeros = {
+    "allowTrailingZeros": False
+}
+
+removeTrailingZerosFromNormalizedForm = {
+    "removeTrailingZerosFromNormalizedForm": True
+}
+
+dontRemoveTrailingDecimalPoint = {
+    "removeTrailingDecimalPointFromNormalizedForm": False
+}
+
 mustHavePlus = {
     "sign": "mustBeExplicit"
 }

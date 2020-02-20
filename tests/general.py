@@ -1,5 +1,8 @@
 
-def merge(d1, d2):
-    a = d1.copy()
-    a.update(d2)
+def merge(*args):
+    a = args[0].copy()
+
+    for b in args[1:]:
+        a.update(b)
+        
     return a
