@@ -217,6 +217,25 @@ A trailing zero is any zero that appears **at the end of a number** and **after 
 
 <br /><br />
 
+### `"removeTrailingDecimalPointFromNormalizedForm"`
+
+#### Allowed Values
+
+| Value | | Description |
+|---|---|---|
+| `false` | | When the student's response is normalized, if it has a trailing decimal point it **will not** be removed. |
+| `true` | *default* | When the student's response is normalized, if it has a trailing decimal point it **will** be removed. |
+
+#### Example (JSON)
+
+```json
+{
+    "removeTrailingDecimalPointFromNormalizedForm": false
+}
+```
+
+<br /><br />
+
 ### `"mustHaveAtLeastNDP"`
 
 #### Allowed Values
@@ -291,9 +310,9 @@ The `"allowTrailingZeros"` and `"removeTrailingZerosFromNormalizedForm"` paramet
 |---|---|---|---|
 | `"USD"` | US Dollars | `12`, `12.50` | `12.5`, `12.500` |
 | `"GBP"` | UK Pounds | `12`, `12.50` | `12.5`, `12.500` |
-| `"EGP"` | Egyptian Pounds | `12`, `12.5`, `12.50`, `12.500` | |
+| `"EGP"` | Egyptian Pounds | `12`, `12.50` | `12.5`, `12.500` | |
 
-At the moment, only `"USD"` and `"GBP"` will have any effect. If `"currency"` is set to either of these values, the student's response will be rejected if it is **not** written to 2 decimal places or 0 decimal places.
+If `"currency"` is set to any of these values, the student's response will be rejected if it is **not** written to 2 decimal places or 0 decimal places.
 
 #### Example (JSON)
 
