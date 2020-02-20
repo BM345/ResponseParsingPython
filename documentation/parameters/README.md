@@ -175,6 +175,48 @@ The `"allowLeadingZeros"`, `"removeLeadingZerosFromNormalizedForm"`, `"sign"`, `
 
 <br /><br />
 
+### `"allowTrailingZeros"`
+
+A trailing zero is any zero that appears **at the end of a number** and **after the decimal point**.
+
+![](trailing-zeros.png)
+
+#### Allowed Values
+
+| Value | | Description | Examples that WOULD pass | Examples that WOULD NOT pass |
+|---|---|---|---|---|
+| `false` | | In order to pass validation, the student's response **must not** have any trailing zeros. | `12.3` | `12.30`, `12.300` |
+| `true` | *default* | The student's response will pass validation regardless of whether or not it has any trailing zeros. | `12.3`, `12.30`, `12.300` |
+
+#### Example (JSON)
+
+```json
+{
+    "allowTrailingZeros": false
+}
+```
+
+<br /><br />
+
+### `"removeTrailingZerosFromNormalizedForm"`
+
+#### Allowed Values
+
+| Value | | Description |
+|---|---|---|
+| `false` | *default* | When the student's response is normalized, trailing zeros **will not** be removed. |
+| `true` | | When the student's response is normalized, trailing zeros **will** be removed. |
+
+#### Example (JSON)
+
+```json
+{
+    "removeTrailingZerosFromNormalizedForm": true
+}
+```
+
+<br /><br />
+
 ### `"mustHaveAtLeastNDP"`
 
 #### Allowed Values
@@ -237,10 +279,11 @@ The default is `not set`.
 
 ## Parameters that can be set for currency values
 
-The `"allowLeadingZeros"`, `"removeLeadingZerosFromNormalizedForm"`, `"sign"`, and `"normalizeSign"` parameters from the `integer` type can also be set for the `currencyValue` type, as well as the following.
+The `"allowLeadingZeros"`, `"removeLeadingZerosFromNormalizedForm"`, `"sign"`, and `"normalizeSign"` parameters from the `integer` type can also be set for the `currencyValue` type.
+
+The `"allowTrailingZeros"` and `"removeTrailingZerosFromNormalizedForm"` parameters **cannot** be set for the `currencyValue` type. This is because for currency values they should always have values of `true` and `false` respectively (and these are their default values). '$12.50' is always a valid way of writing a currency value in dollars, and how we would expect the value to be stored in the question XML.
 
 ### `"currency"`
-
 
 #### Allowed Values
 
