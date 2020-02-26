@@ -44,6 +44,9 @@ class Validator(object):
         if "removeTrailingDecimalPointFromNormalizedForm" in request.constraints and request.constraints["removeTrailingDecimalPointFromNormalizedForm"] == False:
             self.parser.settings.removeTrailingDecimalPointFromSimplifiedForms = False
 
+        if "addSingleLeadingZeroToNormalizedForm" in request.constraints and request.constraints["addSingleLeadingZeroToNormalizedForm"] == False:
+            self.parser.settings.addLeadingZeroToDecimalsForSimplifiedForms = False
+
         if "normalizeSign" in request.constraints:
             if request.constraints["normalizeSign"] == "makeExplicit":
                 self.parser.settings.normaliseSigns = "makeExplicit"
@@ -196,7 +199,7 @@ class Validator(object):
 
         if response.isAccepted == False:
             return
-            
+
         self._applyTrailingZerosConstraints(request, result, response)
 
         if response.isAccepted == False:
@@ -256,7 +259,7 @@ class Validator(object):
             response.messageText = self.messages.getMessageById("dontHaveSign")
             return
 
-        if not (request.constraints["currency"] == "USD" or request.constraints["currency"] == "GBP"):
+        if request.constraints["currency"] not in ["USD", "GBP", "EGP", "SAR"]:
             return
 
         if result.numberOfDecimalPlaces != 0 and result.numberOfDecimalPlaces != 2:

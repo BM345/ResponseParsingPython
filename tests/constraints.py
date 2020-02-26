@@ -91,3 +91,12 @@ dollars = {
 pounds = {
     "currency": "GBP"
 }
+
+egp = {
+    "currency": "EGP"
+}
+
+sar = {
+    "currency": "SAR"
+}
+
