@@ -166,12 +166,15 @@
                     <p>
                         Mostly the same as the decimal type, but a few extra limitations are placed on it.
                     </p>
+                    <p>
+                        <a href="#part18">See here for more about this type. &rarr;</a>
+                    </p>
                 </div>
             </div>
 
             <div class="textcolumn">
                 <p>
-                    The primary type affects what parameters can be set for a question. For example, a parameter that can be set for the decimal type is 'Must have n decimal places', which requires the student to give an answer that has n decimal places, but this parameter obviously can't be set for the integer type, because integers have no decimal places.
+                    The primary type affects what parameters can be set for a question. For example, a parameter that can be set for the decimal type is 'Must have exactly n decimal places', which requires the student to give an answer that has n decimal places, but this parameter obviously can't be set for the integer type, because integers have no decimal places.
                 </p>
                 <p><a href="#toc">&uarr; Back to the table of contents</a></p>
             </div>
@@ -243,7 +246,7 @@
                 <tr>
                     <td>
                         <p>
-                            This parameter determines whether or not students can submit an answer that has leading zeros.
+                            This parameter determines whether or not a student can submit an answer that has leading zeros.
                         </p>
                         <p>
                             If it is set to <code>false</code> for a question, then if a student tries to submit an answer to that question like '0023', they will not be allowed to submit the answer, and will be given the message 'You don't need to write zeros at the start of your answer.'
@@ -355,7 +358,7 @@
     <section class="whitesection" id="part6">
         <div class="centrecolumn">
             <div class="textcolumn">
-                <h2>An exception</h2>
+                <h2>An exception ...</h2>
                 <p>
                     There is one case where most of the time we <i>do</i> want a student to write a leading zero, and that's with decimals between &minus;1 and 1.
                 </p>
@@ -449,6 +452,9 @@
                 </table>
                 <p>
                     When numbers are considered to be exact, by convention we don't normally write out any trailing zeros to a number (because the trailing zeros technically go on forever).
+                </p>
+                <p>
+                    Note that while the leading zeros parameters can be applied to all four of the current primary types, the trailing zeros parameters can only be applied to the decimal type. (Integers don't have trailing zeros.)
                 </p>
                 <p><a href="#toc">&uarr; Back to the table of contents</a></p>
             </div>
@@ -584,13 +590,13 @@
                     What happens if a student types in something like '12.' as their answer - i.e., a decimal with no numbers after the decimal point?
                 </p>
                 <p>
-                    An answer like this <b>is</b> considered a valid decimal. But perhaps the answer is just '12' - in this case neither the 'Allow Trailing Zeros' nor the 'Remove Trailing Zeros' will have any effect - because there are no trailing zeros.
+                    An answer like this <b>is</b> considered a valid decimal. But perhaps the key is just '12' - in this case neither the 'Allow Trailing Zeros' nor the 'Remove Trailing Zeros' will have any effect on the student's answer - because there are no trailing zeros.
                 </p>
                 <p>
-                    There is a special parameter for removing this trailing decimal point before the student's answer is compared to the key. This parameter is called 'Remove Trailing Decimal Point'. It can take a value of <code>true</code> or <code>false</code>. If <code>true</code>, '12.' would be changed to '12'. If false, '12.' would not be changed.
+                    There is a special parameter for removing this trailing decimal point before the student's answer is compared to the key. This parameter is called 'Remove Trailing Decimal Point'. It can take a value of <code>true</code> or <code>false</code>. If <code>true</code>, '12.' would be changed to '12'. If false, '12.' would not be changed. It is set to <code>true</code> by default.
                 </p>
                 <p>
-                    It would be very unusual to ever need to set this parameter - most of the time we don't want students to write something like '12.' (there are only a few cases where we might).
+                    It would be very unusual to ever need to change this parameter - most of the time we don't want students to write something like '12.' (there are only a few cases where we might).
                 </p>
 
                 <p><a href="#toc">&uarr; Back to the table of contents</a></p>
@@ -806,7 +812,7 @@
                 These are fairly self-explanatory.
             </p>
             <p>
-                These parameters, obviously, can't be set for the integer type.
+                These parameters, obviously, can't be set for the integer types.
             </p>
             <table class="threewaytable">
                 <tr>
@@ -874,7 +880,7 @@
                 These are also fairly self-explanatory.
             </p>
             <p>
-                These can be set for the <code>integer</code> or <code>decimal</code> types.
+                These can be set for the <code>integer</code>, <code>non-negative integer</code>, and <code>decimal</code> types.
             </p>
             <table class="threewaytable">
                 <tr>
