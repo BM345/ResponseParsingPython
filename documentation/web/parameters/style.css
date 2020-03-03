@@ -48,7 +48,7 @@ h3 {
 }
 
 h4 {
-     font-size: 1.5em;
+     font-size: 1.25em;
 }
 
 p {
@@ -141,7 +141,7 @@ a:hover {
      width: 30%;
 }
 
-.greentag, .redtag, .bluetag {
+.greentag, .redtag, .bluetag, .tealtag {
      color: white;
      text-transform: uppercase;
      border-radius: 2px;
@@ -150,6 +150,10 @@ a:hover {
 
 .greentag {
      background: linear-gradient(140deg, hsl(90, 60%, 50%), hsl(90, 60%, 40%));
+}
+
+.tealtag {
+     background: linear-gradient(140deg, hsl(190, 60%, 50%), hsl(190, 60%, 40%));
 }
 
 .redtag {
