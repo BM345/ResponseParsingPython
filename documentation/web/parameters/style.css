@@ -1,0 +1,251 @@
+body {
+     font-family: 'Open Sans', sans-serif;
+     font-weight: lighter;
+     font-size: 17.5px;
+     color: #404040;
+     padding: 0em;
+     margin: 0em;
+}
+
+@media(min-width: 550px) {
+     body {
+          font-size: 20px;
+     }
+}
+
+@media(min-width: 1000px) {
+     body {
+          font-size: 22.5px;
+     }
+}
+
+@media(min-width: 1500px) {
+     body {
+          font-size: 25px;
+     }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+     font-family: inherit;
+     font-weight: inherit;
+     font-size: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+     margin: 1em 0em;
+}
+
+h1 {
+     font-size: 3em;
+}
+
+h2 {
+     font-size: 2.5em;
+}
+
+h3 {
+     font-size: 1.75em;
+}
+
+h4 {
+     font-size: 1.5em;
+}
+
+p {
+     text-align: justify;
+     margin: 1.5em 0em;
+}
+
+b {
+     font-weight: bold;
+}
+
+ul {
+     list-style-type: none;
+}
+
+li::before {
+     content: "    –    ";
+}
+
+a {
+     color: inherit;
+     text-decoration: none;
+}
+
+a:hover {
+     text-decoration: underline;
+}
+
+.centrecolumn {
+     max-width: 1500px;
+     margin: 0em auto;
+}
+
+.textcolumn {
+     max-width: 35em;
+}
+
+@media(min-width: 550px) {
+     .whitesection, .redsection, .purplesection, .bluesection, .lightbluesection, .orangesection {
+          padding: 2em;
+          min-height: 100vh;
+     }
+}
+
+.whitesection, .redsection, .purplesection, .bluesection, .lightbluesection, .orangesection {
+     padding: 5em;
+}
+
+.redsection, .purplesection, .bluesection, .lightbluesection, .orangesection {
+     color: white;
+}
+
+.redsection {
+     background: linear-gradient(140deg, hsl(350, 60%, 50%), hsl(350, 60%, 40%));
+}
+
+.purplesection {
+     background: linear-gradient(140deg, hsl(260, 60%, 40%), hsl(260, 60%, 30%));
+}
+
+.bluesection {
+     background: linear-gradient(140deg, hsl(220, 60%, 50%), hsl(220, 60%, 40%));
+}
+
+.lightbluesection {
+     background: linear-gradient(140deg, hsl(200, 60%, 50%), hsl(200, 60%, 40%));
+}
+
+.orangesection {
+     background: linear-gradient(140deg, hsl(15, 60%, 50%), hsl(15, 60%, 40%));
+}
+
+.whitesection a {
+     color: hsl(220, 50%, 50%);
+}
+
+.blockset {
+     display: flex;
+     flex-direction: row;
+     width: 100%;
+     align-items: stretch;
+}
+
+.block {
+     flex-basis: 1;
+     flex-grow: 1;
+     flex-shrink: 1;
+     margin: 1.5em;
+     text-align: center;
+     width: 30%;
+}
+
+.greentag, .redtag, .bluetag {
+     color: white;
+     text-transform: uppercase;
+     border-radius: 2px;
+     padding: 0.1em 0.5em;
+}
+
+.greentag {
+     background: linear-gradient(140deg, hsl(90, 60%, 50%), hsl(90, 60%, 40%));
+}
+
+.redtag {
+     background: linear-gradient(140deg, hsl(15, 60%, 50%), hsl(15, 60%, 40%));
+}
+
+.bluetag {
+     background: linear-gradient(140deg, hsl(250, 60%, 50%), hsl(250, 60%, 40%));
+}
+
+.examplestable, .exampleslist {
+     border-collapse: collapse;
+     margin: 1.5em auto;
+     max-width: 25em;
+}
+
+.examplestable td, .exampleslist td {
+     padding: 0.25em;
+}
+
+.examplestable td:first-child {
+     text-align: right;
+}
+
+.bigexamplestable {
+     border-collapse: collapse;
+     width: 100%;
+}
+
+.bigexamplestable tr {
+     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.bigexamplestable th {
+     font-weight: inherit;
+     text-align: left;
+}
+
+.bigexamplestable th, .bigexamplestable td {
+     padding: 0.5em 0.5em;
+}
+
+.twowaytable, .threewaytable {
+     border-collapse: collapse;
+     margin: 2em 0em 5em 0em;
+}
+
+.twowaytable td {
+     width: 50%;
+     vertical-align: top;
+}
+
+.twowaytable td:nth-child(1) {
+     padding-right: 2em;
+     border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.twowaytable td:nth-child(2) {
+     padding-left: 2em;
+     text-align: right;
+}
+
+.threewaytable td {
+     width: 33%;
+     vertical-align: top;
+}
+
+.threewaytable td:nth-child(1) {
+     padding-right: 2em;
+     border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.threewaytable td:nth-child(2) {
+     padding-right: 2em;
+     padding-left: 2em;
+     border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.threewaytable td:nth-child(3) {
+     padding-left: 2em;
+}
+
+code {
+     display: inline-block;
+     font-family: inherit;
+     background-color: rgba(0, 0, 0, 0.2);
+     border: 1px solid rgba(0, 0, 0, 0.05);
+     color: inherit;
+     border-radius: 2px;
+     padding: 1px 5px;
+     margin: 1px 0px;
+     font-weight: lighter;
+}
+
+.whitesection code {
+     color: black;
+     background-color: rgba(0, 0, 0, 0.07);
+     border: 1px solid rgba(0, 0, 0, 0.1);
+}
