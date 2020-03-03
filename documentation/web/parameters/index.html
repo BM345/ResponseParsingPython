@@ -11,13 +11,18 @@
 
 <body>
 
+
+
     <section class="whitesection" id="part0">
         <div class="centrecolumn">
             <div class="textcolumn">
                 <h1>Validation Parameters</h1>
-                <p>This document describes the validation parameters that are used in Nagwa content.</p>
-                <p>Validation parameters are a set of parameters that determine how a student must write their answer for a given question.</p>
-                <p>Validation parameters often deal with <i>different ways of writing the same thing</i>. For example, '23' and '023' are different ways of writing the same number, and we may want to accept both of them as the right answer to a question.</p>
+                <p>
+                    This document describes the validation parameters that are used in Nagwa content.</p>
+                <p>
+                    Validation parameters are a set of parameters that determine how a student must write their answer for a given question.</p>
+                <p>
+                    Validation parameters often deal with <i>different ways of writing the same thing</i>. For example, '23' and '023' are different ways of writing the same number, and we may want to accept both of them as the right answer to a question.</p>
                 <p>
                     Different parameter values can be set for each question. While most of the time you will probably want to use the default value of each parameter, sometimes you will want to change them.
                 </p>
@@ -31,36 +36,52 @@
                         <ul>
                             <li><a href="#part2">What are leading zeros?</a></li>
                             <li><a href="#part3">Parameters for leading zeros</a></li>
-                            <li><a href="#part4">Common settings</a></li>
+                            <li><a href="#part4">Some examples</a></li>
+                            <li><a href="#part5">Common settings</a></li>
+                            <li><a href="#part6">An exception ...</a></li>
                         </ul>
                     </li>
                     <li>Trailing Zeros
                         <ul>
-                            <li><a href="#part5">What are trailing zeros?</a></li>
-                            <li><a href="#part6">Parameters for trailing zeros</a></li>
-                            <li><a href="#part7">An exception ...</a></li>
-                            <li><a href="#part8">Common settings</a></li>
+                            <li><a href="#part7">What are trailing zeros?</a></li>
+                            <li><a href="#part8">Parameters for trailing zeros</a></li>
+                            <li><a href="#part9">Some examples</a></li>
+                            <li><a href="#part10">An odd case ...</a></li>
+                            <li><a href="#part11">Common settings</a></li>
                         </ul>
                     </li>
-
-
-                    <li><a href="#part9">Plus and minus signs</a>
+                    <li><a href="#part12">Plus and minus signs</a>
                         <ul>
-                            <li><a href="#part10">Parameters for signs</a></li>
-                            <li><a href="#part11">Some examples</a></li>
+                            <li><a href="#part13">Parameters for signs</a></li>
+                            <li><a href="#part14">Some examples</a></li>
                         </ul>
                     </li>
-
+                    <li>Decimal Places
+                        <ul>
+                            <li><a href="#part15">Parameters for decimal places</a></li>
+                            <li><a href="#part16">Conflicts</a></li>
+                        </ul>
+                    </li>
+                    <li>Significant Figures
+                        <ul>
+                            <li><a href="#part17">Parameters for significant figures</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#part18">Currency Values</a>
+                        <ul>
+                            <li><a href="#part19">Some examples</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
     </section>
 
 
+
     <section class="whitesection" id="part1">
         <div class="centrecolumn">
             <h2>The primary answer types</h2>
-
             <div class="textcolumn">
                 <p>
                     Each question expects an answer of a certain <i>primary type</i>.
@@ -76,7 +97,8 @@
             <div class="blockset">
                 <div class="block">
                     <h4 class="greentag">Integer</h4>
-                    <p>Any whole number between negative infinity and positive infinity.</p>
+                    <p>
+                        Any whole number between negative infinity and positive infinity.</p>
                     <table class="exampleslist">
                         <tr>
                             <td>42</td>
@@ -93,12 +115,12 @@
                         <tr>
                             <td>1000000</td>
                         </tr>
-
                     </table>
                 </div>
                 <div class="block">
                     <h4 class="redtag">Decimal</h4>
-                    <p>Any rational number between negative infinity and positive infinity.</p>
+                    <p>
+                        Any rational number between negative infinity and positive infinity.</p>
                     <table class="exampleslist">
                         <tr>
                             <td>12.5</td>
@@ -115,7 +137,6 @@
                         <tr>
                             <td>-2400.0078</td>
                         </tr>
-
                     </table>
                 </div>
                 <div class="block">
@@ -123,7 +144,6 @@
                     <p>
                         Mostly the same as the decimal type, but a few extra limitations are placed on it.
                     </p>
-
                 </div>
             </div>
 
@@ -136,12 +156,16 @@
         </div>
     </section>
 
+
+
     <section class="redsection" id="part2">
         <div class="centrecolumn">
             <div class="textcolumn">
                 <h2>What are leading zeros?</h2>
-                <p>A 'leading zero' is any '0' digit that appears at the start of a number.</p>
-                <p>For example</p>
+                <p>
+                    A 'leading zero' is any '0' digit that appears at the start of a number.</p>
+                <p>
+                    For example</p>
                 <table class="examplestable">
                     <tr>
                         <td>0023</td>
@@ -156,12 +180,15 @@
                         <td>has <b>no</b> leading zeros</td>
                     </tr>
                 </table>
-                <p>All of the above are valid ways of writing the number 23. Most of the time we would never write '0023' or '00023', but all of the above <i>technically</i> represent the number 23. If the answer to a question were 23, but the student gives their answer as '0023', they are still correct. </p>
+                <p>
+                    All of the above are valid ways of writing the number 23. Most of the time we would never write '0023' or '00023', but all of the above <i>technically</i> represent the number 23. If the answer to a question were 23, but the student gives their answer as '0023', they are still correct. </p>
 
                 <p><a href="#toc">&uarr; Back to the table of contents</a></p>
             </div>
         </div>
     </section>
+
+
 
     <section class="whitesection" id="part3">
         <div class="centrecolumn">
@@ -174,7 +201,6 @@
                     <td>
                         <h3>'Remove Leading Zeros'</h3>
                     </td>
-
                 </tr>
                 <tr>
                     <td>
@@ -194,7 +220,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <p> This parameter determines whether or not students can submit an answer that has leading zeros.
+                        <p>
+                            This parameter determines whether or not students can submit an answer that has leading zeros.
                         </p>
                         <p>
                             If it is set to <code>false</code> for a question, then if a student tries to submit an answer to that question like '0023', they will not be allowed to submit the answer, and will be given the message 'You don't need to write zeros at the start of your answer.'
@@ -220,9 +247,9 @@
                 </tr>
             </table>
             <p><a href="#toc">&uarr; Back to the table of contents</a></p>
-
         </div>
     </section>
+
 
 
     <section class="whitesection" id="part11">
@@ -265,12 +292,13 @@
                     <td>23</td>
                     <td style="color: hsl(120, 50%, 50%);">✓</td>
                 </tr>
-
             </table>
 
             <p><a href="#toc">&uarr; Back to the table of contents</a></p>
         </div>
     </section>
+
+
 
     <section class="lightbluesection" id="part4">
         <div class="centrecolumn">
@@ -288,10 +316,10 @@
                         <td>'Remove Leading Zeros'</td>
                         <td><code>true</code></td>
                     </tr>
-
                 </table>
                 <p>
-                    This is the "friendliest" or "nicest" setting. A student can type leading zeros in their answer (if they really want to), but they will automatically be removed before their answer is checked. This way, if a student types '0023', but the key is '23', they won't be "told off" and they won't get the question wrong. </p>
+                    This is the "friendliest" or "nicest" setting. A student can type leading zeros in their answer (if they really want to), but they will automatically be removed before their answer is checked. This way, if a student types '0023', but the key is '23', they won't be "told off" and they won't get the question wrong.
+                </p>
                 <p>
                     Sometimes, however, you might want to encourage the student <i>not</i> to write leading zeros. (This would be particularly useful at lower g-values, because we want to encourage young students to write numbers in the conventional way.) In this case, you could set 'Allow Leading Zeros' to <code>false</code> - then if they try to type '0023', they will be told not to write the leading zeros.
                 </p>
@@ -301,11 +329,14 @@
     </section>
 
 
+
     <section class="whitesection" id="part">
         <div class="centrecolumn">
             <div class="textcolumn">
                 <h2>An exception</h2>
-                <p>There is one case where most of the time we <i>do</i> want a student to write a leading zero, and that's with decimals between &minus;1 and 1.</p>
+                <p>
+                    There is one case where most of the time we <i>do</i> want a student to write a leading zero, and that's with decimals between &minus;1 and 1.
+                </p>
                 <table class="examplestable">
                     <tr>
                         <td></td>
@@ -320,7 +351,9 @@
                         <td>0.4298</td>
                     </tr>
                 </table>
-                <p>All of the above numbers have <b>one</b> leading zero, and this is generally the preferred way of writing decimals between &minus;1 and 1.</p>
+                <p>
+                    All of the above numbers have <b>one</b> leading zero, and this is generally the preferred way of writing decimals between &minus;1 and 1.
+                </p>
                 <p>
                     Even if 'Allow Leading Zeros' is set to <code>false</code>, students will still be allowed to submit decimals of the form '0._____'. (The leading zero is thought of as a 'phantom' zero.)
                 </p>
@@ -334,7 +367,9 @@
                 <p>
                     It is set to <code>true</code> by default.
                 </p>
-                <p>If set to <code>true</code>, when a student enters something like '.12' as their answer, it will automatically have a zero added to the front of it, making it '0.12'.</p>
+                <p>
+                    If set to <code>true</code>, when a student enters something like '.12' as their answer, it will automatically have a zero added to the front of it, making it '0.12'.
+                </p>
                 <p>
                     If set to <code>false</code>, when a student enters something like '.12' as their answer, no leading zero will be added to it.
                 </p>
@@ -342,6 +377,9 @@
             </div>
         </div>
     </section>
+
+
+
     <section class="whitesection" id="part5">
         <div class="centrecolumn">
             <div class="textcolumn">
@@ -365,7 +403,6 @@
                         <td>5.<span style="color: hsl(110, 60%, 40%);">0000</span></td>
                         <td>has <b>four</b> trailing zeros</td>
                     </tr>
-
                 </table>
                 <p>
                     But note that
@@ -387,7 +424,6 @@
                         <td>23<span style="color: hsl(30, 60%, 50%);">000</span></td>
                         <td>has <b>no</b> trailing zeros</td>
                     </tr>
-
                 </table>
                 <p>
                     When numbers are considered to be exact, by convention we don't normally write out any trailing zeros to a number (because the trailing zeros technically go on forever).
@@ -400,7 +436,9 @@
     <section class="orangesection" id="part6">
         <div class="centrecolumn">
             <h2>There are <b>two</b> parameters for how to handle trailing zeros</h2>
-            <p>... and they're very similar to the parameters for leading zeros.</p>
+            <p>
+                ... and they're very similar to the parameters for leading zeros.
+            </p>
             <table class="twowaytable">
                 <tr>
                     <td>
@@ -409,7 +447,6 @@
                     <td>
                         <h3>'Remove Trailing Zeros'</h3>
                     </td>
-
                 </tr>
                 <tr>
                     <td>
@@ -429,7 +466,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <p> This parameter determines whether or not students can submit an answer that has trailing zeros.
+                        <p>
+                            This parameter determines whether or not students can submit an answer that has trailing zeros.
                         </p>
                         <p>
                             If it is set to <code>false</code> for a question, then if a student tries to submit an answer to that question like '2.500', they will not be allowed to submit the answer, and will be given the message 'You don't need to write zeros at the end of your answer.'
@@ -510,7 +548,6 @@
                     <td>2.5</td>
                     <td style="color: hsl(120, 50%, 50%);">✓</td>
                 </tr>
-
             </table>
 
             <p><a href="#toc">&uarr; Back to the table of contents</a></p>
@@ -520,22 +557,26 @@
     <section class="whitesection" id="part7">
         <div class="centrecolumn">
             <div class="textcolumn">
-                <h2>An exception ...</h2>
+                <h2>An odd case ...</h2>
                 <p>
-                    Neither of the parameters 'Allow Trailing Zeros' or 'Remove Trailing Zeros' can be set for the <code>currency value</code> primary type.
+                    What happens if a student types in something like '12.' as their answer - i.e., a decimal with no numbers after the decimal point?
                 </p>
                 <p>
-                    This is because there are often conventions for how currency values are written. For example, in the UK, it's considered incorrect to write '£5.5' - the correct way to write this is '£5.50'.
-
+                    An answer like this <b>is</b> considered a valid decimal. But perhaps the answer is just '12' - in this case neither the 'Allow Trailing Zeros' nor the 'Remove Trailing Zeros' will have any effect - because there are no trailing zeros.
                 </p>
                 <p>
-                    For currency value questions, the key should always be written with two decimal places or no decimal places, and the student will always be told to write their answer to either two decimal places or no decimal places.
+                    There is a special parameter for removing this trailing decimal point before the student's answer is compared to the key. This parameter is called 'Remove Trailing Decimal Point'. It can take a value of <code>true</code> or <code>false</code>. If <code>true</code>, '12.' would be changed to '12'. If false, '12.' would not be changed.
+                </p>
+                <p>
+                    It would be very unusual to ever need to set this parameter - most of the time we don't want students to write something like '12.' (there are only a few cases where we might).
                 </p>
 
                 <p><a href="#toc">&uarr; Back to the table of contents</a></p>
             </div>
         </div>
     </section>
+
+
 
     <section class="lightbluesection" id="part8">
         <div class="centrecolumn">
@@ -553,32 +594,41 @@
                         <td>'Remove Trailing Zeros'</td>
                         <td><code>true</code></td>
                     </tr>
-
                 </table>
                 <p>
-                    This is the "friendliest" or "nicest" setting. A student can type trailing zeros in their answer (if they really want to), but they will automatically be removed before their answer is checked. This way, if a student types '2.500', but the key is '2.5', they won't be "told off" and they won't get the question wrong. </p>
+                    This is the "friendliest" or "nicest" setting. A student can type trailing zeros in their answer (if they really want to), but they will automatically be removed before their answer is checked. This way, if a student types '2.500', but the key is '2.5', they won't be "told off" and they won't get the question wrong.
+                </p>
 
                 <p><a href="#toc">&uarr; Back to the table of contents</a></p>
             </div>
         </div>
     </section>
+
+
 
     <section class="whitesection" id="part9">
         <div class="centrecolumn">
             <div class="textcolumn">
                 <h2>Plus and minus signs</h2>
-                <p>When we write negative numbers, we always write a minus sign at the start of the number to indicate that it's negative.</p>
+                <p>
+                    When we write negative numbers, we always write a minus sign at the start of the number to indicate that it's negative.
+                </p>
                 <p>
                     When we write positive numbers, however, by convention we usually don't write a plus sign at the start of the number to indicate that it's positive. If a number is written without a plus or a minus sign, it's taken to be positive.
                 </p>
                 <p>
-                    However, writing a positive number with a plus sign is still a valid way of writing a number, even if it's not how we normally write numbers. </p>
-                <p>Sometimes we may want to encourage a student not to write a plus sign at the start of a positive number (because we want to encourage them to follow the conventional rules for writing numbers). Other times, we may want them to explicitly write the plus sign (for example, when giving relative charges of particles in physics). And sometimes we may want the allow the student to do either, and have their answer marked correct regardless of whether or not it has the plus sign.</p>
+                    However, writing a positive number with a plus sign is still a valid way of writing a number, even if it's not how we normally write numbers.
+                </p>
+                <p>
+                    Sometimes we may want to encourage a student not to write a plus sign at the start of a positive number (because we want to encourage them to follow the conventional rules for writing numbers). Other times, we may want them to explicitly write the plus sign (for example, when giving relative charges of particles in physics). And sometimes we may want the allow the student to do either, and have their answer marked correct regardless of whether or not it has the plus sign.
+                </p>
 
                 <p><a href="#toc">&uarr; Back to the table of contents</a></p>
             </div>
         </div>
     </section>
+
+
 
     <section class="orangesection" id="part10">
         <div class="centrecolumn">
@@ -591,14 +641,14 @@
                     <td>
                         <h3>'Normalize Sign'</h3>
                     </td>
-
                 </tr>
                 <tr>
                     <td>
                         &ndash; can have a value of <code>must be explicit</code>, <code>must be implicit</code>, or <code>can be explicit or implicit</code>
                     </td>
                     <td>
-                        &ndash; can have a value of <code>make explicit</code>, <code>make implicit</code>, or <code>do nothing</code> </td>
+                        &ndash; can have a value of <code>make explicit</code>, <code>make implicit</code>, or <code>do nothing</code>
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -647,9 +697,10 @@
             </table>
 
             <p><a href="#toc">&uarr; Back to the table of contents</a></p>
-
         </div>
     </section>
+
+
 
     <section class="whitesection" id="part11">
         <div class="centrecolumn">
@@ -725,11 +776,16 @@
     </section>
 
 
+
     <section class="redsection" id="part12">
         <div class="centrecolumn">
             <h2>There are <b>three</b> parameters for handling decimal places</h2>
-            <p>These are fairly self-explanatory.</p>
-            <p>These parameters, obviously, can't be set for the integer type.</p>
+            <p>
+                These are fairly self-explanatory.
+            </p>
+            <p>
+                These parameters, obviously, can't be set for the integer type.
+            </p>
             <table class="threewaytable">
                 <tr>
                     <td>
@@ -746,7 +802,6 @@
                     <td>&ndash; can be set to any integer > 0</td>
                     <td>&ndash; can be set to any integer > 0</td>
                     <td>&ndash; can be set to any integer > 0</td>
-
                 </tr>
                 <tr>
                     <td>&ndash; not set by default</td>
@@ -767,15 +822,15 @@
             </table>
 
             <p><a href="#toc">&uarr; Back to the table of contents</a></p>
-
         </div>
     </section>
+
+
 
     <section class="whitesection" id="part13">
         <div class="centrecolumn">
             <div class="textcolumn">
                 <h2>Conflicts</h2>
-
                 <p>
                     For any given question, it is possible to set more than one of the above three parameters.
                 </p>
@@ -793,8 +848,12 @@
     <section class="purplesection" id="part12">
         <div class="centrecolumn">
             <h2>There are <b>three</b> parameters for handling significant figures</h2>
-            <p>These are also fairly self-explanatory.</p>
-            <p>These can be set for the <code>integer</code> or <code>decimal</code> types.</p>
+            <p>
+                These are also fairly self-explanatory.
+            </p>
+            <p>
+                These can be set for the <code>integer</code> or <code>decimal</code> types.
+            </p>
             <table class="threewaytable">
                 <tr>
                     <td>
@@ -811,7 +870,6 @@
                     <td>&ndash; can be set to any integer > 0</td>
                     <td>&ndash; can be set to any integer > 0</td>
                     <td>&ndash; can be set to any integer > 0</td>
-
                 </tr>
                 <tr>
                     <td>&ndash; not set by default</td>
@@ -832,22 +890,151 @@
             </table>
 
             <p><a href="#toc">&uarr; Back to the table of contents</a></p>
-
         </div>
     </section>
+
 
 
     <section class="whitesection" id="part13">
         <div class="centrecolumn">
             <div class="textcolumn">
                 <h2>Currency Values</h2>
+                <p>
+                    The <code>currency value</code> primary type is a 'special case' of the <code>decimal</code> primary type.
+                </p>
+                <p>
+                    For each country and each currency, there are usually conventions for how to write values of that currency. For example, in the UK, we generally don't write '£12.5' or '£12.500' - we would always write '£12.50'. So the <code>currency value</code> type is like the <code>decimal</code> type, but with some extra limitations.
+                </p>
+                <p>
+                    The main limitations are around the number of decimal places that must be given for a currency value. For example, if the currency is set to GBP (UK pounds), any answer must be given to zero or two decimal places - if the student tries to submit anything else, they will not be able to submit their answer.
+                </p>
+                <h3>Which currencies are supported?</h3>
+                <p>
+                    The table below shows which currencies are currently supported, and what limitations apply to them.
+                </p>
+            </div>
+            <table class="plaintable">
+                <tr>
+                    <td>USD</td>
+                    <td>United States Dollars</td>
+                    <td>Answers must be written to zero or two decimal places.</td>
+                </tr>
+                <tr>
+                    <td>GBP</td>
+                    <td>United Kingdom Pounds</td>
+                    <td>Answers must be written to zero or two decimal places.</td>
+                </tr>
+                <tr>
+                    <td>EGP</td>
+                    <td>Egyptian Pounds</td>
+                    <td>Answers must be written to zero or two decimal places.</td>
+                </tr>
+                <tr>
+                    <td>SAR</td>
+                    <td>Saudi Riyal</td>
+                    <td>Answers must be written to zero or two decimal places.</td>
+                </tr>
+            </table>
+            <div class="textcolumn">
+                <h3>Parameters that can't be applied to currency values</h3>
+                <p>
+                    There are several parameters that can't be applied to currency values.
+                </p>
 
-
+                <p>
+                    'Must have at least n decimal places', 'Must have no more than n decimal places', and 'Must have exactly n decimal places' cannot be applied, as these would conflict with the in-built decimal place constraints for each currency. If these parameters are set for a currency value question, they will be ignored.
+                </p>
+                <p>
+                    The significant figure parameters also can't be applied for the same reason.
+                </p>
+                <p>
+                    And the two trailing zero parameters cannot be applied. This is because something like '£12.50', even though it has a trailing zero, is always a valid way of writing this currency value.
+                </p>
 
                 <p><a href="#toc">&uarr; Back to the table of contents</a></p>
             </div>
         </div>
     </section>
+
+
+
+    <section class="whitesection" id="part11">
+        <div class="centrecolumn">
+            <h2>Some examples</h2>
+            <table class="bigexamplestable">
+                <tr>
+                    <th>Student's answer</th>
+                    <th style="width: 22%;">'Currency'</th>
+                    <th>Student can submit their answer</th>
+                    <th>Student's answer changed to</th>
+                    <th>Key</th>
+                    <th>Answer is marked correct</th>
+                </tr>
+                <tr>
+                    <td>12.53</td>
+                    <td><code>USD</code></td>
+                    <td style="color: hsl(120, 50%, 50%);">✓</td>
+                    <td>12.53</td>
+                    <td>12.53</td>
+                    <td style="color: hsl(120, 50%, 50%);">✓</td>
+                </tr>
+                <tr>
+                    <td>12.50</td>
+                    <td><code>USD</code></td>
+                    <td style="color: hsl(120, 50%, 50%);">✓</td>
+                    <td>12.50</td>
+                    <td>12.50</td>
+                    <td style="color: hsl(120, 50%, 50%);">✓</td>
+                </tr>
+                <tr>
+                    <td>12.00</td>
+                    <td><code>USD</code></td>
+                    <td style="color: hsl(120, 50%, 50%);">✓</td>
+                    <td>12</td>
+                    <td>12.00</td>
+                    <td style="color: hsl(350, 50%, 50%);">✗</td>
+                </tr>
+                <tr>
+                    <td>12.00</td>
+                    <td><code>USD</code></td>
+                    <td style="color: hsl(120, 50%, 50%);">✓</td>
+                    <td>12</td>
+                    <td>12</td>
+                    <td style="color: hsl(120, 50%, 50%);">✓</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td><code>USD</code></td>
+                    <td style="color: hsl(120, 50%, 50%);">✓</td>
+                    <td>12</td>
+                    <td>12</td>
+                    <td style="color: hsl(120, 50%, 50%);">✓</td>
+                </tr>
+                <tr>
+                    <td>12.0</td>
+                    <td><code>USD</code></td>
+                    <td style="color: hsl(350, 50%, 50%);">✗</td>
+                    <td></td>
+                    <td>12</td>
+                    <td style="color: hsl(120, 50%, 50%);"></td>
+                </tr>
+                <tr>
+                    <td>12.000</td>
+                    <td><code>USD</code></td>
+                    <td style="color: hsl(350, 50%, 50%);">✗</td>
+                    <td></td>
+                    <td>12</td>
+                    <td style="color: hsl(120, 50%, 50%);"></td>
+                </tr>
+
+            </table>
+
+            <p><a href="#toc">&uarr; Back to the table of contents</a></p>
+        </div>
+    </section>
+
+
+
 </body>
 
 </html>
