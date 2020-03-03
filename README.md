@@ -44,3 +44,7 @@ Start the server for the web-app by calling
 cd browser_based_testing
 python start_app.py
 ```
+
+## Documentation for content writers
+
+The documentation for content writers for how to use the different parameters can be found here: https://bm345.github.io/ResponseParsingPython/documentation/parameters/index.html
