@@ -45,6 +45,10 @@ cd browser_based_testing
 python start_app.py
 ```
 
+## Documentation for developers
+
+Technical documentation can be found in `/documentation`, and the release notes for each release can be found in `/documentation/release-notes`.
+
 ## Documentation for content writers
 
 The documentation for content writers for how to use the different parameters can be found here: https://bm345.github.io/ResponseParsingPython/documentation/parameters/index.html
