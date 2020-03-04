@@ -10,4 +10,5 @@
   - The way that these parameters work has been added to the documentation.
   - Unit tests have been added for these new parameters.
 - A 'web' version of the parameters documentation has been added for content developers and writers.
+- A fix for currency values of the form '___.00' has been added. Any currency value of this form will always be normalized to '___' - i.e., '12.00' will always become '12'. This is an in-built feature - for currency values, the parameters "allowTrailingZeros", "removeTrailingZerosFromNormalizedForm", and "removeTrailingDecimalPointFromNormalizedForm" are always ignored.
 - There are currently 347 unit tests; all passing.
