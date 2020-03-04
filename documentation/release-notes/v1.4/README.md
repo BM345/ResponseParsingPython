@@ -10,3 +10,4 @@
   - The way that these parameters work has been added to the documentation.
   - Unit tests have been added for these new parameters.
 - A 'web' version of the parameters documentation has been added for content developers and writers.
+- There are currently 347 unit tests; all passing.
