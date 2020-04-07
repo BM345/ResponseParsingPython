@@ -2,7 +2,11 @@ import unittest
 from parameterized import parameterized
 from pyunitreport import HTMLTestRunner
 
-from rp.validation import *
+import sys
+
+sys.path.append("../rp")
+
+from validation import *
 import constraints
 from general import *
 

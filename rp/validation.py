@@ -23,7 +23,7 @@ class ValidationResponse(object):
 
 
 class Validator(object):
-    def __init__(self, messagesFile="./rp/messages.en-gb.xml"):
+    def __init__(self, messagesFile="../rp/messages.en-gb.xml"):
 
         self.parser = parsing.Parser()
         self.messages = messages.Messages(messagesFile)

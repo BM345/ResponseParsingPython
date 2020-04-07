@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 
 
 class Messages(object):
-    def __init__(self, messagesFile="./rp/messages.en-gb.xml"):
+    def __init__(self, messagesFile="../rp/messages.en-gb.xml"):
 
         self.messagesFile = messagesFile
         self.messages = []
