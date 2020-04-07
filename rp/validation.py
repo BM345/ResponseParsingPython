@@ -68,8 +68,8 @@ class Validator(object):
         elif request.expectedResponseType == "decimal":
             self.validateDecimal(request, result, response)
         elif request.expectedResponseType == "currencyValue":
-            if result.type == "number":
-                result = nodes.RPCurrencyValueNode.fromNumberNode(result)
+            if result != None and result.type == "number":
+                result = self.parser.makeIntoCurrencyValue(result)
             self.validateCurrencyValue(request, result, response)
         else:
             raise ValueError("Unsupported response type '{0}'.".format(request.expectedResponseType))

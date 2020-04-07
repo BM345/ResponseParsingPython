@@ -81,6 +81,19 @@ class Parser(object):
 
         return node
 
+    def makeIntoCurrencyValue(self, node):
+        # Currency values have some unique normalisation quirks, which are dealt with here.
+        # We want to always normalise things like '12.00' to just '12'.
+        # We don't do this for normal decimals - only currency values.
+        # So when a decimal is converted to a currency value using this special function
+        # we remove all trailing zeros if the entire decimal part is zero.
+        cvn =  nodes.RPCurrencyValueNode.fromNumberNode(node)
+
+        if cvn.decimalPartIsZero and len(cvn.decimalPart) > 1:
+            cvn.value = cvn.value[:-cvn.numberOfTrailingZeros]
+        
+        return cvn
+
     def parseNumber(self, inputText, marker):
         t = ""
         start = marker.position

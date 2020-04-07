@@ -131,8 +131,8 @@ class RPCurrencyValueNode(RPNumberNode):
 
     @RPNode.latex.getter
     def latex(self):
-        return self.integralPart if self.decimalPartIsZero else self.value
+        return self.value
 
     @RPNode.asciiMath.getter
     def asciiMath(self):
-        return self.integralPart if self.decimalPartIsZero else self.value
+        return self.value
