@@ -59,6 +59,9 @@ class TestCurrencyValueValidation(unittest.TestCase):
         ["012", merge(constraints.dollars, constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "12"],
         ["0012", merge(constraints.dollars, constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "12"],
         ["00012", merge(constraints.dollars, constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "12"],
+        ["012.00", merge(constraints.dollars, constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "12"],
+        ["0012.00", merge(constraints.dollars, constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "12"],
+        ["00012.00", merge(constraints.dollars, constraints.allowLeadingZeros, constraints.removeLeadingZerosFromNormalizedForm), True, "12"],
     ])
     def test_validate(self, studentsResponse, constraints, isAccepted, normalisedStudentsResponse):
 

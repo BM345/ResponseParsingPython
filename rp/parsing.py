@@ -89,8 +89,14 @@ class Parser(object):
         # we remove all trailing zeros if the entire decimal part is zero.
         cvn =  nodes.RPCurrencyValueNode.fromNumberNode(node)
 
+        # Get rid of the trailing zeros if the entire decimal part is zero.
         if cvn.decimalPartIsZero and len(cvn.decimalPart) > 1:
             cvn.value = cvn.value[:-cvn.numberOfTrailingZeros]
+
+        # We also don't allow trailing decimal points for currency values - there's never a need for it.
+        # So we get rid of it here regardless of what the settings are.
+        if cvn.value[-1] == ".":
+            cvn.value = cvn.value[:-1]
         
         return cvn
 
