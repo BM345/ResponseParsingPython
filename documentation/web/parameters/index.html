@@ -176,6 +176,9 @@
                 <p>
                     The primary type affects what parameters can be set for a question. For example, a parameter that can be set for the decimal type is 'Must have exactly n decimal places', which requires the student to give an answer that has n decimal places, but this parameter obviously can't be set for the integer type, because integers have no decimal places.
                 </p>
+                <p>
+                    NOTE: There are many questions in our content that have answers like '9.6 km/s' or '12 mph' (i.e., a number with a unit after it). This is common in mechanics content in maths, and of course throughout physics. Although these keys have integers and decimals <i>as part of them</i>, they <b>should not</b> be set to the integer or decimal answer types. The integer and decimal answer types are only for questions where the answer is an integer or decimal <b>ONLY</b>. Anything else must have the answer type 'none'. This validation system has so far only been designed to cover a small number of maths questions. The majority of the questions in our content will (for now) have an answer type of 'none', as they are not covered by the validation code.
+                </p>
                 <p><a href="#toc">&uarr; Back to the table of contents</a></p>
             </div>
         </div>
